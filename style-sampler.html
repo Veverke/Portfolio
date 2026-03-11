@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Style Sampler — 5 Themes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    /* ============================================================
+       SAMPLER FRAME CHROME
+       (dark background that wraps the preview cards)
+    ============================================================ */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* --- Sampler header --- */
+    .s-hero {
+      text-align: center;
+      padding: 5rem 2rem 2.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .s-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 1rem;
+    }
+    .s-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 0.9rem;
+    }
+    .s-hero p {
+      font-size: 0.98rem;
+      color: #8b949e;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .s-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      justify-content: center;
+    }
+    .s-chip {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 0.28rem 0.85rem;
+      font-size: 0.77rem;
+      color: #c9d1d9;
+    }
+    .s-chip b { color: #38bdf8; font-weight: 600; }
+
+    /* --- Sticky theme-jump nav --- */
+    .s-nav {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      background: rgba(13,17,23,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 200;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .s-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.77rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #8b949e;
+      transition: all 0.15s;
+    }
+    .s-nav a:hover { color: #e6edf3; border-color: rgba(255,255,255,0.28); }
+    .s-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    /* --- Theme section wrapper --- */
+    .t-section {
+      max-width: 1080px;
+      margin: 0 auto 6rem;
+      padding: 0 2rem;
+    }
+    .t-meta {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .t-num {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 52px;
+      text-align: right;
+    }
+    .t-info h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .t-info p { font-size: 0.84rem; color: #8b949e; line-height: 1.6; max-width: 560px; }
+    .t-swatches { display: flex; gap: 0.35rem; margin-top: 0.7rem; flex-wrap: wrap; }
+    .t-swatch {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.12);
+    }
+
+    /* --- Preview frame --- */
+    .preview-frame {
+      height: 720px;
+      display: flex;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.06),
+        0 28px 80px rgba(0,0,0,0.55);
+    }
+
+    /* ============================================================
+       COMPONENT CSS
+       All selectors scoped inside .preview-frame to prevent leaks.
+       Colors/fonts are CSS custom properties overridden per theme.
+    ============================================================ */
+
+    /* --- Sidebar --- */
+    .preview-frame .pf-sidebar {
+      width: 248px;
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .preview-frame .pf-sidebar-top {
+      padding: 1.8rem 1.4rem 1.3rem;
+      border-bottom: 1px solid var(--sidebar-border);
+      text-align: center;
+    }
+    .preview-frame .pf-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: var(--avatar-radius, 50%);
+      margin: 0 auto 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.9rem;
+      background: var(--avatar-bg);
+      border: 2px solid var(--avatar-border);
+    }
+    .preview-frame .pf-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--sidebar-strong);
+      margin-bottom: 0.15rem;
+      letter-spacing: var(--heading-tracking);
+    }
+    .preview-frame .pf-role-tag {
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: var(--sidebar-muted);
+      margin-bottom: 0.75rem;
+      font-family: var(--font-body);
+    }
+    .preview-frame .pf-avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--avail-bg);
+      border: 1px solid var(--avail-border);
+      border-radius: 20px;
+      padding: 0.18rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--avail-text);
+      font-family: var(--font-body);
+    }
+    .preview-frame .avail-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--avail-text);
+    }
+
+    /* nav */
+    .preview-frame .pf-nav { flex: 1; padding: 1rem 0.7rem; overflow-y: auto; }
+    .preview-frame .pf-nav-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--sidebar-label);
+      padding: 0.5rem 0.65rem 0.3rem;
+      font-family: var(--font-body);
+    }
+    .preview-frame .pf-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.58rem 0.65rem;
+      border-radius: var(--nav-radius, 8px);
+      text-decoration: none;
+      color: var(--sidebar-muted);
+      font-size: 0.83rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      margin-bottom: 0.08rem;
+      font-family: var(--font-body);
+    }
+    .preview-frame .pf-nav-item:hover {
+      background: var(--nav-hover-bg);
+      color: var(--sidebar-strong);
+    }
+    .preview-frame .pf-nav-item.is-active {
+      background: var(--nav-active-bg);
+      color: var(--sidebar-strong);
+    }
+    .preview-frame .pf-nav-icon {
+      width: 17px;
+      text-align: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* sidebar footer */
+    .preview-frame .pf-sidebar-foot {
+      padding: 1.1rem 1.4rem 1.4rem;
+      border-top: 1px solid var(--sidebar-border);
+    }
+    .preview-frame .pf-social-row { display: flex; gap: 0.45rem; margin-bottom: 0.85rem; }
+    .preview-frame .pf-social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.42rem;
+      background: var(--nav-hover-bg);
+      border: 1px solid var(--sidebar-border);
+      border-radius: var(--radius-sm);
+      color: var(--sidebar-muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: var(--font-body);
+      transition: all 0.15s;
+    }
+    .preview-frame .pf-social-btn:hover {
+      color: var(--sidebar-strong);
+      background: var(--nav-active-bg);
+    }
+    .preview-frame .pf-cv-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      background: var(--color-primary);
+      color: var(--cta-text);
+      text-decoration: none;
+      padding: 0.58rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: var(--font-body);
+      transition: all 0.15s;
+    }
+
+    /* --- Main content --- */
+    .preview-frame .pf-main {
+      flex: 1;
+      background: var(--color-bg);
+      overflow-y: auto;
+      padding: 1.8rem 2.2rem;
+      font-family: var(--font-body);
+      color: var(--color-text);
+    }
+
+    /* hero */
+    .preview-frame .pf-hero {
+      background: var(--hero-bg);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.9rem;
+      margin-bottom: 1.7rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-frame .pf-hero-pill {
+      display: inline-block;
+      background: var(--hero-pill-bg);
+      border: 1px solid var(--hero-pill-border);
+      border-radius: 20px;
+      padding: 0.2rem 0.72rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--hero-text);
+      margin-bottom: 0.9rem;
+      font-family: var(--font-body);
+    }
+    .preview-frame .pf-hero h1 {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: var(--heading-tracking);
+      line-height: 1.18;
+      color: var(--hero-text);
+      margin-bottom: 0.6rem;
+      position: relative;
+    }
+    .preview-frame .pf-hero p {
+      font-size: 0.875rem;
+      color: var(--hero-desc);
+      line-height: 1.65;
+      max-width: 400px;
+      margin-bottom: 1.4rem;
+      position: relative;
+    }
+    .preview-frame .pf-hero-btns { display: flex; gap: 0.6rem; flex-wrap: wrap; position: relative; }
+    .preview-frame .pf-btn-p {
+      padding: 0.52rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      background: var(--btn-p-bg);
+      color: var(--btn-p-text);
+      border: none;
+      font-family: var(--font-body);
+      cursor: pointer;
+    }
+    .preview-frame .pf-btn-o {
+      padding: 0.52rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      background: transparent;
+      color: var(--btn-o-text);
+      border: 1.5px solid var(--btn-o-border);
+      font-family: var(--font-body);
+      cursor: pointer;
+    }
+
+    /* section header */
+    .preview-frame .pf-section { margin-bottom: 1.5rem; }
+    .preview-frame .pf-sec-eye {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-primary);
+      margin-bottom: 0.15rem;
+      font-family: var(--font-body);
+    }
+    .preview-frame .pf-sec-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: var(--heading-tracking);
+      color: var(--color-text);
+    }
+    .preview-frame .pf-sec-line {
+      width: 28px;
+      height: 3px;
+      background: var(--accent-line);
+      border-radius: 2px;
+      margin-top: 0.35rem;
+      margin-bottom: 0.9rem;
+    }
+
+    /* project card */
+    .preview-frame .pf-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-left: var(--card-left-border);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 0.9rem;
+      align-items: start;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .preview-frame .pf-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-hover-shadow);
+    }
+    .preview-frame .pf-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: var(--card-icon-bg);
+      flex-shrink: 0;
+    }
+    .preview-frame .pf-card h3 {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 0.22rem;
+      color: var(--color-text);
+      letter-spacing: var(--heading-tracking);
+    }
+    .preview-frame .pf-card p {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      line-height: 1.55;
+      margin-bottom: 0.65rem;
+    }
+    .preview-frame .pf-tags { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+    .preview-frame .pf-tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: var(--tag-pad);
+      border-radius: var(--radius-tag);
+      font-size: 0.7rem;
+      font-weight: 600;
+      border: var(--tag-border);
+      font-family: var(--tag-font);
+    }
+
+    /* skills */
+    .preview-frame .pf-skills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .preview-frame .pf-skill {
+      background: var(--skill-bg);
+      color: var(--skill-text);
+      border: var(--skill-border);
+      border-radius: var(--radius-skill);
+      padding: 0.28rem 0.7rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      font-family: var(--tag-font);
+    }
+
+
+    /* ============================================================
+       THEME VARIABLES
+       One block per theme, keyed on .theme-N class on .preview-frame.
+    ============================================================ */
+
+    /* ---- 1: Professional & Clean ---- */
+    .theme-1 {
+      --font-heading:      'Inter', sans-serif;
+      --font-body:         'Inter', sans-serif;
+      --heading-tracking:  -0.3px;
+
+      --color-primary:     #0369a1;
+      --color-bg:          #f8fafc;
+      --color-surface:     #ffffff;
+      --color-text:        #0f172a;
+      --color-muted:       #64748b;
+      --color-border:      #e2e8f0;
+
+      --sidebar-bg:        #0f172a;
+      --sidebar-strong:    #ffffff;
+      --sidebar-muted:     rgba(255,255,255,0.58);
+      --sidebar-label:     rgba(255,255,255,0.22);
+      --sidebar-border:    rgba(255,255,255,0.07);
+      --nav-hover-bg:      rgba(255,255,255,0.06);
+      --nav-active-bg:     rgba(3,105,161,0.35);
+      --nav-radius:        8px;
+      --avatar-bg:         linear-gradient(135deg, #0369a1, #0891b2);
+      --avatar-border:     rgba(255,255,255,0.2);
+      --avail-bg:          rgba(16,185,129,0.12);
+      --avail-border:      rgba(16,185,129,0.3);
+      --avail-text:        #34d399;
+
+      --hero-bg:           linear-gradient(135deg, #0369a1 0%, #0ea5e9 65%, #0891b2 100%);
+      --hero-text:         #ffffff;
+      --hero-pill-bg:      rgba(255,255,255,0.15);
+      --hero-pill-border:  rgba(255,255,255,0.25);
+      --hero-desc:         rgba(255,255,255,0.82);
+      --btn-p-bg:          #ffffff;
+      --btn-p-text:        #0369a1;
+      --btn-o-text:        #ffffff;
+      --btn-o-border:      rgba(255,255,255,0.42);
+      --cta-text:          #ffffff;
+
+      --accent-line:       linear-gradient(90deg, #0369a1, #0891b2);
+      --card-left-border:  none;
+      --card-hover-shadow: 0 8px 28px rgba(3,105,161,0.13);
+      --card-icon-bg:      #e0f2fe;
+      --tag-bg:            #e0f2fe;
+      --tag-text:          #0369a1;
+      --tag-pad:           0.18rem 0.52rem;
+      --tag-border:        none;
+      --tag-font:          'Inter', sans-serif;
+      --radius-tag:        4px;
+      --skill-bg:          #f1f5f9;
+      --skill-text:        #334155;
+      --skill-border:      1px solid #e2e8f0;
+      --radius-skill:      6px;
+
+      --radius-sm:         8px;
+      --radius-md:         12px;
+      --radius-lg:         14px;
+    }
+
+    /* ---- 2: Bold & Editorial ---- */
+    .theme-2 {
+      --font-heading:      'Space Grotesk', sans-serif;
+      --font-body:         'Inter', sans-serif;
+      --heading-tracking:  -0.6px;
+
+      --color-primary:     #065f46;
+      --color-bg:          #ecfdf5;
+      --color-surface:     #ffffff;
+      --color-text:        #022c22;
+      --color-muted:       #6b7280;
+      --color-border:      #d1fae5;
+
+      --sidebar-bg:        #022c22;
+      --sidebar-strong:    #ffffff;
+      --sidebar-muted:     rgba(255,255,255,0.52);
+      --sidebar-label:     rgba(255,255,255,0.18);
+      --sidebar-border:    rgba(255,255,255,0.07);
+      --nav-hover-bg:      rgba(255,255,255,0.05);
+      --nav-active-bg:     rgba(16,185,129,0.2);
+      --nav-radius:        4px;
+      --avatar-bg:         linear-gradient(135deg, #065f46, #10b981);
+      --avatar-border:     rgba(255,255,255,0.15);
+      --avail-bg:          rgba(16,185,129,0.12);
+      --avail-border:      rgba(16,185,129,0.27);
+      --avail-text:        #6ee7b7;
+
+      --hero-bg:           #065f46;
+      --hero-text:         #ffffff;
+      --hero-pill-bg:      rgba(16,185,129,0.22);
+      --hero-pill-border:  rgba(16,185,129,0.35);
+      --hero-desc:         rgba(255,255,255,0.74);
+      --btn-p-bg:          #10b981;
+      --btn-p-text:        #ffffff;
+      --btn-o-text:        rgba(255,255,255,0.88);
+      --btn-o-border:      rgba(255,255,255,0.3);
+      --cta-text:          #ffffff;
+
+      --accent-line:       #10b981;
+      --card-left-border:  3px solid #10b981;
+      --card-hover-shadow: 0 6px 24px rgba(6,95,70,0.1);
+      --card-icon-bg:      #d1fae5;
+      --tag-bg:            transparent;
+      --tag-text:          #065f46;
+      --tag-pad:           0.17rem 0.52rem;
+      --tag-border:        1px solid #a7f3d0;
+      --tag-font:          'Inter', sans-serif;
+      --radius-tag:        3px;
+      --skill-bg:          #ffffff;
+      --skill-text:        #065f46;
+      --skill-border:      1px solid #d1fae5;
+      --radius-skill:      4px;
+
+      --radius-sm:         4px;
+      --radius-md:         6px;
+      --radius-lg:         8px;
+    }
+    /* bold hero decoration */
+    .theme-2 .pf-hero::before {
+      content: '';
+      position: absolute;
+      right: -2.5rem; top: -2.5rem;
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      background: rgba(16,185,129,0.12);
+      pointer-events: none;
+    }
+    .theme-2 .pf-hero::after {
+      content: '';
+      position: absolute;
+      right: 3rem; bottom: -3.5rem;
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: rgba(16,185,129,0.08);
+      pointer-events: none;
+    }
+    /* editorial: oversized headline weight */
+    .theme-2 .pf-hero h1 { font-size: 2.1rem; }
+
+    /* ---- 3: Creative & Expressive ---- */
+    .theme-3 {
+      --font-heading:      'Nunito', sans-serif;
+      --font-body:         'Inter', sans-serif;
+      --heading-tracking:  -0.2px;
+
+      --color-primary:     #0d9488;
+      --color-bg:          #f0fdfa;
+      --color-surface:     #ffffff;
+      --color-text:        #134e4a;
+      --color-muted:       #6b7280;
+      --color-border:      #99f6e4;
+
+      --sidebar-bg:        linear-gradient(180deg, #0d9488 0%, #0369a1 100%);
+      --sidebar-strong:    #ffffff;
+      --sidebar-muted:     rgba(255,255,255,0.62);
+      --sidebar-label:     rgba(255,255,255,0.24);
+      --sidebar-border:    rgba(255,255,255,0.12);
+      --nav-hover-bg:      rgba(255,255,255,0.1);
+      --nav-active-bg:     rgba(255,255,255,0.18);
+      --nav-radius:        20px;
+      --avatar-radius:     28% 72% 68% 32% / 36% 32% 68% 64%;
+      --avatar-bg:         linear-gradient(135deg, #38bdf8, #0d9488);
+      --avatar-border:     rgba(255,255,255,0.28);
+      --avail-bg:          rgba(255,255,255,0.16);
+      --avail-border:      rgba(255,255,255,0.26);
+      --avail-text:        #ccfbf1;
+
+      --hero-bg:           linear-gradient(135deg, #0d9488 0%, #0284c7 100%);
+      --hero-text:         #ffffff;
+      --hero-pill-bg:      rgba(255,255,255,0.18);
+      --hero-pill-border:  rgba(255,255,255,0.26);
+      --hero-desc:         rgba(255,255,255,0.82);
+      --btn-p-bg:          #ffffff;
+      --btn-p-text:        #0d9488;
+      --btn-o-text:        #ffffff;
+      --btn-o-border:      rgba(255,255,255,0.44);
+      --cta-text:          #ffffff;
+
+      --accent-line:       linear-gradient(90deg, #0d9488, #38bdf8);
+      --card-left-border:  none;
+      --card-hover-shadow: 0 8px 28px rgba(13,148,136,0.15);
+      --card-icon-bg:      #ccfbf1;
+      --tag-bg:            #ccfbf1;
+      --tag-text:          #0d9488;
+      --tag-pad:           0.2rem 0.65rem;
+      --tag-border:        none;
+      --tag-font:          'Inter', sans-serif;
+      --radius-tag:        20px;
+      --skill-bg:          #ffffff;
+      --skill-text:        #0d9488;
+      --skill-border:      1.5px solid #99f6e4;
+      --radius-skill:      20px;
+
+      --radius-sm:         14px;
+      --radius-md:         20px;
+      --radius-lg:         24px;
+    }
+    /* creative hero blob decoration */
+    .theme-3 .pf-hero::before {
+      content: '';
+      position: absolute;
+      right: -3rem; top: -3rem;
+      width: 180px; height: 180px;
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      background: rgba(255,255,255,0.09);
+      pointer-events: none;
+    }
+    .theme-3 .pf-hero::after {
+      content: '';
+      position: absolute;
+      left: -2rem; bottom: -3rem;
+      width: 120px; height: 120px;
+      border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
+      background: rgba(56,189,248,0.1);
+      pointer-events: none;
+    }
+
+    /* ---- 4: Minimal & Understated ---- */
+    .theme-4 {
+      --font-heading:      'DM Sans', sans-serif;
+      --font-body:         'DM Sans', sans-serif;
+      --heading-tracking:  -0.15px;
+
+      --color-primary:     #2563eb;
+      --color-bg:          #ffffff;
+      --color-surface:     #f8fafc;
+      --color-text:        #1e293b;
+      --color-muted:       #94a3b8;
+      --color-border:      #f1f5f9;
+
+      --sidebar-bg:        #f8fafc;
+      --sidebar-strong:    #1e293b;
+      --sidebar-muted:     #94a3b8;
+      --sidebar-label:     #cbd5e1;
+      --sidebar-border:    #e2e8f0;
+      --nav-hover-bg:      #f1f5f9;
+      --nav-active-bg:     #eff6ff;
+      --nav-radius:        6px;
+      --avatar-bg:         #e0e7ff;
+      --avatar-border:     #e2e8f0;
+      --avail-bg:          #f0fdf4;
+      --avail-border:      #bbf7d0;
+      --avail-text:        #16a34a;
+
+      --hero-bg:           #ffffff;
+      --hero-text:         #1e293b;
+      --hero-pill-bg:      #eff6ff;
+      --hero-pill-border:  #bfdbfe;
+      --hero-desc:         #64748b;
+      --btn-p-bg:          #2563eb;
+      --btn-p-text:        #ffffff;
+      --btn-o-text:        #2563eb;
+      --btn-o-border:      #bfdbfe;
+      --cta-text:          #ffffff;
+
+      --accent-line:       #2563eb;
+      --card-left-border:  none;
+      --card-hover-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      --card-icon-bg:      #eff6ff;
+      --tag-bg:            #f8fafc;
+      --tag-text:          #64748b;
+      --tag-pad:           0.17rem 0.52rem;
+      --tag-border:        1px solid #e2e8f0;
+      --tag-font:          'DM Sans', sans-serif;
+      --radius-tag:        4px;
+      --skill-bg:          #f8fafc;
+      --skill-text:        #475569;
+      --skill-border:      1px solid #e2e8f0;
+      --radius-skill:      6px;
+
+      --radius-sm:         6px;
+      --radius-md:         8px;
+      --radius-lg:         10px;
+    }
+    /* minimal: light sidebar needs its own right border separator */
+    .theme-4 .pf-sidebar {
+      border-right: 1px solid #e2e8f0;
+    }
+    /* minimal: hero is a clean white card with blue left accent + outline */
+    .theme-4 .pf-hero {
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #2563eb;
+    }
+    /* minimal: muted nav item text specific to light sidebar */
+    .theme-4 .pf-nav-item { color: #64748b; }
+    .theme-4 .pf-nav-item:hover { color: #1e293b; }
+    .theme-4 .pf-nav-item.is-active { color: #1e293b; }
+    .theme-4 .pf-social-btn { color: #64748b; }
+
+    /* ---- 5: Technical Precision ---- */
+    .theme-5 {
+      --font-heading:      'Fira Code', monospace;
+      --font-body:         'Inter', sans-serif;
+      --heading-tracking:  -0.4px;
+
+      --color-primary:     #1e40af;
+      --color-bg:          #f0f9ff;
+      --color-surface:     #ffffff;
+      --color-text:        #0c4a6e;
+      --color-muted:       #64748b;
+      --color-border:      #bae6fd;
+
+      --sidebar-bg:        #0c4a6e;
+      --sidebar-strong:    #ffffff;
+      --sidebar-muted:     rgba(186,230,253,0.6);
+      --sidebar-label:     rgba(186,230,253,0.22);
+      --sidebar-border:    rgba(186,230,253,0.1);
+      --nav-hover-bg:      rgba(255,255,255,0.06);
+      --nav-active-bg:     rgba(56,189,248,0.2);
+      --nav-radius:        6px;
+      --avatar-bg:         linear-gradient(135deg, #1e40af, #38bdf8);
+      --avatar-border:     rgba(186,230,253,0.22);
+      --avail-bg:          rgba(56,189,248,0.12);
+      --avail-border:      rgba(56,189,248,0.25);
+      --avail-text:        #7dd3fc;
+
+      --hero-bg:           #0c4a6e;
+      --hero-text:         #ffffff;
+      --hero-pill-bg:      rgba(56,189,248,0.15);
+      --hero-pill-border:  rgba(56,189,248,0.28);
+      --hero-desc:         rgba(186,230,253,0.85);
+      --btn-p-bg:          #38bdf8;
+      --btn-p-text:        #0c4a6e;
+      --btn-o-text:        rgba(255,255,255,0.84);
+      --btn-o-border:      rgba(186,230,253,0.32);
+      --cta-text:          #0c4a6e;
+
+      --accent-line:       linear-gradient(90deg, #1e40af, #38bdf8);
+      --card-left-border:  none;
+      --card-hover-shadow: 0 6px 24px rgba(14,165,233,0.13);
+      --card-icon-bg:      #e0f2fe;
+      --tag-bg:            #e0f2fe;
+      --tag-text:          #0c4a6e;
+      --tag-pad:           0.18rem 0.55rem;
+      --tag-border:        none;
+      --tag-font:          'Fira Code', monospace;
+      --radius-tag:        4px;
+      --skill-bg:          #e0f2fe;
+      --skill-text:        #0c4a6e;
+      --skill-border:      1px solid #bae6fd;
+      --radius-skill:      4px;
+
+      --radius-sm:         6px;
+      --radius-md:         8px;
+      --radius-lg:         10px;
+    }
+    /* technical: subtle dot-grid on hero */
+    .theme-5 .pf-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(56,189,248,0.18) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+    /* technical: monospace heading on card */
+    .theme-5 .pf-card h3 { font-size: 0.88rem; }
+
+
+    /* ============================================================
+       RESPONSIVE: hide sampler at tiny widths
+    ============================================================ */
+    @media (max-width: 640px) {
+      .preview-frame { height: auto; flex-direction: column; }
+      .preview-frame .pf-sidebar { width: 100%; height: auto; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ======================================================
+       SAMPLER HEADER
+  ====================================================== -->
+  <header class="s-hero">
+    <div class="s-eyebrow">Phase 2-pre · Visual Direction</div>
+    <h1>Choose Your Visual Identity</h1>
+    <p>Five fully-crafted themes. Same sidebar-nav layout — five distinct personalities. Review them, pick one (or call out which parts you like from each), then production CSS begins.</p>
+    <div class="s-chips">
+      <div class="s-chip">Tone: <b>all four + bonus</b></div>
+      <div class="s-chip">Background: <b>light</b></div>
+      <div class="s-chip">Colors: <b>blues · teals · greens</b></div>
+      <div class="s-chip">Field: <b>Software Engineer</b></div>
+    </div>
+  </header>
+
+  <nav class="s-nav" aria-label="Jump to theme">
+    <a href="#t1"><span class="s-dot" style="background:#0369a1"></span>Professional &amp; Clean</a>
+    <a href="#t2"><span class="s-dot" style="background:#10b981"></span>Bold &amp; Editorial</a>
+    <a href="#t3"><span class="s-dot" style="background:#0d9488"></span>Creative &amp; Expressive</a>
+    <a href="#t4"><span class="s-dot" style="background:#2563eb"></span>Minimal &amp; Understated</a>
+    <a href="#t5"><span class="s-dot" style="background:#38bdf8"></span>Technical Precision</a>
+  </nav>
+
+  <main style="padding: 3rem 0 8rem;">
+
+    <!-- ============================================================
+         THEME 1 — Professional & Clean
+    ============================================================ -->
+    <section class="t-section" id="t1">
+      <div class="t-meta">
+        <div class="t-num">01</div>
+        <div class="t-info">
+          <h2>Professional &amp; Clean</h2>
+          <p>Structured, confident, polished. Ocean-blue palette with a deep-navy sidebar. Inter keeps typography precision-sharp — the kind of portfolio that earns trust before a line is read.</p>
+          <div class="t-swatches">
+            <div class="t-swatch" style="background:#0f172a" title="Sidebar navy"></div>
+            <div class="t-swatch" style="background:#0369a1" title="Primary ocean-blue"></div>
+            <div class="t-swatch" style="background:#0891b2" title="Cyan-teal accent"></div>
+            <div class="t-swatch" style="background:#f8fafc" title="Ice-white bg"></div>
+            <div class="t-swatch" style="background:#ffffff" title="Surface white"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-frame theme-1">
+        <!-- sidebar -->
+        <aside class="pf-sidebar">
+          <div class="pf-sidebar-top">
+            <div class="pf-avatar">🧑‍💻</div>
+            <div class="pf-name">Alex Chen</div>
+            <div class="pf-role-tag">Software Engineer</div>
+            <div class="pf-avail"><span class="avail-dot"></span>Open to work</div>
+          </div>
+          <nav class="pf-nav" aria-label="Main navigation">
+            <div class="pf-nav-label">Menu</div>
+            <a href="#" class="pf-nav-item is-active"><span class="pf-nav-icon">🏠</span>Home</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">👤</span>About</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">💼</span>Projects</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">⚡</span>Skills</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">📋</span>Experience</a>
+            <div class="pf-nav-label">Connect</div>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">✉️</span>Contact</a>
+          </nav>
+          <div class="pf-sidebar-foot">
+            <div class="pf-social-row">
+              <a href="#" class="pf-social-btn" aria-label="GitHub">GH</a>
+              <a href="#" class="pf-social-btn" aria-label="LinkedIn">LI</a>
+              <a href="#" class="pf-social-btn" aria-label="X / Twitter">X</a>
+            </div>
+            <a href="#" class="pf-cv-btn">↓ Download CV</a>
+          </div>
+        </aside>
+
+        <!-- main -->
+        <main class="pf-main">
+          <div class="pf-hero">
+            <div class="pf-hero-pill">✦ Software Engineer · Full-Stack</div>
+            <h1>Hi, I'm Alex.<br>I build things for the web.</h1>
+            <p>5+ years crafting scalable APIs, cloud infrastructure, and clean interfaces. Passionate about developer tooling and product-quality code.</p>
+            <div class="pf-hero-btns">
+              <a href="#" class="pf-btn-p">View Projects</a>
+              <a href="#" class="pf-btn-o">Get in Touch</a>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Featured Work</div>
+            <div class="pf-sec-title">Recent Projects</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-card">
+              <div class="pf-card-icon">☁️</div>
+              <div>
+                <h3>CloudSync API</h3>
+                <p>Distributed gateway handling 2M+ req/day. Built with Go, AWS Lambda &amp; DynamoDB. 99.98% uptime across 18 months of production traffic.</p>
+                <div class="pf-tags">
+                  <span class="pf-tag">Go</span>
+                  <span class="pf-tag">AWS</span>
+                  <span class="pf-tag">Docker</span>
+                  <span class="pf-tag">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Expertise</div>
+            <div class="pf-sec-title">Skills</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-skills">
+              <span class="pf-skill">React</span>
+              <span class="pf-skill">TypeScript</span>
+              <span class="pf-skill">Node.js</span>
+              <span class="pf-skill">Go</span>
+              <span class="pf-skill">Python</span>
+              <span class="pf-skill">AWS</span>
+              <span class="pf-skill">Docker</span>
+              <span class="pf-skill">Kubernetes</span>
+            </div>
+          </div>
+        </main>
+      </div><!-- /.preview-frame.theme-1 -->
+    </section>
+
+
+    <!-- ============================================================
+         THEME 2 — Bold & Editorial
+    ============================================================ -->
+    <section class="t-section" id="t2">
+      <div class="t-meta">
+        <div class="t-num">02</div>
+        <div class="t-info">
+          <h2>Bold &amp; Editorial</h2>
+          <p>High visual weight, strong hierarchy, editorial confidence. Deep forest-green with Space Grotesk headlines gives an engineering-meets-design-leadership feel — decisive and impossible to ignore.</p>
+          <div class="t-swatches">
+            <div class="t-swatch" style="background:#022c22" title="Forest sidebar"></div>
+            <div class="t-swatch" style="background:#065f46" title="Primary emerald"></div>
+            <div class="t-swatch" style="background:#10b981" title="Bright green accent"></div>
+            <div class="t-swatch" style="background:#ecfdf5" title="Mint bg"></div>
+            <div class="t-swatch" style="background:#ffffff" title="Surface white"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-frame theme-2">
+        <aside class="pf-sidebar">
+          <div class="pf-sidebar-top">
+            <div class="pf-avatar">🧑‍💻</div>
+            <div class="pf-name">Alex Chen</div>
+            <div class="pf-role-tag">Software Engineer</div>
+            <div class="pf-avail"><span class="avail-dot"></span>Open to work</div>
+          </div>
+          <nav class="pf-nav" aria-label="Main navigation">
+            <div class="pf-nav-label">Menu</div>
+            <a href="#" class="pf-nav-item is-active"><span class="pf-nav-icon">🏠</span>Home</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">👤</span>About</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">💼</span>Projects</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">⚡</span>Skills</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">📋</span>Experience</a>
+            <div class="pf-nav-label">Connect</div>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">✉️</span>Contact</a>
+          </nav>
+          <div class="pf-sidebar-foot">
+            <div class="pf-social-row">
+              <a href="#" class="pf-social-btn" aria-label="GitHub">GH</a>
+              <a href="#" class="pf-social-btn" aria-label="LinkedIn">LI</a>
+              <a href="#" class="pf-social-btn" aria-label="X / Twitter">X</a>
+            </div>
+            <a href="#" class="pf-cv-btn">↓ Download CV</a>
+          </div>
+        </aside>
+
+        <main class="pf-main">
+          <div class="pf-hero">
+            <div class="pf-hero-pill">✦ Software Engineer · Full-Stack</div>
+            <h1>Hi, I'm Alex.<br>I build things for the web.</h1>
+            <p>5+ years crafting scalable APIs, cloud infrastructure, and clean interfaces. Passionate about developer tooling and product-quality code.</p>
+            <div class="pf-hero-btns">
+              <a href="#" class="pf-btn-p">View Projects</a>
+              <a href="#" class="pf-btn-o">Get in Touch</a>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Featured Work</div>
+            <div class="pf-sec-title">Recent Projects</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-card">
+              <div class="pf-card-icon">☁️</div>
+              <div>
+                <h3>CloudSync API</h3>
+                <p>Distributed gateway handling 2M+ req/day. Built with Go, AWS Lambda &amp; DynamoDB. 99.98% uptime across 18 months of production traffic.</p>
+                <div class="pf-tags">
+                  <span class="pf-tag">Go</span>
+                  <span class="pf-tag">AWS</span>
+                  <span class="pf-tag">Docker</span>
+                  <span class="pf-tag">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Expertise</div>
+            <div class="pf-sec-title">Skills</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-skills">
+              <span class="pf-skill">React</span>
+              <span class="pf-skill">TypeScript</span>
+              <span class="pf-skill">Node.js</span>
+              <span class="pf-skill">Go</span>
+              <span class="pf-skill">Python</span>
+              <span class="pf-skill">AWS</span>
+              <span class="pf-skill">Docker</span>
+              <span class="pf-skill">Kubernetes</span>
+            </div>
+          </div>
+        </main>
+      </div><!-- /.preview-frame.theme-2 -->
+    </section>
+
+
+    <!-- ============================================================
+         THEME 3 — Creative & Expressive
+    ============================================================ -->
+    <section class="t-section" id="t3">
+      <div class="t-meta">
+        <div class="t-num">03</div>
+        <div class="t-info">
+          <h2>Creative &amp; Expressive</h2>
+          <p>Warm, playful, and human. Teal-to-blue gradient sidebar, bubbly Nunito type, rounded-pill tags. Shows you care about craft and visual quality — not just shipping code.</p>
+          <div class="t-swatches">
+            <div class="t-swatch" style="background:#0d9488" title="Teal primary"></div>
+            <div class="t-swatch" style="background:#0369a1" title="Blue gradient end"></div>
+            <div class="t-swatch" style="background:#38bdf8" title="Sky accent"></div>
+            <div class="t-swatch" style="background:#f0fdfa" title="Teal-50 bg"></div>
+            <div class="t-swatch" style="background:#ccfbf1" title="Mint surface / tags"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-frame theme-3">
+        <aside class="pf-sidebar" style="background: linear-gradient(180deg, #0d9488 0%, #0369a1 100%);">
+          <div class="pf-sidebar-top">
+            <div class="pf-avatar">🧑‍💻</div>
+            <div class="pf-name">Alex Chen</div>
+            <div class="pf-role-tag">Software Engineer</div>
+            <div class="pf-avail"><span class="avail-dot"></span>Open to work</div>
+          </div>
+          <nav class="pf-nav" aria-label="Main navigation">
+            <div class="pf-nav-label">Menu</div>
+            <a href="#" class="pf-nav-item is-active"><span class="pf-nav-icon">🏠</span>Home</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">👤</span>About</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">💼</span>Projects</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">⚡</span>Skills</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">📋</span>Experience</a>
+            <div class="pf-nav-label">Connect</div>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">✉️</span>Contact</a>
+          </nav>
+          <div class="pf-sidebar-foot">
+            <div class="pf-social-row">
+              <a href="#" class="pf-social-btn" aria-label="GitHub">GH</a>
+              <a href="#" class="pf-social-btn" aria-label="LinkedIn">LI</a>
+              <a href="#" class="pf-social-btn" aria-label="X / Twitter">X</a>
+            </div>
+            <a href="#" class="pf-cv-btn">↓ Download CV</a>
+          </div>
+        </aside>
+
+        <main class="pf-main">
+          <div class="pf-hero">
+            <div class="pf-hero-pill">✦ Software Engineer · Full-Stack</div>
+            <h1>Hi, I'm Alex.<br>I build things for the web.</h1>
+            <p>5+ years crafting scalable APIs, cloud infrastructure, and clean interfaces. Passionate about developer tooling and product-quality code.</p>
+            <div class="pf-hero-btns">
+              <a href="#" class="pf-btn-p">View Projects</a>
+              <a href="#" class="pf-btn-o">Get in Touch</a>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Featured Work</div>
+            <div class="pf-sec-title">Recent Projects</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-card">
+              <div class="pf-card-icon">☁️</div>
+              <div>
+                <h3>CloudSync API</h3>
+                <p>Distributed gateway handling 2M+ req/day. Built with Go, AWS Lambda &amp; DynamoDB. 99.98% uptime across 18 months of production traffic.</p>
+                <div class="pf-tags">
+                  <span class="pf-tag">Go</span>
+                  <span class="pf-tag">AWS</span>
+                  <span class="pf-tag">Docker</span>
+                  <span class="pf-tag">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Expertise</div>
+            <div class="pf-sec-title">Skills</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-skills">
+              <span class="pf-skill">React</span>
+              <span class="pf-skill">TypeScript</span>
+              <span class="pf-skill">Node.js</span>
+              <span class="pf-skill">Go</span>
+              <span class="pf-skill">Python</span>
+              <span class="pf-skill">AWS</span>
+              <span class="pf-skill">Docker</span>
+              <span class="pf-skill">Kubernetes</span>
+            </div>
+          </div>
+        </main>
+      </div><!-- /.preview-frame.theme-3 -->
+    </section>
+
+
+    <!-- ============================================================
+         THEME 4 — Minimal & Understated
+    ============================================================ -->
+    <section class="t-section" id="t4">
+      <div class="t-meta">
+        <div class="t-num">04</div>
+        <div class="t-info">
+          <h2>Minimal &amp; Understated</h2>
+          <p>Swiss-style restraint. Pure white canvas, light sidebar with hairline borders, DM Sans for elegance. Every element earns its place. Blue surfaces only where necessary — confident enough to say less.</p>
+          <div class="t-swatches">
+            <div class="t-swatch" style="background:#f8fafc; border-color: rgba(255,255,255,0.35)" title="Sidebar bg"></div>
+            <div class="t-swatch" style="background:#2563eb" title="Primary blue (sparingly used)"></div>
+            <div class="t-swatch" style="background:#eff6ff" title="Soft blue highlight"></div>
+            <div class="t-swatch" style="background:#ffffff; border-color: rgba(255,255,255,0.3)" title="White bg"></div>
+            <div class="t-swatch" style="background:#94a3b8" title="Muted gray text"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-frame theme-4">
+        <aside class="pf-sidebar">
+          <div class="pf-sidebar-top">
+            <div class="pf-avatar">🧑‍💻</div>
+            <div class="pf-name">Alex Chen</div>
+            <div class="pf-role-tag">Software Engineer</div>
+            <div class="pf-avail"><span class="avail-dot"></span>Open to work</div>
+          </div>
+          <nav class="pf-nav" aria-label="Main navigation">
+            <div class="pf-nav-label">Menu</div>
+            <a href="#" class="pf-nav-item is-active"><span class="pf-nav-icon">🏠</span>Home</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">👤</span>About</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">💼</span>Projects</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">⚡</span>Skills</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">📋</span>Experience</a>
+            <div class="pf-nav-label">Connect</div>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">✉️</span>Contact</a>
+          </nav>
+          <div class="pf-sidebar-foot">
+            <div class="pf-social-row">
+              <a href="#" class="pf-social-btn" aria-label="GitHub">GH</a>
+              <a href="#" class="pf-social-btn" aria-label="LinkedIn">LI</a>
+              <a href="#" class="pf-social-btn" aria-label="X / Twitter">X</a>
+            </div>
+            <a href="#" class="pf-cv-btn">↓ Download CV</a>
+          </div>
+        </aside>
+
+        <main class="pf-main">
+          <div class="pf-hero">
+            <div class="pf-hero-pill">✦ Software Engineer · Full-Stack</div>
+            <h1>Hi, I'm Alex.<br>I build things for the web.</h1>
+            <p>5+ years crafting scalable APIs, cloud infrastructure, and clean interfaces. Passionate about developer tooling and product-quality code.</p>
+            <div class="pf-hero-btns">
+              <a href="#" class="pf-btn-p">View Projects</a>
+              <a href="#" class="pf-btn-o">Get in Touch</a>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Featured Work</div>
+            <div class="pf-sec-title">Recent Projects</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-card">
+              <div class="pf-card-icon">☁️</div>
+              <div>
+                <h3>CloudSync API</h3>
+                <p>Distributed gateway handling 2M+ req/day. Built with Go, AWS Lambda &amp; DynamoDB. 99.98% uptime across 18 months of production traffic.</p>
+                <div class="pf-tags">
+                  <span class="pf-tag">Go</span>
+                  <span class="pf-tag">AWS</span>
+                  <span class="pf-tag">Docker</span>
+                  <span class="pf-tag">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Expertise</div>
+            <div class="pf-sec-title">Skills</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-skills">
+              <span class="pf-skill">React</span>
+              <span class="pf-skill">TypeScript</span>
+              <span class="pf-skill">Node.js</span>
+              <span class="pf-skill">Go</span>
+              <span class="pf-skill">Python</span>
+              <span class="pf-skill">AWS</span>
+              <span class="pf-skill">Docker</span>
+              <span class="pf-skill">Kubernetes</span>
+            </div>
+          </div>
+        </main>
+      </div><!-- /.preview-frame.theme-4 -->
+    </section>
+
+
+    <!-- ============================================================
+         THEME 5 — Technical Precision  (bonus)
+    ============================================================ -->
+    <section class="t-section" id="t5">
+      <div class="t-meta">
+        <div class="t-num">05</div>
+        <div class="t-info">
+          <h2>Technical Precision <span style="font-size:0.8rem;color:#38bdf8;font-weight:500;margin-left:0.5rem;">bonus</span></h2>
+          <p>A portfolio that looks like an IDE — in a good way. Deep-ocean sidebar, sky-50 background, Fira Code headlines, monospaced tags. Every pixel says "I care about systems at depth."</p>
+          <div class="t-swatches">
+            <div class="t-swatch" style="background:#0c4a6e" title="Ocean sidebar"></div>
+            <div class="t-swatch" style="background:#1e40af" title="Primary deep-blue"></div>
+            <div class="t-swatch" style="background:#38bdf8" title="Sky-cyan accent"></div>
+            <div class="t-swatch" style="background:#f0f9ff" title="Sky-50 bg"></div>
+            <div class="t-swatch" style="background:#e0f2fe" title="Sky-100 surface / tags"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-frame theme-5">
+        <aside class="pf-sidebar">
+          <div class="pf-sidebar-top">
+            <div class="pf-avatar">🧑‍💻</div>
+            <div class="pf-name">Alex Chen</div>
+            <div class="pf-role-tag">Software Engineer</div>
+            <div class="pf-avail"><span class="avail-dot"></span>Open to work</div>
+          </div>
+          <nav class="pf-nav" aria-label="Main navigation">
+            <div class="pf-nav-label">Menu</div>
+            <a href="#" class="pf-nav-item is-active"><span class="pf-nav-icon">🏠</span>Home</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">👤</span>About</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">💼</span>Projects</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">⚡</span>Skills</a>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">📋</span>Experience</a>
+            <div class="pf-nav-label">Connect</div>
+            <a href="#" class="pf-nav-item"><span class="pf-nav-icon">✉️</span>Contact</a>
+          </nav>
+          <div class="pf-sidebar-foot">
+            <div class="pf-social-row">
+              <a href="#" class="pf-social-btn" aria-label="GitHub">GH</a>
+              <a href="#" class="pf-social-btn" aria-label="LinkedIn">LI</a>
+              <a href="#" class="pf-social-btn" aria-label="X / Twitter">X</a>
+            </div>
+            <a href="#" class="pf-cv-btn">↓ Download CV</a>
+          </div>
+        </aside>
+
+        <main class="pf-main">
+          <div class="pf-hero">
+            <div class="pf-hero-pill">✦ Software Engineer · Full-Stack</div>
+            <h1>Hi, I'm Alex.<br>I build things for the web.</h1>
+            <p>5+ years crafting scalable APIs, cloud infrastructure, and clean interfaces. Passionate about developer tooling and product-quality code.</p>
+            <div class="pf-hero-btns">
+              <a href="#" class="pf-btn-p">View Projects</a>
+              <a href="#" class="pf-btn-o">Get in Touch</a>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Featured Work</div>
+            <div class="pf-sec-title">Recent Projects</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-card">
+              <div class="pf-card-icon">☁️</div>
+              <div>
+                <h3>CloudSync API</h3>
+                <p>Distributed gateway handling 2M+ req/day. Built with Go, AWS Lambda &amp; DynamoDB. 99.98% uptime across 18 months of production traffic.</p>
+                <div class="pf-tags">
+                  <span class="pf-tag">Go</span>
+                  <span class="pf-tag">AWS</span>
+                  <span class="pf-tag">Docker</span>
+                  <span class="pf-tag">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pf-section">
+            <div class="pf-sec-eye">Expertise</div>
+            <div class="pf-sec-title">Skills</div>
+            <div class="pf-sec-line"></div>
+            <div class="pf-skills">
+              <span class="pf-skill">React</span>
+              <span class="pf-skill">TypeScript</span>
+              <span class="pf-skill">Node.js</span>
+              <span class="pf-skill">Go</span>
+              <span class="pf-skill">Python</span>
+              <span class="pf-skill">AWS</span>
+              <span class="pf-skill">Docker</span>
+              <span class="pf-skill">Kubernetes</span>
+            </div>
+          </div>
+        </main>
+      </div><!-- /.preview-frame.theme-5 -->
+    </section>
+
+    <!-- Footer prompt -->
+    <div style="text-align:center; padding: 0 2rem; color: #8b949e; font-size: 0.9rem; line-height: 1.8;">
+      <p>Which theme (or combination of elements) feels right? Record your choice in <code style="background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.82rem;">work-plan.md</code> under <em>§ 2-pre</em> — then production CSS begins.</p>
+    </div>
+
+  </main>
+</body>
+</html>

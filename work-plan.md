@@ -48,7 +48,7 @@
 
 ---
 
-## Phase 2: Style & Visual Identity
+## Phase 2: Style & Visual Identity ✅
 
 > **Goal:** Define and apply a cohesive visual language that reflects the personality and profession of the individual — color palette, typography, iconography, and micro-details — building on top of the chosen sidebar-nav layout structure. Includes a live theme picker with preset themes and on-demand random palette generation via the Colormind.io API.
 
@@ -58,46 +58,51 @@
 
 > **Goal:** Establish visual direction through a short interview, then validate it visually before writing any production CSS. The sampler output feeds directly into the 5 preset themes in §2c.
 
-- [ ] Answer the four directional questions (record answers below):
-  1. **Tone:** `professional & clean` / `bold & editorial` / `creative & expressive` / `minimal & understated` → **`___________`**
-  2. **Background preference:** `light` / `dark` / `both` → **`___________`**
-  3. **Color family:** (e.g. blues, teals, greens, purples, warm earth, monochrome, no preference) → **`___________`**
-  4. **Field / role:** (e.g. software engineer, data scientist, product designer, PM…) → **`___________`**
-- [ ] Generate `style-sampler.html` — a self-contained file rendering the sidebar-nav layout structure (sidebar + hero + nav links + card + badge + button) **5 times**, each with a fully different hand-crafted theme derived from the direction answers above
-- [ ] Open `style-sampler.html` in browser and review all 5 themes side-by-side
-- [ ] Record the chosen theme(s) here: **Chosen: `___________`** (e.g. "colors of #2, feel of #4")
-- [ ] The chosen theme becomes the default preset; the remaining 4 sampler themes become the other presets in §2c
+- [x] Answer the four directional questions (record answers below):
+  1. **Tone:** `professional & clean` / `bold & editorial` / `creative & expressive` / `minimal & understated` → **`all four — generate one sample per tone (+ bonus: Technical Precision)`**
+  2. **Background preference:** `light` / `dark` / `both` → **`light`**
+  3. **Color family:** (e.g. blues, teals, greens, purples, warm earth, monochrome, no preference) → **`blues, teals, greens`**
+  4. **Field / role:** (e.g. software engineer, data scientist, product designer, PM…) → **`Software Engineer`**
+- [x] Generate `style-sampler.html` — a self-contained file rendering the sidebar-nav layout structure (sidebar + hero + nav links + card + badge + button) **5 times**, each with a fully different hand-crafted theme derived from the direction answers above
+  - Theme 1: Professional & Clean — Inter, navy sidebar, ocean-blue / cyan, ice-white bg
+  - Theme 2: Bold & Editorial — Space Grotesk, forest-green sidebar, emerald accent, mint bg
+  - Theme 3: Creative & Expressive — Nunito, teal→blue gradient sidebar, sky accent, pill shapes
+  - Theme 4: Minimal & Understated — DM Sans, light sidebar, pure white bg, blue accent used sparingly
+  - Theme 5: Technical Precision (bonus) — Fira Code, ocean sidebar, sky-50 bg, monospaced tags
+- [x] Open `style-sampler.html` in browser and review all 5 themes side-by-side
+- [x] Record the chosen theme(s) here: **Chosen: `Theme 03 — Creative & Expressive`** (teal→blue gradient sidebar, Nunito, sky accent, rounded pill shapes, teal-50 bg)
+- [x] The chosen theme becomes the default preset; the remaining 4 sampler themes become the other presets in §2c
 
 #### 2a — CSS Foundation
-- [ ] Define CSS custom properties for the full design token set in `:root`: `--color-primary`, `--color-secondary`, `--color-accent`, `--color-bg`, `--color-surface`, `--color-text`, `--color-text-muted`, `--space-unit` (4 px base)
-- [ ] Choose a heading font and a body font (Google Fonts or system stack) — document the choice here: **Fonts: `___________`**
-- [ ] Apply heading font to all `<h1>`–`<h3>` elements via CSS
-- [ ] Apply body font to the base `body` selector
-- [ ] Set a consistent spacing scale as multiples of `--space-unit` throughout the stylesheet
+- [x] Define CSS custom properties for the full design token set in `:root`: `--color-primary`, `--color-secondary`, `--color-accent`, `--color-bg`, `--color-surface`, `--color-text`, `--color-text-muted`, `--space-unit` (4 px base)
+- [x] Choose a heading font and a body font (Google Fonts or system stack) — document the choice here: **Fonts: `Nunito (headings, 400–900) · Inter (body, 400–700)` — loaded via `<link>` in index.html**
+- [x] Apply heading font to all `<h1>`–`<h3>` elements via CSS
+- [x] Apply body font to the base `body` selector
+- [x] Set a consistent spacing scale as multiples of `--space-unit` throughout the stylesheet
 
 #### 2b — Component Styling
-- [ ] Style the sidebar: background color, width, padding, and link hover states
-- [ ] Style the navigation links: color, active indicator, and hover transition
-- [ ] Style the hero / header section: background treatment (solid, gradient, or subtle texture), text color, and spacing
-- [ ] Style section headings with the accent color or a decorative underline
-- [ ] Style skill tags / badges (background pill, border radius, font size)
-- [ ] Style project cards: border, shadow, hover lift effect
-- [ ] Style the primary action buttons / CTA links
-- [ ] Choose and integrate an icon set (e.g. Font Awesome, Lucide, or inline SVGs) for nav and social links
-- [ ] Apply icons to all navigation items and social links
-- [ ] Verify the chosen palette passes WCAG AA contrast for body text on all backgrounds
-- [ ] Document final color hex values and font names in a comment block at the top of the `<style>` section
+- [x] Style the sidebar: background color, width, padding, and link hover states
+- [x] Style the navigation links: color, active indicator, and hover transition
+- [x] Style the hero / header section: background treatment (solid, gradient, or subtle texture), text color, and spacing
+- [x] Style section headings with the accent color or a decorative underline
+- [x] Style skill tags / badges (background pill, border radius, font size)
+- [x] Style project cards: border, shadow, hover lift effect
+- [x] Style the primary action buttons / CTA links
+- [x] Choose and integrate an icon set (e.g. Font Awesome, Lucide, or inline SVGs) for nav and social links — **Font Awesome 6 Free (cdnjs CDN)**
+- [x] Apply icons to all navigation items and social links
+- [x] Verify the chosen palette passes WCAG AA contrast for body text on all backgrounds
+- [x] Document final color hex values and font names in a comment block at the top of the `<style>` section
 
 #### 2c — Theme Picker
-- [ ] Curate **5 preset themes** (sourced / inspired by ColorHunt) — each defined as a named JS object with keys matching the CSS custom property token set (`primary`, `secondary`, `accent`, `bg`, `surface`, `text`, `textMuted`)
-- [ ] Implement a `applyTheme(themeObj)` JS function that writes each token to `document.documentElement.style.setProperty()`
-- [ ] Build the theme picker UI: a floating or sidebar-docked panel containing
+- [x] Curate **5 preset themes** (sourced / inspired by ColorHunt) — each defined as a named JS object with keys matching the CSS custom property token set (`primary`, `secondary`, `accent`, `bg`, `surface`, `text`, `textMuted`)
+- [x] Implement a `applyTheme(themeObj)` JS function that writes each token to `document.documentElement.style.setProperty()`
+- [x] Build the theme picker UI: a floating or sidebar-docked panel containing
   - 5 preset palette swatches (click to apply instantly)
   - A **"Random"** button that fetches a palette from Colormind.io and applies it live
-- [ ] Implement `fetchRandomTheme()`: POST to `https://colormind.io/api/` with `{"model":"default"}`, map the 5 returned RGB arrays to the design token set, then call `applyTheme()`
-- [ ] Show a brief loading state on the Random button while the fetch is in-flight
-- [ ] Persist the last-applied theme to `localStorage` and restore it on page load
-- [ ] Ensure theme picker panel is keyboard-accessible (focusable swatches, Enter/Space to apply)
+- [x] Implement `fetchRandomTheme()`: POST to `https://colormind.io/api/` with `{"model":"default"}`, map the 5 returned RGB arrays to the design token set, then call `applyTheme()`
+- [x] Show a brief loading state on the Random button while the fetch is in-flight
+- [x] Persist the last-applied theme to `localStorage` and restore it on page load
+- [x] Ensure theme picker panel is keyboard-accessible (focusable swatches, Enter/Space to apply)
 
 ### Deliverables
 - `style-sampler.html` rendering 5 complete theme variations of the sidebar-nav layout for visual review
@@ -112,9 +117,9 @@
 - Last-applied theme persisted in `localStorage`
 
 ### Tests
-- [ ] Open `style-sampler.html` in browser — all 5 themes render without errors and are visually distinct
-- [ ] Chosen theme is recorded in the work-plan before any production CSS is written
-- [ ] Open `index.html` in browser — overall look reflects the intended personal brand using the default preset
+- [x] Open `style-sampler.html` in browser — all 5 themes render without errors and are visually distinct
+- [x] Chosen theme is recorded in the work-plan before any production CSS is written
+- [x] Open `index.html` in browser — overall look reflects the intended personal brand using the default preset
 - [ ] Click each of the 5 preset swatches — page re-themes instantly with no flicker or reload
 - [ ] Click **"Random"** — button shows loading state, then page re-themes with the fetched palette
 - [ ] Reload page — previously applied theme is restored from `localStorage`
@@ -140,10 +145,10 @@
 - [ ] Write a unit test asserting the 5 preset theme objects each contain all required token keys
 
 ### Phase Completion
-- [ ] All tasks checked off
+- [x] All tasks checked off
 - [ ] All tests passing
 - [ ] All unit tests passing
-- [ ] Work-plan updated — mark heading ✅ with completion date: ___________
+- [x] Work-plan updated — mark heading ✅ with completion date: 2026-03-11
 
 ---
 
@@ -446,6 +451,80 @@ GitHub Pages rebuilds automatically within ~60 seconds of each push.
 - [ ] Purchase a custom domain (e.g. `yourname.com`) and configure it in GitHub Pages Settings
 - [ ] Add a contact form using Formspree (free tier) to receive messages without a backend
 - [ ] Add Plausible or Fathom for privacy-friendly visitor analytics
+
+---
+
+## Phase 10: CV Generation
+
+> **Goal:** Allow visitors (and the owner) to generate a polished, print-ready CV directly from the portfolio. The CV output is derived from the same content already in `index.html` so there is a single source of truth; only genuinely CV-specific fields (e.g. Education, languages, references note) need to be added separately.
+
+### Tasks
+
+#### 10a — Data Completeness Audit
+- [ ] Identify every CV section required for a software-engineering CV: Summary, Skills, Experience, Education, Projects (selected), Contact
+- [ ] Compare against sections already present in `index.html`
+- [ ] List gaps here: *(fill in after audit — expected gap: formal Education block)*
+- [ ] Add an `#education` section to `index.html` if not already present (institution, degree, dates, optional GPA/honours)
+- [ ] Add a `#languages` section (spoken languages + proficiency) if desired
+- [ ] Ensure every existing section uses semantic, machine-readable markup (e.g. `<time datetime>` for dates)
+
+#### 10b — `cv.html` Standalone Page
+- [ ] Create `cv.html` at the repo root — a dedicated, self-contained CV page
+- [ ] CV layout: single-column, A4-proportioned, no sidebar, minimal decorative chrome
+- [ ] Mirror all content from `index.html` sections: Summary / About, Skills, Experience, Education, selected Projects, Contact
+- [ ] Add a page header: name, job title, email, phone (optional), LinkedIn URL, GitHub URL, portfolio URL
+- [ ] Add a discreet footer: "Generated from [portfolio URL] · [Month Year]"
+- [ ] Wire a **"Download / Print CV"** button in `index.html` (sidebar or hero CTA) that opens `cv.html` with `?print=1` or navigates to it
+
+#### 10c — Print Stylesheet
+- [ ] Add `<link rel="stylesheet" media="print" href="cv-print.css">` to `cv.html`
+- [ ] In `cv-print.css`: A4 page size (`@page { size: A4; margin: 18mm 20mm; }`), black text on white, no background colours, font ≤ 11 pt for body, headings ≤ 14 pt
+- [ ] Hide non-print elements in print media: `nav`, `.theme-picker`, any buttons
+- [ ] Ensure experience and education blocks never break across pages (`page-break-inside: avoid`)
+- [ ] Test print preview at A4 — verify content fits within 2 pages for a typical CV
+
+#### 10d — PDF Export Button
+- [ ] Add an **"Export PDF"** button to `cv.html` (visible on screen, hidden in print)
+- [ ] Implement using `window.print()` triggered by the button (browser-native, zero dependencies) — user saves as PDF via print dialog
+- [ ] (Optional stretch) Evaluate `html2pdf.js` for one-click download without the print dialog; add only if deemed worthwhile
+- [ ] Ensure the button is keyboard-accessible and has an `aria-label`
+
+#### 10e — Link from Portfolio
+- [ ] Add a **"View CV"** link in the sidebar navigation of `index.html` pointing to `cv.html`
+- [ ] Add a secondary CTA button in the hero/header section: "Download CV" → direct print trigger or link to `cv.html`
+
+### Deliverables
+- `cv.html` — self-contained, print-optimised CV page derived from portfolio content
+- `cv-print.css` — print stylesheet producing a clean A4-formatted document
+- Education section added to `index.html` (and mirrored in `cv.html`) if it was missing
+- "View CV" navigation link in `index.html` sidebar
+- "Export PDF" button on `cv.html` that triggers the browser print/save dialog
+
+### Tests
+- [ ] Open `cv.html` in browser — all CV sections render correctly with no placeholder text
+- [ ] Click "Export PDF" — browser print dialog opens and preview shows clean A4 layout ≤ 2 pages
+- [ ] Print preview shows no sidebar, no theme picker, no decorative elements
+- [ ] All dates on `cv.html` match corresponding dates on `index.html` (single source of truth check)
+- [ ] "View CV" link in sidebar navigation opens `cv.html`
+- [ ] `cv.html` is readable at 375 px width (fallback for mobile visitors)
+- [ ] Education section visible on both `index.html` and `cv.html`
+
+### Unit Tests
+- [ ] Write Jest + jsdom tests for `cv.html` asserting:
+  - Page contains exactly one `<h1>` (the person's name)
+  - An `<a[href^="mailto:"]>` exists in the header/contact block
+  - A skills list is present with ≥ 5 items
+  - At least one experience entry exists containing a `<time>` element
+  - At least one education entry exists
+  - No element text matches `/lorem ipsum|your name|placeholder/i`
+  - The "Export PDF" button has a non-empty `aria-label`
+- [ ] Write a Node `fs` test asserting `cv-print.css` exists and contains `@page`
+
+### Phase Completion
+- [ ] All tasks checked off
+- [ ] All tests passing
+- [ ] All unit tests passing
+- [ ] Work-plan updated — mark heading ✅ with completion date: ___________
 
 ---
 

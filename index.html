@@ -4,7 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio – Sidebar Nav</title>
-  <!-- styles & font injected by Vite via src/main.js -->
+  <!-- Google Fonts: Nunito (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 Free — nav & social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- App styles & JS (via Vite) -->
   <script type="module" src="/src/main.js"></script>
 </head>
 <body>
@@ -18,35 +24,43 @@
     <div class="sidebar-badge"><span class="badge-dot"></span> Open to work</div>
   </div>
 
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav" aria-label="Main navigation">
     <div class="nav-label">Menu</div>
     <a href="#hero" class="nav-item active">
-      <span class="nav-icon">🏠</span> Overview
+      <span class="nav-icon"><i class="fa-solid fa-house fa-fw"></i></span> Overview
     </a>
     <a href="#about-section" class="nav-item">
-      <span class="nav-icon">👤</span> About
+      <span class="nav-icon"><i class="fa-solid fa-user fa-fw"></i></span> About
     </a>
     <a href="#projects-section" class="nav-item">
-      <span class="nav-icon">🚀</span> Projects
+      <span class="nav-icon"><i class="fa-solid fa-rocket fa-fw"></i></span> Projects
     </a>
     <a href="#experience-section" class="nav-item">
-      <span class="nav-icon">💼</span> Experience
+      <span class="nav-icon"><i class="fa-solid fa-briefcase fa-fw"></i></span> Experience
     </a>
     <a href="#skills-section" class="nav-item">
-      <span class="nav-icon">⚡</span> Skills
+      <span class="nav-icon"><i class="fa-solid fa-bolt fa-fw"></i></span> Skills
     </a>
     <a href="#contact-section" class="nav-item">
-      <span class="nav-icon">✉️</span> Contact
+      <span class="nav-icon"><i class="fa-solid fa-envelope fa-fw"></i></span> Contact
     </a>
   </nav>
 
   <div class="sidebar-footer">
     <div class="social-row">
-      <a href="https://github.com/" class="social-btn" title="GitHub">⬡</a>
-      <a href="https://linkedin.com/" class="social-btn" title="LinkedIn">in</a>
-      <a href="https://twitter.com/" class="social-btn" title="Twitter">𝕏</a>
+      <a href="https://github.com/" class="social-btn" title="GitHub" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://linkedin.com/" class="social-btn" title="LinkedIn" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+      <a href="https://twitter.com/" class="social-btn" title="X / Twitter" aria-label="X / Twitter">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
     </div>
-    <a href="#" class="cv-btn">↓ Download Resume</a>
+    <a href="#" class="cv-btn">
+      <i class="fa-solid fa-download"></i> Download Resume
+    </a>
   </div>
 </aside>
 
@@ -67,6 +81,16 @@
 
     <!-- STATS -->
     <div class="stat-chips">
+      <a href="https://stackoverflow.com/users/1219280/veverke"
+         class="stat-chip stat-chip--so"
+         target="_blank"
+         rel="noopener noreferrer"
+         title="Stack Overflow profile">
+        <img src="https://stackoverflow.com/users/flair/1219280.png?theme=clean"
+             width="208" height="58"
+             alt="veverke's Stack Overflow profile"
+             style="display:block;width:208px;height:auto;">
+      </a>
       <div class="stat-chip">
         <span class="chip-icon">📅</span>
         <div><div class="chip-num">5+</div><div class="chip-label">Years exp.</div></div>
@@ -79,10 +103,6 @@
         <span class="chip-icon">⭐</span>
         <div><div class="chip-num">8k+</div><div class="chip-label">GitHub stars</div></div>
       </div>
-      <div class="stat-chip">
-        <span class="chip-icon">🌍</span>
-        <div><div class="chip-num">3</div><div class="chip-label">OSS libraries</div></div>
-      </div>
     </div>
 
     <!-- ABOUT -->
@@ -90,7 +110,7 @@
       <div class="section-label">About Me</div>
       <div class="section-title">Who I am</div>
       <div class="section-underline"></div>
-      <p style="color:#555;font-size:1rem;line-height:1.8;max-width:620px">I'm a product-minded full-stack engineer who loves building things that make a real difference. I've spent 5+ years working across startups and scale-ups, taking products from zero to production. I care about code quality, great UX, and continuous learning.</p>
+      <p class="about-text">I'm a product-minded full-stack engineer who loves building things that make a real difference. I've spent 5+ years working across startups and scale-ups, taking products from zero to production. I care about code quality, great UX, and continuous learning.</p>
     </section>
 
     <!-- PROJECTS -->
@@ -100,7 +120,7 @@
       <div class="section-underline"></div>
 
       <div class="featured-proj">
-        <div class="proj-emoji" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">📋</div>
+        <div class="proj-emoji proj-emoji--indigo">📋</div>
         <div class="proj-main">
           <h3>TaskMaster</h3>
           <p>Collaborative task management with real-time sync, team workspaces, and smart notification routing. Scales to 10k+ concurrent users.</p>
@@ -116,7 +136,7 @@
       </div>
 
       <div class="featured-proj">
-        <div class="proj-emoji" style="background:linear-gradient(135deg,#10b981,#0891b2)">💪</div>
+        <div class="proj-emoji proj-emoji--teal">💪</div>
         <div class="proj-main">
           <h3>FitTrack</h3>
           <p>Mobile fitness app with AI-powered workout recommendations, nutrition tracking, and progress visualization. 12k+ downloads.</p>
@@ -131,7 +151,7 @@
       </div>
 
       <div class="featured-proj">
-        <div class="proj-emoji" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">🛒</div>
+        <div class="proj-emoji proj-emoji--amber">🛒</div>
         <div class="proj-main">
           <h3>ShopSync</h3>
           <p>E-commerce platform with inventory management, Stripe integration, and live analytics dashboards. Processed $500k in transactions.</p>
@@ -147,9 +167,9 @@
       </div>
 
       <div class="featured-proj">
-        <div class="proj-emoji" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">🤖</div>
+        <div class="proj-emoji proj-emoji--pink">🤖</div>
         <div class="proj-main">
-          <h3>AiNote <span style="font-size:0.75rem;color:var(--muted);font-weight:500">&nbsp;★ 2.1k</span></h3>
+          <h3>AiNote <span class="proj-name-meta">&nbsp;★ 2.1k</span></h3>
           <p>AI-powered note-taking with auto-summarization, semantic search, and knowledge graph visualization. Open source.</p>
           <div class="proj-tags">
             <span class="proj-tag">Python</span><span class="proj-tag">FastAPI</span>
@@ -226,22 +246,22 @@
       <div class="section-label">Get in Touch</div>
       <div class="section-title">Contact</div>
       <div class="section-underline"></div>
-      <p style="color:#555;margin-bottom:1.5rem;font-size:0.95rem;line-height:1.7;max-width:500px">I'm open to new opportunities, collaborations, and interesting conversations. Reach out through any of the channels below.</p>
+      <p class="contact-intro">I'm open to new opportunities, collaborations, and interesting conversations. Reach out through any of the channels below.</p>
       <div class="contact-grid">
         <a href="mailto:jane@example.com" class="contact-card">
-          <div class="contact-card-icon" style="background:#eef2ff">✉️</div>
+          <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
           <div><div class="contact-card-label">Email</div><div class="contact-card-value">jane@example.com</div></div>
         </a>
         <a href="https://linkedin.com/" class="contact-card">
-          <div class="contact-card-icon" style="background:#dbeafe">💼</div>
+          <div class="contact-card-icon"><i class="fa-brands fa-linkedin-in"></i></div>
           <div><div class="contact-card-label">LinkedIn</div><div class="contact-card-value">linkedin.com/in/janedoe</div></div>
         </a>
         <a href="https://github.com/" class="contact-card">
-          <div class="contact-card-icon" style="background:#f3f4f6">⬡</div>
+          <div class="contact-card-icon"><i class="fa-brands fa-github"></i></div>
           <div><div class="contact-card-label">GitHub</div><div class="contact-card-value">github.com/janedoe</div></div>
         </a>
         <a href="#" class="contact-card">
-          <div class="contact-card-icon" style="background:#fdf4ff">📄</div>
+          <div class="contact-card-icon"><i class="fa-solid fa-file-lines"></i></div>
           <div><div class="contact-card-label">Resume</div><div class="contact-card-value">Download PDF</div></div>
         </a>
       </div>
@@ -249,6 +269,22 @@
 
   </div>
 </main>
+
+<!-- THEME PICKER -->
+<div class="theme-picker" role="region" aria-label="Theme picker">
+  <button class="theme-picker-toggle"
+          aria-expanded="true"
+          aria-controls="theme-picker-panel"
+          aria-label="Toggle theme picker">›</button>
+  <div class="theme-picker-panel" id="theme-picker-panel">
+    <div class="picker-label">Theme</div>
+    <div class="picker-swatches" role="group" aria-label="Preset themes"></div>
+    <div class="picker-divider" role="separator"></div>
+    <button class="picker-random-btn"
+            title="Random palette from Colormind.io"
+            aria-label="Apply random palette">↻</button>
+  </div>
+</div>
 
 </body>
 </html>
