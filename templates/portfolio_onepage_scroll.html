@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio – One Page Scroll</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; overflow-y: scroll; }
+    body { font-family: 'Montserrat', Arial, sans-serif; }
+
+    /* SCROLL SECTIONS */
+    .snap-section { scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5rem 2rem; position: relative; overflow: hidden; }
+
+    /* NAV DOTS */
+    .nav-dots { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 200; display: flex; flex-direction: column; gap: 0.9rem; }
+    .nav-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); border: none; cursor: pointer; transition: all 0.25s; padding: 0; }
+    .nav-dot.active { background: #fff; transform: scale(1.4); }
+    .nav-dot:hover { background: rgba(255,255,255,0.8); }
+
+    /* SECTION 1 — HERO */
+    .s-hero { background: linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%); color: #fff; text-align: center; }
+    .s-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(99,102,241,0.2) 0%, transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(236,72,153,0.15) 0%, transparent 55%); }
+    .hero-content { position: relative; max-width: 800px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 40px; padding: 0.4rem 1.1rem; font-size: 0.82rem; font-weight: 500; margin-bottom: 2.5rem; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 6px #22c55e; animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .hero-name { font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; letter-spacing: -3px; line-height: 1; margin-bottom: 0.8rem; }
+    .hero-name .line1 { display: block; }
+    .hero-name .line2 { display: block; background: linear-gradient(90deg, #818cf8, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1.05rem; font-weight: 500; color: rgba(255,255,255,0.55); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3rem; }
+    .hero-cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .scroll-btn { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.25); color: #fff; padding: 0.85rem 2.2rem; border-radius: 50px; font-size: 0.95rem; font-weight: 700; text-decoration: none; font-family: inherit; transition: all 0.2s; cursor: pointer; letter-spacing: 0.5px; }
+    .scroll-btn:hover { background: rgba(255,255,255,0.22); transform: translateY(-2px); }
+    .scroll-btn-accent { background: linear-gradient(90deg, #818cf8, #ec4899); border-color: transparent; }
+    .scroll-btn-accent:hover { opacity: 0.9; }
+    .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.3); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .scroll-arrow { width: 20px; height: 20px; border-right: 2px solid rgba(255,255,255,0.3); border-bottom: 2px solid rgba(255,255,255,0.3); transform: rotate(45deg); animation: bounce 1.5s infinite; }
+    @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+
+    /* SECTION 2 — ABOUT */
+    .s-about { background: #fff; }
+    .section-inner { max-width: 900px; width: 100%; }
+    .section-number { font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .section-heading { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 2.5rem; }
+    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .about-desc { font-size: 1rem; line-height: 1.85; color: #555; }
+    .about-desc p { margin-bottom: 1rem; }
+    .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .fact-box { border-left: 3px solid; padding: 0.8rem 1rem; }
+    .fact-box .fact-num { font-size: 2rem; font-weight: 900; letter-spacing: -1px; line-height: 1; }
+    .fact-box .fact-label { font-size: 0.82rem; color: #888; margin-top: 0.2rem; }
+
+    /* SECTION 3 — PROJECTS */
+    .s-projects { background: #0f172a; color: #fff; }
+    .s-projects .section-number { color: #818cf8; }
+    .s-projects .section-heading { color: #fff; }
+    .proj-scroll { width: 100%; overflow-x: auto; padding-bottom: 1rem; }
+    .proj-row { display: flex; gap: 1.5rem; min-width: max-content; padding: 0.5rem 0.5rem 0; }
+    .proj-card { width: 300px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; overflow: hidden; flex-shrink: 0; transition: transform 0.2s, border-color 0.2s; }
+    .proj-card:hover { transform: translateY(-6px); border-color: rgba(129,140,248,0.5); }
+    .proj-card-banner { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .proj-card-body { padding: 1.3rem; }
+    .proj-card-body h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .proj-card-body p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 1rem; }
+    .proj-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .proj-tech span { background: rgba(129,140,248,0.2); color: #a5b4fc; padding: 0.18rem 0.55rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .proj-card-footer { padding: 0.8rem 1.3rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 1rem; }
+    .proj-footer-link { font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #818cf8; transition: opacity 0.15s; }
+    .proj-footer-link:hover { opacity: 0.75; }
+
+    /* SECTION 4 — SKILLS */
+    .s-skills { background: linear-gradient(135deg, #f8faff 0%, #eef2ff 100%); }
+    .s-skills .section-number { color: #818cf8; }
+    .skills-wheel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 0.5rem; max-width: 720px; width: 100%; }
+    .skill-hexagon { background: #fff; border-radius: 16px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 4px 16px rgba(99,102,241,0.1); border: 1px solid #e0e7ff; transition: transform 0.2s, box-shadow 0.2s; }
+    .skill-hexagon:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(99,102,241,0.18); }
+    .skill-hex-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+    .skill-hex-name { font-size: 0.88rem; font-weight: 700; color: #1e1b4b; }
+    .skill-hex-level { font-size: 0.75rem; color: #818cf8; font-weight: 600; margin-top: 0.2rem; }
+
+    /* SECTION 5 — CONTACT */
+    .s-contact { background: linear-gradient(145deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%); color: #fff; text-align: center; }
+    .s-contact::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 60% 30%, rgba(236,72,153,0.15) 0%, transparent 55%); }
+    .contact-content { position: relative; max-width: 650px; }
+    .contact-content p { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 2.5rem; }
+    .contact-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+    .contact-chip { display: flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 50px; padding: 0.6rem 1.3rem; text-decoration: none; color: #fff; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; }
+    .contact-chip:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+    /* FOOTER */
+    .site-footer { scroll-snap-align: start; background: #050505; color: #444; text-align: center; padding: 2.5rem; font-size: 0.85rem; min-height: auto; display: flex; align-items: center; justify-content: center; }
+    .site-footer span { color: #818cf8; }
+
+    @media (max-width: 700px) {
+      .about-layout { grid-template-columns: 1fr; }
+      .skills-wheel { grid-template-columns: repeat(2, 1fr); }
+      .nav-dots { right: 0.8rem; }
+      .hero-name { letter-spacing: -2px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<div class="nav-dots">
+  <button class="nav-dot active" onclick="document.querySelector('.s-hero').scrollIntoView({behavior:'smooth'})" title="Home"></button>
+  <button class="nav-dot" onclick="document.querySelector('.s-about').scrollIntoView({behavior:'smooth'})" title="About"></button>
+  <button class="nav-dot" onclick="document.querySelector('.s-projects').scrollIntoView({behavior:'smooth'})" title="Projects"></button>
+  <button class="nav-dot" onclick="document.querySelector('.s-skills').scrollIntoView({behavior:'smooth'})" title="Skills"></button>
+  <button class="nav-dot" onclick="document.querySelector('.s-contact').scrollIntoView({behavior:'smooth'})" title="Contact"></button>
+</div>
+
+<!-- 1. HERO -->
+<section class="snap-section s-hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span> Available for new projects</div>
+    <h1 class="hero-name">
+      <span class="line1">Jane</span>
+      <span class="line2">Doe.</span>
+    </h1>
+    <p class="hero-sub">Developer &nbsp;&middot;&nbsp; Maker &nbsp;&middot;&nbsp; Creator</p>
+    <div class="hero-cta-group">
+      <a class="scroll-btn scroll-btn-accent" href="#" onclick="event.preventDefault();document.querySelector('.s-projects').scrollIntoView({behavior:'smooth'})">See My Work</a>
+      <a class="scroll-btn" href="#" onclick="event.preventDefault();document.querySelector('.s-contact').scrollIntoView({behavior:'smooth'})">Say Hello</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- 2. ABOUT -->
+<section class="snap-section s-about">
+  <div class="section-inner">
+    <div class="section-number" style="color:#6366f1">01 / About</div>
+    <h2 class="section-heading">I build digital<br>experiences.</h2>
+    <div class="about-layout">
+      <div class="about-desc">
+        <p>Full-stack developer with 5+ years of experience crafting high-quality web applications. I love bringing ideas from whiteboard to production — clean code, great UX, and all.</p>
+        <p>I've worked with startups and mid-sized companies, shipping products that serve thousands of daily users. I'm skilled across the full stack and comfortable leading both technical and UX decisions.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact-box" style="border-color:#6366f1">
+          <div class="fact-num" style="color:#6366f1">5+</div>
+          <div class="fact-label">Years of experience</div>
+        </div>
+        <div class="fact-box" style="border-color:#ec4899">
+          <div class="fact-num" style="color:#ec4899">20+</div>
+          <div class="fact-label">Projects shipped</div>
+        </div>
+        <div class="fact-box" style="border-color:#f59e0b">
+          <div class="fact-num" style="color:#f59e0b">8k+</div>
+          <div class="fact-label">GitHub stars</div>
+        </div>
+        <div class="fact-box" style="border-color:#10b981">
+          <div class="fact-num" style="color:#10b981">3</div>
+          <div class="fact-label">OSS libraries</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PROJECTS -->
+<section class="snap-section s-projects">
+  <div class="section-inner">
+    <div class="section-number">02 / Projects</div>
+    <h2 class="section-heading">Things I've built.</h2>
+    <div class="proj-scroll">
+      <div class="proj-row">
+        <div class="proj-card">
+          <div class="proj-card-banner" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">📋</div>
+          <div class="proj-card-body">
+            <h3>TaskMaster</h3>
+            <p>Real-time collaborative task management with team workspaces and smart notifications.</p>
+            <div class="proj-tech"><span>React</span><span>Node.js</span><span>Socket.io</span></div>
+          </div>
+          <div class="proj-card-footer">
+            <a href="#" class="proj-footer-link">Live Demo →</a>
+            <a href="#" class="proj-footer-link">GitHub →</a>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-card-banner" style="background:linear-gradient(135deg,#10b981,#0891b2)">💪</div>
+          <div class="proj-card-body">
+            <h3>FitTrack</h3>
+            <p>Mobile fitness app with AI workout recs, nutrition logging, and progress charts.</p>
+            <div class="proj-tech"><span>Flutter</span><span>Firebase</span><span>TFLite</span></div>
+          </div>
+          <div class="proj-card-footer">
+            <a href="#" class="proj-footer-link">App Store →</a>
+            <a href="#" class="proj-footer-link">GitHub →</a>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-card-banner" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">🛒</div>
+          <div class="proj-card-body">
+            <h3>ShopSync</h3>
+            <p>E-commerce platform with inventory management, Stripe payments, and live analytics.</p>
+            <div class="proj-tech"><span>Next.js</span><span>PostgreSQL</span><span>Stripe</span></div>
+          </div>
+          <div class="proj-card-footer">
+            <a href="#" class="proj-footer-link">Case Study →</a>
+            <a href="#" class="proj-footer-link">GitHub →</a>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-card-banner" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">🤖</div>
+          <div class="proj-card-body">
+            <h3>AiNote</h3>
+            <p>AI-powered notes with auto-summarization, semantic search, and knowledge graphs.</p>
+            <div class="proj-tech"><span>Python</span><span>OpenAI</span><span>Vue.js</span></div>
+          </div>
+          <div class="proj-card-footer">
+            <a href="#" class="proj-footer-link">Live Demo →</a>
+            <a href="#" class="proj-footer-link">★ 2.1k →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SKILLS -->
+<section class="snap-section s-skills">
+  <div class="section-inner">
+    <div class="section-number">03 / Skills</div>
+    <h2 class="section-heading">My tech stack.</h2>
+    <div class="skills-wheel">
+      <div class="skill-hexagon"><span class="skill-hex-icon">⚛️</span><div class="skill-hex-name">React</div><div class="skill-hex-level">Expert</div></div>
+      <div class="skill-hexagon"><span class="skill-hex-icon">🔷</span><div class="skill-hex-name">TypeScript</div><div class="skill-hex-level">Expert</div></div>
+      <div class="skill-hexagon"><span class="skill-hex-icon">🟢</span><div class="skill-hex-name">Node.js</div><div class="skill-hex-level">Expert</div></div>
+      <div class="skill-hexagon"><span class="skill-hex-icon">🐍</span><div class="skill-hex-name">Python</div><div class="skill-hex-level">Advanced</div></div>
+      <div class="skill-hexagon"><span class="skill-hex-icon">🗄️</span><div class="skill-hex-name">PostgreSQL</div><div class="skill-hex-level">Advanced</div></div>
+      <div class="skill-hexagon"><span class="skill-hex-icon">🐳</span><div class="skill-hex-name">Docker</div><div class="skill-hex-level">Advanced</div></div>
+      <div class="skill-hexagon"><span class="skill-hex-icon">☁️</span><div class="skill-hex-name">AWS</div><div class="skill-hex-level">Proficient</div></div>
+      <div class="skill-hexagon"><span class="skill-hex-icon">▲</span><div class="skill-hex-name">Next.js</div><div class="skill-hex-level">Expert</div></div>
+      <div class="skill-hexagon"><span class="skill-hex-icon">🎨</span><div class="skill-hex-name">Figma</div><div class="skill-hex-level">Proficient</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CONTACT -->
+<section class="snap-section s-contact">
+  <div class="contact-content">
+    <div class="section-number" style="color:#a5b4fc">04 / Contact</div>
+    <h2 class="section-heading" style="color:#fff">Let's work together.</h2>
+    <p>Have a project in mind, a role to fill, or just want to connect? I'd love to hear from you.</p>
+    <div class="contact-row">
+      <a href="mailto:jane@example.com" class="contact-chip">✉️ Email</a>
+      <a href="https://linkedin.com/" class="contact-chip">💼 LinkedIn</a>
+      <a href="https://github.com/" class="contact-chip">🐙 GitHub</a>
+      <a href="#" class="contact-chip">📄 Resume</a>
+    </div>
+    <p style="font-size:0.85rem">Based in San Francisco · Open to remote worldwide</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  &copy; 2026 Jane Doe &nbsp;·&nbsp; <span>One Page Scroll Layout</span>
+</footer>
+
+<script>
+  // Update active nav dot on scroll
+  const sections = document.querySelectorAll('.snap-section');
+  const dots = document.querySelectorAll('.nav-dot');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        const idx = Array.from(sections).indexOf(e.target);
+        if (dots[idx]) dots[idx].classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

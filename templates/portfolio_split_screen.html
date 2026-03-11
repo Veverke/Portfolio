@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio – Split Screen</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --charcoal: #1a1a2e;
+      --rose: #e8405a;
+      --rose-pale: #fde8eb;
+      --stone: #f7f5f2;
+      --text: #1a1a1a;
+      --muted: #777;
+      --border: #e8e8e8;
+    }
+    html { height: 100%; }
+    body { font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif; height: 100%; display: flex; color: var(--text); }
+
+    /* LEFT PANEL — Fixed identity */
+    .left { width: 42%; min-width: 340px; background: var(--charcoal); color: #fff; position: fixed; top: 0; left: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    .left-inner { display: flex; flex-direction: column; height: 100%; padding: 3.5rem; }
+    .left-brand { font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: auto; padding-bottom: 3rem; }
+    .left-avatar { width: 72px; height: 72px; border-radius: 16px; background: linear-gradient(135deg, var(--rose), #ff7c93); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 2rem; border: 2px solid rgba(255,255,255,0.1); }
+    .left-name { font-family: 'DM Serif Display', Georgia, serif; font-size: 3rem; line-height: 1.05; margin-bottom: 0.8rem; letter-spacing: -1px; }
+    .left-name em { font-style: italic; color: var(--rose); }
+    .left-role { font-size: 1rem; color: rgba(255,255,255,0.6); font-weight: 400; margin-bottom: 2rem; line-height: 1.6; }
+    .left-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .left-tag { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 30px; padding: 0.3rem 0.9rem; font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.65); }
+    .left-links { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: auto; }
+    .left-link { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.88rem; font-weight: 500; transition: color 0.18s; padding: 0.3rem 0; }
+    .left-link:hover { color: #fff; }
+    .left-link .l-icon { width: 30px; height: 30px; border-radius: 7px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; transition: background 0.18s; }
+    .left-link:hover .l-icon { background: rgba(255,255,255,0.14); }
+    .left-nav { display: flex; gap: 1.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .left-nav a { text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.3); transition: color 0.18s; }
+    .left-nav a:hover { color: rgba(255,255,255,0.8); }
+    .left-bg-deco { position: absolute; right: -60px; bottom: -60px; width: 280px; height: 280px; border-radius: 50%; background: rgba(232,64,90,0.08); pointer-events: none; }
+
+    /* RIGHT PANEL — Scrollable content */
+    .right { margin-left: 42%; flex: 1; overflow-y: auto; background: var(--stone); min-height: 100vh; }
+    .right-inner { padding: 5rem 4rem 5rem 5rem; max-width: 720px; }
+
+    /* SECTION STYLES */
+    .rt-section { margin-bottom: 5.5rem; }
+    .rt-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--rose); margin-bottom: 0.4rem; }
+    .rt-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 2.2rem; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 0.5rem; }
+    .rt-divider { height: 1px; background: var(--border); margin-bottom: 2.2rem; }
+
+    /* INTRO */
+    .intro-text { font-size: 1.05rem; line-height: 1.85; color: #555; }
+    .intro-text p { margin-bottom: 1rem; }
+    .intro-highlight { display: inline-block; background: var(--rose-pale); color: var(--rose); padding: 0.1rem 0.5rem; border-radius: 4px; font-weight: 600; }
+
+    /* PROJECTS */
+    .rt-proj { border-bottom: 1px solid var(--border); padding: 2rem 0; display: grid; grid-template-columns: 56px 1fr; gap: 1.5rem; transition: background 0.15s; border-radius: 0; }
+    .rt-proj:last-child { border-bottom: none; }
+    .rt-proj:first-child { padding-top: 0; }
+    .rt-proj-num { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: #ddd; line-height: 1; padding-top: 0.1rem; user-select: none; }
+    .rt-proj-content h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .rt-proj-content p { font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.8rem; }
+    .rt-proj-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .rt-proj-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .rt-proj-tech span { background: #fff; border: 1px solid var(--border); color: #555; padding: 0.15rem 0.55rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .rt-proj-links { display: flex; gap: 0.6rem; margin-left: auto; }
+    .rt-proj-link { font-size: 0.82rem; font-weight: 700; text-decoration: none; color: var(--rose); border: 1.5px solid #ffc9d1; padding: 0.28rem 0.75rem; border-radius: 6px; background: var(--rose-pale); transition: all 0.18s; white-space: nowrap; }
+    .rt-proj-link:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+    /* SKILLS */
+    .rt-skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .rt-skill-cat h4 { font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 0.8rem; }
+    .rt-skill-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .rt-skill-item { display: flex; align-items: center; justify-content: space-between; }
+    .rt-skill-name { font-size: 0.92rem; font-weight: 500; color: var(--text); }
+    .rt-skill-track { width: 90px; height: 3px; background: var(--border); border-radius: 2px; }
+    .rt-skill-fill { height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--rose), #ff7c93); }
+
+    /* EXPERIENCE */
+    .exp-row { padding: 1.8rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 1.5rem; }
+    .exp-row:last-child { border-bottom: none; }
+    .exp-year { font-size: 0.78rem; font-weight: 700; color: var(--muted); white-space: nowrap; min-width: 80px; padding-top: 0.2rem; }
+    .exp-body h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.15rem; }
+    .exp-body .exp-co { color: var(--rose); font-size: 0.88rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .exp-body p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    /* CONTACT */
+    .contact-cta { background: var(--charcoal); border-radius: 16px; padding: 2.5rem; color: #fff; }
+    .contact-cta h3 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 0.6rem; }
+    .contact-cta p { color: rgba(255,255,255,0.6); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.7; }
+    .contact-cta-links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .cta-link { padding: 0.7rem 1.4rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700; text-decoration: none; transition: all 0.18s; display: inline-block; }
+    .cta-link-rose { background: var(--rose); color: #fff; }
+    .cta-link-rose:hover { background: #c72d47; transform: translateY(-1px); }
+    .cta-link-ghost { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.18); }
+    .cta-link-ghost:hover { background: rgba(255,255,255,0.18); }
+
+    footer { color: rgba(255,255,255,0.2); font-size: 0.8rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07); }
+
+    @media (max-width: 950px) {
+      body { flex-direction: column; height: auto; }
+      .left { position: relative; width: 100%; min-width: 0; height: auto; }
+      .left-inner { padding: 2.5rem 2rem; }
+      .left-name { font-size: 2.2rem; }
+      .right { margin-left: 0; }
+      .right-inner { padding: 3rem 2rem; }
+    }
+    @media (max-width: 560px) {
+      .rt-skills-layout { grid-template-columns: 1fr; }
+      .rt-proj { grid-template-columns: 1fr; gap: 0.5rem; }
+      .rt-proj-num { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LEFT PANEL -->
+<div class="left">
+  <div class="left-inner">
+    <div class="left-brand">Portfolio · 2026</div>
+
+    <div>
+      <div class="left-avatar">👩‍💻</div>
+      <h1 class="left-name">Jane<br><em>Doe.</em></h1>
+      <p class="left-role">Full-Stack Engineer crafting elegant digital products with care and precision.</p>
+      <div class="left-tags">
+        <span class="left-tag">5+ yrs experience</span>
+        <span class="left-tag">San Francisco</span>
+        <span class="left-tag">🟢 Open to work</span>
+      </div>
+    </div>
+
+    <div class="left-links">
+      <a href="mailto:jane@example.com" class="left-link">
+        <span class="l-icon">✉</span> jane@example.com
+      </a>
+      <a href="https://github.com/" class="left-link">
+        <span class="l-icon">⬡</span> github.com/janedoe
+      </a>
+      <a href="https://linkedin.com/" class="left-link">
+        <span class="l-icon">in</span> linkedin.com/in/janedoe
+      </a>
+      <a href="#" class="left-link">
+        <span class="l-icon">↓</span> Download resume
+      </a>
+    </div>
+
+    <nav class="left-nav">
+      <a href="#intro">About</a>
+      <a href="#rt-projects">Work</a>
+      <a href="#rt-skills">Skills</a>
+      <a href="#rt-contact">Contact</a>
+    </nav>
+  </div>
+  <div class="left-bg-deco"></div>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right">
+  <div class="right-inner">
+
+    <!-- INTRO -->
+    <div id="intro" class="rt-section">
+      <div class="rt-eyebrow">About</div>
+      <h2 class="rt-title">I build things<br>on the web.</h2>
+      <div class="rt-divider"></div>
+      <div class="intro-text">
+        <p>I'm a <span class="intro-highlight">full-stack engineer</span> with 5+ years of experience building performant, accessible web applications. I work across the entire stack — from database schema to pixel-perfect UIs.</p>
+        <p>My background spans early-stage startups to established product teams. I've shipped products used by thousands, led small engineering teams, and contributed to open source projects with thousands of stars.</p>
+        <p>I care deeply about code quality, developer experience, and making software that's genuinely delightful to use.</p>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="rt-projects" class="rt-section">
+      <div class="rt-eyebrow">Selected Work</div>
+      <h2 class="rt-title">Projects.</h2>
+      <div class="rt-divider"></div>
+
+      <div class="rt-proj">
+        <div class="rt-proj-num">01</div>
+        <div class="rt-proj-content">
+          <h3>TaskMaster</h3>
+          <p>Collaborative task management platform with real-time updates, team workspaces, notification routing, and detailed analytics. Handles thousands of concurrent connections.</p>
+          <div class="rt-proj-row">
+            <div class="rt-proj-tech">
+              <span>React</span><span>Node.js</span><span>Socket.io</span><span>MongoDB</span>
+            </div>
+            <div class="rt-proj-links">
+              <a href="#" class="rt-proj-link">Demo</a>
+              <a href="#" class="rt-proj-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rt-proj">
+        <div class="rt-proj-num">02</div>
+        <div class="rt-proj-content">
+          <h3>FitTrack</h3>
+          <p>Cross-platform mobile fitness app with AI-powered workout recommendations, nutrition tracking, and progress analytics. 4.8★ rating with 12k+ installs.</p>
+          <div class="rt-proj-row">
+            <div class="rt-proj-tech">
+              <span>Flutter</span><span>Firebase</span><span>TensorFlow Lite</span>
+            </div>
+            <div class="rt-proj-links">
+              <a href="#" class="rt-proj-link">App Store</a>
+              <a href="#" class="rt-proj-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rt-proj">
+        <div class="rt-proj-num">03</div>
+        <div class="rt-proj-content">
+          <h3>ShopSync</h3>
+          <p>Full-stack e-commerce platform with inventory management, multi-currency Stripe payments, and a live analytics dashboard. Processed $500k+ in transactions.</p>
+          <div class="rt-proj-row">
+            <div class="rt-proj-tech">
+              <span>Next.js</span><span>PostgreSQL</span><span>Stripe</span><span>Redis</span>
+            </div>
+            <div class="rt-proj-links">
+              <a href="#" class="rt-proj-link">Case Study</a>
+              <a href="#" class="rt-proj-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rt-proj">
+        <div class="rt-proj-num">04</div>
+        <div class="rt-proj-content">
+          <h3>AiNote <span style="color:#bbb;font-size:0.8rem;font-weight:400">· Open Source · ★ 2.1k</span></h3>
+          <p>AI-powered note-taking tool with automatic summarization, tag extraction, and semantic search over a personal knowledge base. 2.1k GitHub stars.</p>
+          <div class="rt-proj-row">
+            <div class="rt-proj-tech">
+              <span>Python</span><span>FastAPI</span><span>OpenAI</span><span>Vue.js</span>
+            </div>
+            <div class="rt-proj-links">
+              <a href="#" class="rt-proj-link">Demo</a>
+              <a href="#" class="rt-proj-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div id="rt-skills" class="rt-section">
+      <div class="rt-eyebrow">Technology</div>
+      <h2 class="rt-title">Skills.</h2>
+      <div class="rt-divider"></div>
+      <div class="rt-skills-layout">
+        <div class="rt-skill-cat">
+          <h4>Frontend</h4>
+          <div class="rt-skill-list">
+            <div class="rt-skill-item"><span class="rt-skill-name">React / Next.js</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:95%"></div></div></div>
+            <div class="rt-skill-item"><span class="rt-skill-name">TypeScript</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:90%"></div></div></div>
+            <div class="rt-skill-item"><span class="rt-skill-name">Vue.js</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:75%"></div></div></div>
+            <div class="rt-skill-item"><span class="rt-skill-name">CSS / Tailwind</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:88%"></div></div></div>
+            <div class="rt-skill-item"><span class="rt-skill-name">Figma</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:70%"></div></div></div>
+          </div>
+        </div>
+        <div class="rt-skill-cat">
+          <h4>Backend &amp; Infra</h4>
+          <div class="rt-skill-list">
+            <div class="rt-skill-item"><span class="rt-skill-name">Node.js</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:92%"></div></div></div>
+            <div class="rt-skill-item"><span class="rt-skill-name">Python / FastAPI</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:85%"></div></div></div>
+            <div class="rt-skill-item"><span class="rt-skill-name">PostgreSQL</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:82%"></div></div></div>
+            <div class="rt-skill-item"><span class="rt-skill-name">Docker / AWS</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:78%"></div></div></div>
+            <div class="rt-skill-item"><span class="rt-skill-name">CI/CD</span><div class="rt-skill-track"><div class="rt-skill-fill" style="width:84%"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div id="rt-experience" class="rt-section">
+      <div class="rt-eyebrow">Career</div>
+      <h2 class="rt-title">Experience.</h2>
+      <div class="rt-divider"></div>
+      <div class="exp-row">
+        <div class="exp-year">2023 –<br>Now</div>
+        <div class="exp-body">
+          <h4>Senior Full-Stack Engineer</h4>
+          <div class="exp-co">Acme Corp · San Francisco</div>
+          <p>Leading the core product platform redesign. Reduced API latency 60%, managed a team of 4, and drove migration to microservices.</p>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-year">2021 –<br>2023</div>
+        <div class="exp-body">
+          <h4>Full-Stack Developer</h4>
+          <div class="exp-co">StartupCo · Remote</div>
+          <p>Built the customer dashboard from scratch. Scaled from 0 to 50k MAU. Owned the full delivery pipeline including CI/CD and infrastructure.</p>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-year">2019 –<br>2021</div>
+        <div class="exp-body">
+          <h4>Junior Developer</h4>
+          <div class="exp-co">WebStudio · New York</div>
+          <p>Built client web features, improved frontend performance by 35%, contributed to an internal component library used across 12 projects.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="rt-contact" class="rt-section">
+      <div class="contact-cta">
+        <h3>Let's work together.</h3>
+        <p>I'm open to full-time roles, freelance engagements, and interesting collaborations. If you have something in mind, reach out.</p>
+        <div class="contact-cta-links">
+          <a href="mailto:jane@example.com" class="cta-link cta-link-rose">Send an Email</a>
+          <a href="https://linkedin.com/" class="cta-link cta-link-ghost">LinkedIn</a>
+          <a href="https://github.com/" class="cta-link cta-link-ghost">GitHub</a>
+        </div>
+        <footer>&copy; 2026 Jane Doe · Split Screen Layout</footer>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

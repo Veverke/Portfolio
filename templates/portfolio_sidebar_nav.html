@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio – Sidebar Nav</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sidebar-w: 280px;
+      --indigo: #4f46e5;
+      --indigo-light: #818cf8;
+      --pink: #ec4899;
+      --bg: #f1f5f9;
+      --card: #fff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --sidebar-bg: #1e1b4b;
+      --sidebar-text: rgba(255,255,255,0.75);
+      --sidebar-active: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); display: flex; }
+
+    /* SIDEBAR */
+    .sidebar { width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0; background: var(--sidebar-bg); display: flex; flex-direction: column; overflow: hidden; z-index: 50; }
+    .sidebar-top { padding: 2.5rem 1.8rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .avatar { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--indigo), var(--pink)); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; border: 3px solid rgba(255,255,255,0.2); }
+    .sidebar-name { color: #fff; font-weight: 800; font-size: 1.2rem; margin-bottom: 0.2rem; }
+    .sidebar-role { color: var(--sidebar-text); font-size: 0.85rem; font-weight: 500; margin-bottom: 1rem; }
+    .sidebar-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); border-radius: 20px; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 600; color: #4ade80; }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
+    .sidebar-nav { flex: 1; padding: 1.5rem 1rem; overflow-y: auto; }
+    .nav-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.25); padding: 0 0.8rem; margin-bottom: 0.5rem; margin-top: 1rem; }
+    .nav-item { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0.9rem; border-radius: 8px; text-decoration: none; color: var(--sidebar-text); font-weight: 500; font-size: 0.9rem; transition: all 0.15s; margin-bottom: 0.2rem; }
+    .nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-item.active { background: rgba(79,70,229,0.4); color: #fff; }
+    .nav-icon { width: 20px; text-align: center; font-size: 1.05rem; flex-shrink: 0; }
+    .sidebar-footer { padding: 1.5rem 1.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .social-row { display: flex; gap: 0.6rem; margin-bottom: 1.2rem; }
+    .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0.5rem; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 7px; color: var(--sidebar-text); text-decoration: none; font-size: 0.95rem; transition: all 0.15s; }
+    .social-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+    .cv-btn { display: block; text-align: center; background: var(--indigo); color: #fff; text-decoration: none; padding: 0.65rem; border-radius: 8px; font-size: 0.88rem; font-weight: 700; transition: all 0.18s; }
+    .cv-btn:hover { background: #4338ca; transform: translateY(-1px); }
+
+    /* MAIN CONTENT */
+    .main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; padding: 0; }
+    .content { max-width: 860px; padding: 3rem 3rem; }
+
+    /* SECTION HEADERS */
+    .section { margin-bottom: 4.5rem; }
+    .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--indigo); margin-bottom: 0.3rem; }
+    .section-title { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+    .section-underline { width: 40px; height: 3px; background: linear-gradient(90deg, var(--indigo), var(--pink)); border-radius: 2px; margin-bottom: 2rem; }
+
+    /* HERO SECTION */
+    .hero-section { background: linear-gradient(135deg, var(--indigo), #7c3aed, var(--pink)); border-radius: 16px; padding: 3rem 2.5rem; color: #fff; margin-bottom: 3rem; position: relative; overflow: hidden; }
+    .hero-section::before { content: ''; position: absolute; right: -2rem; top: -2rem; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.07); }
+    .hero-section::after { content: ''; position: absolute; right: 4rem; bottom: -3rem; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+    .hero-tag { display: inline-block; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.25); border-radius: 30px; padding: 0.3rem 0.9rem; font-size: 0.78rem; font-weight: 600; margin-bottom: 1.2rem; position: relative; }
+    .hero-section h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 0.7rem; position: relative; line-height: 1.15; }
+    .hero-section p { font-size: 1rem; opacity: 0.85; line-height: 1.7; max-width: 500px; position: relative; margin-bottom: 1.8rem; }
+    .hero-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; position: relative; }
+    .hbtn { padding: 0.65rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700; text-decoration: none; transition: all 0.18s; }
+    .hbtn-white { background: #fff; color: var(--indigo); }
+    .hbtn-white:hover { background: #f0f0ff; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+    .hbtn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.5); }
+    .hbtn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* STAT CHIPS */
+    .stat-chips { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+    .stat-chip { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.4rem; display: flex; align-items: center; gap: 0.8rem; }
+    .chip-icon { font-size: 1.4rem; }
+    .chip-num { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; }
+    .chip-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+
+    /* FEATURED PROJECTS */
+    .featured-proj { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; margin-bottom: 1.2rem; display: grid; grid-template-columns: 60px 1fr auto; gap: 1.2rem; align-items: start; transition: box-shadow 0.2s, transform 0.2s; }
+    .featured-proj:hover { box-shadow: 0 8px 30px rgba(79,70,229,0.1); transform: translateY(-2px); }
+    .proj-emoji { width: 54px; height: 54px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
+    .proj-main h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .proj-main p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.7rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .proj-tag { background: #eef2ff; color: var(--indigo); padding: 0.18rem 0.55rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .proj-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
+    .proj-action-link { font-size: 0.8rem; font-weight: 600; text-decoration: none; color: var(--indigo); white-space: nowrap; padding: 0.3rem 0.7rem; border: 1px solid #e0e7ff; border-radius: 6px; background: #fff; transition: all 0.15s; }
+    .proj-action-link:hover { background: var(--indigo); color: #fff; border-color: var(--indigo); }
+
+    /* SKILLS GRID */
+    .skills-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; }
+    .skill-tile { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 0.6rem; text-align: center; transition: all 0.18s; cursor: default; }
+    .skill-tile:hover { border-color: var(--indigo-light); box-shadow: 0 4px 14px rgba(79,70,229,0.12); transform: translateY(-2px); }
+    .skill-tile-icon { font-size: 1.7rem; display: block; margin-bottom: 0.4rem; }
+    .skill-tile-name { font-size: 0.78rem; font-weight: 600; color: var(--muted); }
+
+    /* EXPERIENCE */
+    .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem 1.5rem; margin-bottom: 1rem; display: flex; gap: 1.2rem; }
+    .exp-dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 0.3rem; }
+    .exp-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--indigo); flex-shrink: 0; }
+    .exp-line { flex: 1; width: 2px; background: var(--border); margin-top: 0.4rem; }
+    .exp-last .exp-line { display: none; }
+    .exp-date-badge { font-size: 0.75rem; font-weight: 700; color: var(--indigo); background: #eef2ff; border-radius: 20px; padding: 0.2rem 0.65rem; display: inline-block; margin-bottom: 0.4rem; }
+    .exp-role-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.15rem; }
+    .exp-company-name { color: var(--muted); font-size: 0.88rem; margin-bottom: 0.5rem; }
+    .exp-desc { font-size: 0.88rem; color: #555; line-height: 1.65; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem; display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text); transition: all 0.18s; }
+    .contact-card:hover { border-color: var(--indigo-light); box-shadow: 0 4px 16px rgba(79,70,229,0.1); transform: translateY(-2px); }
+    .contact-card-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .contact-card-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; margin-bottom: 0.1rem; }
+    .contact-card-value { font-weight: 700; font-size: 0.92rem; }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 100%; height: auto; position: relative; flex-direction: row; flex-wrap: wrap; }
+      .main { margin-left: 0; }
+      .content { padding: 1.5rem; }
+      .sidebar-nav { display: none; }
+    }
+    @media (max-width: 600px) {
+      .featured-proj { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-section h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="avatar">👩‍💻</div>
+    <div class="sidebar-name">Jane Doe</div>
+    <div class="sidebar-role">Full-Stack Engineer</div>
+    <div class="sidebar-badge"><span class="badge-dot"></span> Open to work</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-label">Menu</div>
+    <a href="#hero" class="nav-item active">
+      <span class="nav-icon">🏠</span> Overview
+    </a>
+    <a href="#about-section" class="nav-item">
+      <span class="nav-icon">👤</span> About
+    </a>
+    <a href="#projects-section" class="nav-item">
+      <span class="nav-icon">🚀</span> Projects
+    </a>
+    <a href="#experience-section" class="nav-item">
+      <span class="nav-icon">💼</span> Experience
+    </a>
+    <a href="#skills-section" class="nav-item">
+      <span class="nav-icon">⚡</span> Skills
+    </a>
+    <a href="#contact-section" class="nav-item">
+      <span class="nav-icon">✉️</span> Contact
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="social-row">
+      <a href="https://github.com/" class="social-btn" title="GitHub">⬡</a>
+      <a href="https://linkedin.com/" class="social-btn" title="LinkedIn">in</a>
+      <a href="https://twitter.com/" class="social-btn" title="Twitter">𝕏</a>
+    </div>
+    <a href="#" class="cv-btn">↓ Download Resume</a>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+  <div class="content">
+
+    <!-- HERO -->
+    <div id="hero" class="hero-section">
+      <span class="hero-tag">👋 Welcome to my portfolio</span>
+      <h1>Building great products<br>one commit at a time.</h1>
+      <p>I'm a full-stack developer with 5+ years of experience shipping web applications that people love. San Francisco-based, remote-friendly.</p>
+      <div class="hero-btns">
+        <a href="#projects-section" class="hbtn hbtn-white">See My Work</a>
+        <a href="#contact-section" class="hbtn hbtn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stat-chips">
+      <div class="stat-chip">
+        <span class="chip-icon">📅</span>
+        <div><div class="chip-num">5+</div><div class="chip-label">Years exp.</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">🚀</span>
+        <div><div class="chip-num">20+</div><div class="chip-label">Projects shipped</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">⭐</span>
+        <div><div class="chip-num">8k+</div><div class="chip-label">GitHub stars</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">🌍</span>
+        <div><div class="chip-num">3</div><div class="chip-label">OSS libraries</div></div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about-section" class="section">
+      <div class="section-label">About Me</div>
+      <div class="section-title">Who I am</div>
+      <div class="section-underline"></div>
+      <p style="color:#555;font-size:1rem;line-height:1.8;max-width:620px">I'm a product-minded full-stack engineer who loves building things that make a real difference. I've spent 5+ years working across startups and scale-ups, taking products from zero to production. I care about code quality, great UX, and continuous learning.</p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects-section" class="section">
+      <div class="section-label">Featured Work</div>
+      <div class="section-title">Projects</div>
+      <div class="section-underline"></div>
+
+      <div class="featured-proj">
+        <div class="proj-emoji" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">📋</div>
+        <div class="proj-main">
+          <h3>TaskMaster</h3>
+          <p>Collaborative task management with real-time sync, team workspaces, and smart notification routing. Scales to 10k+ concurrent users.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">React</span><span class="proj-tag">Node.js</span>
+            <span class="proj-tag">Socket.io</span><span class="proj-tag">MongoDB</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a href="#" class="proj-action-link">Live →</a>
+          <a href="#" class="proj-action-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="featured-proj">
+        <div class="proj-emoji" style="background:linear-gradient(135deg,#10b981,#0891b2)">💪</div>
+        <div class="proj-main">
+          <h3>FitTrack</h3>
+          <p>Mobile fitness app with AI-powered workout recommendations, nutrition tracking, and progress visualization. 12k+ downloads.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Flutter</span><span class="proj-tag">Firebase</span><span class="proj-tag">TFLite</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a href="#" class="proj-action-link">App Store →</a>
+          <a href="#" class="proj-action-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="featured-proj">
+        <div class="proj-emoji" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">🛒</div>
+        <div class="proj-main">
+          <h3>ShopSync</h3>
+          <p>E-commerce platform with inventory management, Stripe integration, and live analytics dashboards. Processed $500k in transactions.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Next.js</span><span class="proj-tag">PostgreSQL</span>
+            <span class="proj-tag">Stripe</span><span class="proj-tag">Redis</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a href="#" class="proj-action-link">Case Study →</a>
+          <a href="#" class="proj-action-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="featured-proj">
+        <div class="proj-emoji" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">🤖</div>
+        <div class="proj-main">
+          <h3>AiNote <span style="font-size:0.75rem;color:var(--muted);font-weight:500">&nbsp;★ 2.1k</span></h3>
+          <p>AI-powered note-taking with auto-summarization, semantic search, and knowledge graph visualization. Open source.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span><span class="proj-tag">FastAPI</span>
+            <span class="proj-tag">OpenAI</span><span class="proj-tag">Vue.js</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a href="#" class="proj-action-link">Demo →</a>
+          <a href="#" class="proj-action-link">GitHub →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience-section" class="section">
+      <div class="section-label">Work History</div>
+      <div class="section-title">Experience</div>
+      <div class="section-underline"></div>
+
+      <div class="exp-card">
+        <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+        <div>
+          <span class="exp-date-badge">2023 – Present</span>
+          <div class="exp-role-title">Senior Full-Stack Engineer</div>
+          <div class="exp-company-name">Acme Corp · San Francisco</div>
+          <div class="exp-desc">Led redesign of the core product platform, reducing API latency by 60%. Managed a team of 4 and drove adoption of microservices architecture.</div>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+        <div>
+          <span class="exp-date-badge">2021 – 2023</span>
+          <div class="exp-role-title">Full-Stack Developer</div>
+          <div class="exp-company-name">StartupCo · Remote</div>
+          <div class="exp-desc">Built the customer dashboard from scratch. Handled third-party API integrations, CI/CD pipelines, and scaled from 0 to 50k MAU.</div>
+        </div>
+      </div>
+
+      <div class="exp-card exp-last">
+        <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+        <div>
+          <span class="exp-date-badge">2019 – 2021</span>
+          <div class="exp-role-title">Junior Developer</div>
+          <div class="exp-company-name">WebStudio · New York</div>
+          <div class="exp-desc">Developed client web app features, improved frontend performance by 35%, and contributed to an internal component library used across 12 projects.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills-section" class="section">
+      <div class="section-label">Technology</div>
+      <div class="section-title">Skills</div>
+      <div class="section-underline"></div>
+      <div class="skills-board">
+        <div class="skill-tile"><span class="skill-tile-icon">⚛️</span><span class="skill-tile-name">React</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">▲</span><span class="skill-tile-name">Next.js</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🔷</span><span class="skill-tile-name">TypeScript</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🟢</span><span class="skill-tile-name">Node.js</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🐍</span><span class="skill-tile-name">Python</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🗄️</span><span class="skill-tile-name">PostgreSQL</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🍃</span><span class="skill-tile-name">MongoDB</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🐳</span><span class="skill-tile-name">Docker</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">☁️</span><span class="skill-tile-name">AWS</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🔀</span><span class="skill-tile-name">Git</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🔁</span><span class="skill-tile-name">CI/CD</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🎨</span><span class="skill-tile-name">Figma</span></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact-section" class="section">
+      <div class="section-label">Get in Touch</div>
+      <div class="section-title">Contact</div>
+      <div class="section-underline"></div>
+      <p style="color:#555;margin-bottom:1.5rem;font-size:0.95rem;line-height:1.7;max-width:500px">I'm open to new opportunities, collaborations, and interesting conversations. Reach out through any of the channels below.</p>
+      <div class="contact-grid">
+        <a href="mailto:jane@example.com" class="contact-card">
+          <div class="contact-card-icon" style="background:#eef2ff">✉️</div>
+          <div><div class="contact-card-label">Email</div><div class="contact-card-value">jane@example.com</div></div>
+        </a>
+        <a href="https://linkedin.com/" class="contact-card">
+          <div class="contact-card-icon" style="background:#dbeafe">💼</div>
+          <div><div class="contact-card-label">LinkedIn</div><div class="contact-card-value">linkedin.com/in/janedoe</div></div>
+        </a>
+        <a href="https://github.com/" class="contact-card">
+          <div class="contact-card-icon" style="background:#f3f4f6">⬡</div>
+          <div><div class="contact-card-label">GitHub</div><div class="contact-card-value">github.com/janedoe</div></div>
+        </a>
+        <a href="#" class="contact-card">
+          <div class="contact-card-icon" style="background:#fdf4ff">📄</div>
+          <div><div class="contact-card-label">Resume</div><div class="contact-card-value">Download PDF</div></div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+</body>
+</html>

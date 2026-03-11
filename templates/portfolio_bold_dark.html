@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio – Bold Dark</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2128;
+      --border: #30363d;
+      --amber: #f0a500;
+      --amber-dim: #b07800;
+      --green: #39d353;
+      --text: #e6edf3;
+      --muted: #8b949e;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(13,17,23,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0.9rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: 'Fira Code', monospace; font-weight: 600; color: var(--amber); font-size: 1.05rem; }
+    .nav-logo span { color: var(--muted); }
+    nav ul { list-style: none; display: flex; gap: 1.8rem; }
+    nav ul a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; letter-spacing: 0.3px; }
+    nav ul a:hover { color: var(--amber); }
+
+    /* HERO */
+    .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding: 3rem 2.5rem; max-width: 900px; margin: 0 auto; }
+    .hero-pre { font-family: 'Fira Code', monospace; color: var(--green); font-size: 0.95rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+    .hero-pre::before { content: '▶'; font-size: 0.75rem; }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; letter-spacing: -2px; margin-bottom: 0.8rem; }
+    .hero h1 .glow { color: var(--amber); text-shadow: 0 0 40px rgba(240,165,0,0.4), 0 0 80px rgba(240,165,0,0.15); }
+    .hero .tagline { font-size: 1.2rem; color: var(--muted); margin-bottom: 2rem; font-family: 'Fira Code', monospace; }
+    .hero .tagline span { color: var(--text); }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { padding: 0.78rem 2rem; border-radius: 6px; font-size: 0.95rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; font-family: 'Fira Code', monospace; display: inline-block; }
+    .btn-amber { background: var(--amber); color: var(--bg); }
+    .btn-amber:hover { background: #ffbd2e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,165,0,0.3); }
+    .btn-ghost { background: transparent; color: var(--amber); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--amber); background: rgba(240,165,0,0.06); }
+    .hero-scroll { margin-top: 3rem; font-family: 'Fira Code', monospace; font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+
+    /* SECTIONS */
+    .section { padding: 6rem 2.5rem; max-width: 900px; margin: 0 auto; }
+    .section-tag { font-family: 'Fira Code', monospace; color: var(--green); font-size: 0.85rem; margin-bottom: 0.5rem; letter-spacing: 0.5px; }
+    .section-title { font-size: 1.9rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.4rem; }
+    .section-title .accent { color: var(--amber); }
+    .divider { height: 1px; background: var(--border); margin: 0.8rem 0 2rem; position: relative; }
+    .divider::after { content: ''; position: absolute; left: 0; top: -1px; width: 60px; height: 2px; background: var(--amber); }
+
+    /* ABOUT */
+    .about-text { color: var(--muted); font-size: 1.02rem; line-height: 1.85; }
+    .about-text strong { color: var(--text); }
+    .terminal-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; font-family: 'Fira Code', monospace; font-size: 0.9rem; }
+    .terminal-bar { display: flex; gap: 0.4rem; margin-bottom: 1rem; }
+    .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ff5f57; }
+    .dot-yellow { background: #febc2e; }
+    .dot-green { background: #28c840; }
+    .terminal-line { margin: 0.2rem 0; }
+    .prompt { color: var(--green); }
+    .cmd { color: var(--amber); }
+    .output { color: var(--muted); }
+    .val { color: #79c0ff; }
+
+    /* PROJECTS */
+    .project-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.7rem; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+    .project-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--amber); border-radius: 2px 0 0 2px; }
+    .project-card:hover { border-color: var(--amber-dim); transform: translateX(4px); }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem; }
+    .project-name { font-weight: 700; font-size: 1.1rem; font-family: 'Fira Code', monospace; color: var(--amber); }
+    .project-links-row { display: flex; gap: 0.6rem; }
+    .proj-link { font-size: 0.8rem; font-family: 'Fira Code', monospace; color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: 0.22rem 0.7rem; border-radius: 4px; transition: all 0.2s; }
+    .proj-link:hover { color: var(--amber); border-color: var(--amber-dim); }
+    .project-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tech-tag { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); padding: 0.2rem 0.65rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.78rem; }
+
+    /* SKILLS */
+    .skills-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+    .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.3rem; }
+    .skill-group-title { font-family: 'Fira Code', monospace; color: var(--amber); font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .skill-group-title::before { content: '//'; color: var(--muted); }
+    .skill-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.7rem; }
+    .skill-item-name { font-size: 0.9rem; color: var(--text); font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+    .skill-bar-bg { width: 80px; height: 4px; background: var(--surface2); border-radius: 2px; }
+    .skill-bar { height: 4px; border-radius: 2px; background: var(--amber); }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .contact-info p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .contact-links-list { display: flex; flex-direction: column; gap: 0.7rem; }
+    .contact-link { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: var(--muted); font-family: 'Fira Code', monospace; font-size: 0.9rem; padding: 0.7rem 1rem; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s; }
+    .contact-link:hover { color: var(--amber); border-color: var(--amber-dim); background: rgba(240,165,0,0.05); }
+    .contact-link .icon { font-size: 1.1rem; }
+    .status-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
+    .status-indicator { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .status-text { color: var(--green); font-family: 'Fira Code', monospace; font-size: 0.9rem; font-weight: 600; }
+    .status-details { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+
+    footer { border-top: 1px solid var(--border); text-align: center; color: var(--muted); padding: 2rem; font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+    footer span { color: var(--amber); }
+
+    @media (max-width: 700px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 1rem; }
+      .project-header { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><span>~/</span>janedoe</div>
+  <ul>
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-pre">available for hire — open to interesting problems</div>
+  <h1>Hi, I'm <span class="glow">Jane</span><br>I build things<br>for the web.</h1>
+  <p class="tagline">
+    <span>full-stack dev</span> · <span>product thinker</span> · <span>open source contributor</span>
+  </p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-amber">View Projects</a>
+    <a href="#contact" class="btn btn-ghost">Contact Me</a>
+  </div>
+  <div class="hero-scroll">scroll down to explore ↓</div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-tag">// about</div>
+  <div class="section-title">Who I <span class="accent">am</span></div>
+  <div class="divider"></div>
+  <p class="about-text">
+    I'm a <strong>full-stack software engineer</strong> with 5+ years of experience building scalable, user-centric web applications. I love working at the intersection of engineering and design — where clean code meets great experience.
+    <br><br>
+    I've worked across early-stage startups and established companies, shipping products from prototype to production. I'm comfortable from database schema design all the way to deploying containerized services on AWS.
+  </p>
+  <div class="terminal-box">
+    <div class="terminal-bar">
+      <div class="terminal-dot dot-red"></div>
+      <div class="terminal-dot dot-yellow"></div>
+      <div class="terminal-dot dot-green"></div>
+    </div>
+    <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">whoami</span></div>
+    <div class="terminal-line output">Jane Doe — full-stack engineer, maker, lifelong learner</div>
+    <div class="terminal-line">&nbsp;</div>
+    <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">cat</span> experience.json | jq '.years'</div>
+    <div class="terminal-line output"><span class="val">5</span></div>
+    <div class="terminal-line">&nbsp;</div>
+    <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">cat</span> experience.json | jq '.location'</div>
+    <div class="terminal-line output"><span class="val">"San Francisco, CA"</span></div>
+    <div class="terminal-line">&nbsp;</div>
+    <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">cat</span> experience.json | jq '.focus'</div>
+    <div class="terminal-line output"><span class="val">["web apps", "APIs", "developer tooling", "AI integrations"]</span></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-tag">// projects</div>
+  <div class="section-title">Things I've <span class="accent">built</span></div>
+  <div class="divider"></div>
+  <div class="project-list">
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">TaskMaster</span>
+        <div class="project-links-row">
+          <a href="#" class="proj-link">→ live</a>
+          <a href="#" class="proj-link">→ github</a>
+        </div>
+      </div>
+      <p class="project-desc">Collaborative task management platform with real-time updates, team dashboards, and smart notification routing. Handles 10k+ concurrent connections via WebSockets.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">React</span><span class="tech-tag">Node.js</span>
+        <span class="tech-tag">MongoDB</span><span class="tech-tag">Socket.io</span><span class="tech-tag">Redis</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">FitTrack</span>
+        <div class="project-links-row">
+          <a href="#" class="proj-link">→ app store</a>
+          <a href="#" class="proj-link">→ github</a>
+        </div>
+      </div>
+      <p class="project-desc">Cross-platform mobile fitness app with AI-powered workout recommendations, nutrition tracking, and progress visualization. 4.8★ on App Store with 12k+ downloads.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">Flutter</span><span class="tech-tag">Dart</span>
+        <span class="tech-tag">Firebase</span><span class="tech-tag">TensorFlow Lite</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">ShopSync</span>
+        <div class="project-links-row">
+          <a href="#" class="proj-link">→ case study</a>
+          <a href="#" class="proj-link">→ github</a>
+        </div>
+      </div>
+      <p class="project-desc">Full-stack e-commerce platform with inventory management, multi-currency Stripe payments, and live analytic dashboards. Processed $500k+ in transactions.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">Next.js</span><span class="tech-tag">TypeScript</span>
+        <span class="tech-tag">PostgreSQL</span><span class="tech-tag">Stripe</span><span class="tech-tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">AiNote <span style="color:var(--muted);font-size:0.8rem">· open source</span></span>
+        <div class="project-links-row">
+          <a href="#" class="proj-link">→ demo</a>
+          <a href="#" class="proj-link">→ github ★ 2.1k</a>
+        </div>
+      </div>
+      <p class="project-desc">AI-powered note-taking tool with automatic summarization, tag extraction, and semantic search over your personal knowledge base. 2.1k GitHub stars.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span><span class="tech-tag">FastAPI</span>
+        <span class="tech-tag">OpenAI</span><span class="tech-tag">ChromaDB</span><span class="tech-tag">Vue.js</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-tag">// skills</div>
+  <div class="section-title">Tech <span class="accent">stack</span></div>
+  <div class="divider"></div>
+  <div class="skills-categories">
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-item"><span class="skill-item-name">React / Next.js</span><div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">TypeScript</span><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">Vue.js</span><div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">CSS / Tailwind</span><div class="skill-bar-bg"><div class="skill-bar" style="width:88%"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend</div>
+      <div class="skill-item"><span class="skill-item-name">Node.js</span><div class="skill-bar-bg"><div class="skill-bar" style="width:92%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">Python / FastAPI</span><div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">PostgreSQL</span><div class="skill-bar-bg"><div class="skill-bar" style="width:82%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">MongoDB</span><div class="skill-bar-bg"><div class="skill-bar" style="width:78%"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Infra / Tools</div>
+      <div class="skill-item"><span class="skill-item-name">Docker / K8s</span><div class="skill-bar-bg"><div class="skill-bar" style="width:80%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">AWS</span><div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">CI/CD</span><div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-item"><span class="skill-item-name">Git</span><div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-tag">// contact</div>
+  <div class="section-title">Get in <span class="accent">touch</span></div>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>Whether you have a project in mind, a role to fill, or just want to talk tech — I'd love to hear from you. I typically respond within 24 hours.</p>
+      <div class="contact-links-list">
+        <a href="mailto:jane@example.com" class="contact-link"><span class="icon">✉</span> jane@example.com</a>
+        <a href="https://github.com/" class="contact-link"><span class="icon">⬡</span> github.com/janedoe</a>
+        <a href="https://linkedin.com/" class="contact-link"><span class="icon">in</span> linkedin.com/in/janedoe</a>
+        <a href="#" class="contact-link"><span class="icon">↓</span> Download resume.pdf</a>
+      </div>
+    </div>
+    <div class="status-box">
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span class="status-text">Available for hire</span>
+      </div>
+      <div class="status-details">
+        Currently open to full-time roles and select freelance projects. Particularly interested in developer tooling, SaaS products, and AI-powered applications.<br><br>
+        Timezone: <strong style="color:var(--text)">PST (UTC-8)</strong><br>
+        Response time: <strong style="color:var(--text)">&lt; 24 hours</strong><br>
+        Preferred contact: <strong style="color:var(--text)">Email</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>// </span>designed &amp; built by jane doe · 2026<span> //</span>
+</footer>
+
+</body>
+</html>

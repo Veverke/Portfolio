@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio – Modern Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; background: #f0f2f8; color: #1a1a2e; line-height: 1.6; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.82); backdrop-filter: blur(14px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; box-shadow: 0 1px 16px rgba(0,0,0,0.07); }
+    .logo { font-weight: 900; font-size: 1.4rem; background: linear-gradient(90deg, #6a82fb, #fc5c7d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
+    nav ul { list-style: none; display: flex; gap: 2.2rem; }
+    nav ul a { text-decoration: none; color: #444; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+    nav ul a:hover { color: #6a82fb; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 45%, #fc5c7d 100%); color: #fff; padding: 7rem 2rem 6rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%); }
+    .hero-avatar { width: 110px; height: 110px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.5); margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: rgba(255,255,255,0.15); backdrop-filter: blur(6px); position: relative; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 0.6rem; position: relative; }
+    .hero .subtitle { font-size: 1.25rem; opacity: 0.88; margin-bottom: 1.2rem; font-weight: 400; position: relative; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2.2rem; position: relative; }
+    .hero-tag { background: rgba(255,255,255,0.18); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.3); border-radius: 40px; padding: 0.35rem 1.1rem; font-size: 0.88rem; font-weight: 500; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+    .btn { padding: 0.85rem 2.2rem; border-radius: 40px; font-size: 1rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; display: inline-block; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.22); }
+    .btn-primary { background: #fff; color: #764ba2; }
+    .btn-outline { background: transparent; color: #fff; border: 2.5px solid rgba(255,255,255,0.65); }
+
+    /* LAYOUT */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 5.5rem 0; }
+    .section-header { margin-bottom: 3rem; }
+    .section-title { font-size: 2rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+    .section-accent { width: 48px; height: 4px; background: linear-gradient(90deg, #6a82fb, #fc5c7d); border-radius: 2px; margin-bottom: 0.7rem; }
+    .section-desc { color: #666; font-size: 1rem; max-width: 520px; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem; align-items: center; }
+    .about-text p { color: #555; font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card { background: #fff; border-radius: 14px; padding: 1.4rem; text-align: center; box-shadow: 0 3px 16px rgba(106,130,251,0.1); border: 1px solid #eef0ff; }
+    .stat-num { font-size: 2.4rem; font-weight: 900; background: linear-gradient(90deg, #6a82fb, #fc5c7d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; }
+    .stat-label { font-size: 0.85rem; color: #888; margin-top: 0.3rem; font-weight: 500; }
+
+    /* PROJECTS */
+    .projects-section { background: #fff; }
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+    .project-card { background: #f8f9ff; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(106,130,251,0.09); transition: transform 0.25s, box-shadow 0.25s; border: 1px solid #e8eaff; }
+    .project-card:hover { transform: translateY(-7px); box-shadow: 0 16px 40px rgba(106,130,251,0.18); }
+    .project-banner { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .project-body { padding: 1.5rem; }
+    .project-body h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .project-body p { font-size: 0.92rem; color: #666; line-height: 1.6; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .project-tag { background: #eef0ff; color: #6a82fb; padding: 0.2rem 0.65rem; border-radius: 5px; font-size: 0.78rem; font-weight: 600; }
+    .project-links { display: flex; gap: 0.7rem; margin-top: 1.1rem; }
+    .project-link { font-size: 0.85rem; font-weight: 600; text-decoration: none; color: #6a82fb; border: 1.5px solid #c0c8ff; padding: 0.32rem 0.9rem; border-radius: 7px; transition: all 0.2s; background: #fff; }
+    .project-link:hover { background: #6a82fb; color: #fff; border-color: #6a82fb; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1rem; }
+    .skill-card { background: #fff; border-radius: 14px; padding: 1.4rem 0.8rem; text-align: center; box-shadow: 0 2px 14px rgba(0,0,0,0.05); border: 1px solid #eee; transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(106,130,251,0.14); border-color: #c0c8ff; }
+    .skill-icon { font-size: 2.2rem; display: block; margin-bottom: 0.6rem; }
+    .skill-name { font-size: 0.88rem; font-weight: 600; color: #444; }
+
+    /* EXPERIENCE */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, #6a82fb, #fc5c7d); border-radius: 2px; }
+    .timeline-item { position: relative; margin-bottom: 2.2rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -2.35rem; top: 0.35rem; width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(135deg, #6a82fb, #fc5c7d); border: 2px solid #fff; box-shadow: 0 0 0 3px rgba(106,130,251,0.2); }
+    .timeline-date { font-size: 0.82rem; font-weight: 600; color: #6a82fb; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+    .timeline-role { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.1rem; }
+    .timeline-company { color: #888; font-size: 0.92rem; margin-bottom: 0.4rem; }
+    .timeline-desc { color: #555; font-size: 0.92rem; line-height: 1.6; }
+
+    /* CONTACT */
+    .contact-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #fc5c7d 100%); border-radius: 24px; padding: 4rem 2rem; text-align: center; color: #fff; }
+    .contact-box h2 { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.7rem; }
+    .contact-box p { opacity: 0.9; margin-bottom: 2.2rem; font-size: 1.05rem; }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+    .contact-link { background: rgba(255,255,255,0.2); border: 1.5px solid rgba(255,255,255,0.35); color: #fff; padding: 0.75rem 1.7rem; border-radius: 40px; text-decoration: none; font-weight: 600; transition: background 0.2s, transform 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .contact-link:hover { background: rgba(255,255,255,0.32); transform: translateY(-2px); }
+
+    footer { text-align: center; color: #aaa; padding: 2.5rem 0; font-size: 0.9rem; background: #f0f2f8; }
+    footer span { color: #fc5c7d; }
+
+    @media (max-width: 768px) {
+      nav ul { gap: 1.2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-btns { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 480px) {
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">JD.</span>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-avatar">👨‍💻</div>
+  <h1>Jane Doe</h1>
+  <p class="subtitle">Full-Stack Developer &amp; Product Builder</p>
+  <div class="hero-tags">
+    <span class="hero-tag">🚀 Open to opportunities</span>
+    <span class="hero-tag">📍 San Francisco, CA</span>
+    <span class="hero-tag">💡 5+ years experience</span>
+  </div>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary">See My Work</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <div class="section-title">About Me</div>
+      <p class="section-desc">Developer with a passion for building products that people love.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a full-stack developer with 5+ years of experience turning complex problems into elegant, performant software. I care deeply about both the code and the end-user experience.</p>
+        <p>From architecting backend APIs to crafting pixel-perfect UIs, I thrive across the full stack. I've shipped products used by thousands of users and love every step of that journey.</p>
+        <p>When I'm not coding, I contribute to open source, write technical articles, and mentor junior developers in my community.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat-card"><div class="stat-num">20+</div><div class="stat-label">Projects Shipped</div></div>
+        <div class="stat-card"><div class="stat-num">8k+</div><div class="stat-label">GitHub Stars</div></div>
+        <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Open Source Libs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section projects-section" id="projects">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <div class="section-title">Featured Projects</div>
+      <p class="section-desc">A selection of products and side projects I've built.</p>
+    </div>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="project-banner" style="background: linear-gradient(135deg,#667eea,#764ba2)">📋</div>
+        <div class="project-body">
+          <h3>TaskMaster</h3>
+          <p>Collaborative task management platform with real-time sync, team dashboards, and smart notifications.</p>
+          <div class="project-tags">
+            <span class="project-tag">React</span><span class="project-tag">Node.js</span>
+            <span class="project-tag">MongoDB</span><span class="project-tag">WebSockets</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Live Demo</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-banner" style="background: linear-gradient(135deg,#43cea2,#185a9d)">💪</div>
+        <div class="project-body">
+          <h3>FitTrack</h3>
+          <p>Mobile fitness app with AI-powered workout recommendations, progress charts, and meal logging.</p>
+          <div class="project-tags">
+            <span class="project-tag">Flutter</span><span class="project-tag">Firebase</span>
+            <span class="project-tag">TFLite</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">App Store</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-banner" style="background: linear-gradient(135deg,#f7971e,#ffd200)">🛒</div>
+        <div class="project-body">
+          <h3>ShopSync</h3>
+          <p>E-commerce platform with inventory management, Stripe payments, and real-time analytics.</p>
+          <div class="project-tags">
+            <span class="project-tag">Next.js</span><span class="project-tag">PostgreSQL</span>
+            <span class="project-tag">Stripe</span><span class="project-tag">Redis</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Case Study</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-banner" style="background: linear-gradient(135deg,#fc5c7d,#6a82fb)">🤖</div>
+        <div class="project-body">
+          <h3>AiNote</h3>
+          <p>An AI-powered note-taking tool with automatic summarization, tagging, and semantic search.</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span><span class="project-tag">FastAPI</span>
+            <span class="project-tag">OpenAI</span><span class="project-tag">Vue.js</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Live Demo</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <div class="section-title">Tech Stack</div>
+      <p class="section-desc">Tools and technologies I work with regularly.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card"><span class="skill-icon">⚛️</span><span class="skill-name">React</span></div>
+      <div class="skill-card"><span class="skill-icon">🟨</span><span class="skill-name">JavaScript</span></div>
+      <div class="skill-card"><span class="skill-icon">🔷</span><span class="skill-name">TypeScript</span></div>
+      <div class="skill-card"><span class="skill-icon">🟢</span><span class="skill-name">Node.js</span></div>
+      <div class="skill-card"><span class="skill-icon">🐍</span><span class="skill-name">Python</span></div>
+      <div class="skill-card"><span class="skill-icon">▲</span><span class="skill-name">Next.js</span></div>
+      <div class="skill-card"><span class="skill-icon">🗄️</span><span class="skill-name">PostgreSQL</span></div>
+      <div class="skill-card"><span class="skill-icon">🍃</span><span class="skill-name">MongoDB</span></div>
+      <div class="skill-card"><span class="skill-icon">🐳</span><span class="skill-name">Docker</span></div>
+      <div class="skill-card"><span class="skill-icon">☁️</span><span class="skill-name">AWS</span></div>
+      <div class="skill-card"><span class="skill-icon">🔀</span><span class="skill-name">Git</span></div>
+      <div class="skill-card"><span class="skill-icon">🎨</span><span class="skill-name">Figma</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience" style="background:#fff">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-accent"></div>
+      <div class="section-title">Experience</div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2023 – Present</div>
+        <div class="timeline-role">Senior Full-Stack Engineer</div>
+        <div class="timeline-company">Acme Corp · San Francisco, CA</div>
+        <div class="timeline-desc">Lead development of the core product platform. Reduced API response times by 60%, mentored a team of 4 engineers, and drove the migration to a microservices architecture.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2021 – 2023</div>
+        <div class="timeline-role">Full-Stack Developer</div>
+        <div class="timeline-company">StartupCo · Remote</div>
+        <div class="timeline-desc">Built the customer-facing dashboard from scratch using React and Node.js. Integrated third-party APIs and implemented CI/CD pipelines using GitHub Actions.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2019 – 2021</div>
+        <div class="timeline-role">Junior Developer</div>
+        <div class="timeline-company">WebStudio · New York, NY</div>
+        <div class="timeline-desc">Developed features for client web applications, improved frontend performance, and contributed to an internal component library used across 12 projects.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-box">
+      <h2>Let's build something great</h2>
+      <p>Open to freelance projects, collaborations, and full-time roles.</p>
+      <div class="contact-links">
+        <a href="mailto:jane@example.com" class="contact-link">✉️ Email Me</a>
+        <a href="https://github.com/" class="contact-link">🐙 GitHub</a>
+        <a href="https://linkedin.com/" class="contact-link">💼 LinkedIn</a>
+        <a href="#" class="contact-link">📄 Download CV</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Jane Doe · Made with <span>♥</span> — Modern Cards Layout
+</footer>
+
+</body>
+</html>

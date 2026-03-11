@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio – Sidebar Nav</title>
+  <!-- styles & font injected by Vite via src/main.js -->
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="avatar">👩‍💻</div>
+    <div class="sidebar-name">Jane Doe</div>
+    <div class="sidebar-role">Full-Stack Engineer</div>
+    <div class="sidebar-badge"><span class="badge-dot"></span> Open to work</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-label">Menu</div>
+    <a href="#hero" class="nav-item active">
+      <span class="nav-icon">🏠</span> Overview
+    </a>
+    <a href="#about-section" class="nav-item">
+      <span class="nav-icon">👤</span> About
+    </a>
+    <a href="#projects-section" class="nav-item">
+      <span class="nav-icon">🚀</span> Projects
+    </a>
+    <a href="#experience-section" class="nav-item">
+      <span class="nav-icon">💼</span> Experience
+    </a>
+    <a href="#skills-section" class="nav-item">
+      <span class="nav-icon">⚡</span> Skills
+    </a>
+    <a href="#contact-section" class="nav-item">
+      <span class="nav-icon">✉️</span> Contact
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="social-row">
+      <a href="https://github.com/" class="social-btn" title="GitHub">⬡</a>
+      <a href="https://linkedin.com/" class="social-btn" title="LinkedIn">in</a>
+      <a href="https://twitter.com/" class="social-btn" title="Twitter">𝕏</a>
+    </div>
+    <a href="#" class="cv-btn">↓ Download Resume</a>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+  <div class="content">
+
+    <!-- HERO -->
+    <div id="hero" class="hero-section">
+      <span class="hero-tag">👋 Welcome to my portfolio</span>
+      <h1>Building great products<br>one commit at a time.</h1>
+      <p>I'm a full-stack developer with 5+ years of experience shipping web applications that people love. San Francisco-based, remote-friendly.</p>
+      <div class="hero-btns">
+        <a href="#projects-section" class="hbtn hbtn-white">See My Work</a>
+        <a href="#contact-section" class="hbtn hbtn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stat-chips">
+      <div class="stat-chip">
+        <span class="chip-icon">📅</span>
+        <div><div class="chip-num">5+</div><div class="chip-label">Years exp.</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">🚀</span>
+        <div><div class="chip-num">20+</div><div class="chip-label">Projects shipped</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">⭐</span>
+        <div><div class="chip-num">8k+</div><div class="chip-label">GitHub stars</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">🌍</span>
+        <div><div class="chip-num">3</div><div class="chip-label">OSS libraries</div></div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about-section" class="section">
+      <div class="section-label">About Me</div>
+      <div class="section-title">Who I am</div>
+      <div class="section-underline"></div>
+      <p style="color:#555;font-size:1rem;line-height:1.8;max-width:620px">I'm a product-minded full-stack engineer who loves building things that make a real difference. I've spent 5+ years working across startups and scale-ups, taking products from zero to production. I care about code quality, great UX, and continuous learning.</p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects-section" class="section">
+      <div class="section-label">Featured Work</div>
+      <div class="section-title">Projects</div>
+      <div class="section-underline"></div>
+
+      <div class="featured-proj">
+        <div class="proj-emoji" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">📋</div>
+        <div class="proj-main">
+          <h3>TaskMaster</h3>
+          <p>Collaborative task management with real-time sync, team workspaces, and smart notification routing. Scales to 10k+ concurrent users.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">React</span><span class="proj-tag">Node.js</span>
+            <span class="proj-tag">Socket.io</span><span class="proj-tag">MongoDB</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a href="#" class="proj-action-link">Live →</a>
+          <a href="#" class="proj-action-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="featured-proj">
+        <div class="proj-emoji" style="background:linear-gradient(135deg,#10b981,#0891b2)">💪</div>
+        <div class="proj-main">
+          <h3>FitTrack</h3>
+          <p>Mobile fitness app with AI-powered workout recommendations, nutrition tracking, and progress visualization. 12k+ downloads.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Flutter</span><span class="proj-tag">Firebase</span><span class="proj-tag">TFLite</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a href="#" class="proj-action-link">App Store →</a>
+          <a href="#" class="proj-action-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="featured-proj">
+        <div class="proj-emoji" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">🛒</div>
+        <div class="proj-main">
+          <h3>ShopSync</h3>
+          <p>E-commerce platform with inventory management, Stripe integration, and live analytics dashboards. Processed $500k in transactions.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Next.js</span><span class="proj-tag">PostgreSQL</span>
+            <span class="proj-tag">Stripe</span><span class="proj-tag">Redis</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a href="#" class="proj-action-link">Case Study →</a>
+          <a href="#" class="proj-action-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="featured-proj">
+        <div class="proj-emoji" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">🤖</div>
+        <div class="proj-main">
+          <h3>AiNote <span style="font-size:0.75rem;color:var(--muted);font-weight:500">&nbsp;★ 2.1k</span></h3>
+          <p>AI-powered note-taking with auto-summarization, semantic search, and knowledge graph visualization. Open source.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span><span class="proj-tag">FastAPI</span>
+            <span class="proj-tag">OpenAI</span><span class="proj-tag">Vue.js</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a href="#" class="proj-action-link">Demo →</a>
+          <a href="#" class="proj-action-link">GitHub →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience-section" class="section">
+      <div class="section-label">Work History</div>
+      <div class="section-title">Experience</div>
+      <div class="section-underline"></div>
+
+      <div class="exp-card">
+        <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+        <div>
+          <span class="exp-date-badge">2023 – Present</span>
+          <div class="exp-role-title">Senior Full-Stack Engineer</div>
+          <div class="exp-company-name">Acme Corp · San Francisco</div>
+          <div class="exp-desc">Led redesign of the core product platform, reducing API latency by 60%. Managed a team of 4 and drove adoption of microservices architecture.</div>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+        <div>
+          <span class="exp-date-badge">2021 – 2023</span>
+          <div class="exp-role-title">Full-Stack Developer</div>
+          <div class="exp-company-name">StartupCo · Remote</div>
+          <div class="exp-desc">Built the customer dashboard from scratch. Handled third-party API integrations, CI/CD pipelines, and scaled from 0 to 50k MAU.</div>
+        </div>
+      </div>
+
+      <div class="exp-card exp-last">
+        <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+        <div>
+          <span class="exp-date-badge">2019 – 2021</span>
+          <div class="exp-role-title">Junior Developer</div>
+          <div class="exp-company-name">WebStudio · New York</div>
+          <div class="exp-desc">Developed client web app features, improved frontend performance by 35%, and contributed to an internal component library used across 12 projects.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills-section" class="section">
+      <div class="section-label">Technology</div>
+      <div class="section-title">Skills</div>
+      <div class="section-underline"></div>
+      <div class="skills-board">
+        <div class="skill-tile"><span class="skill-tile-icon">⚛️</span><span class="skill-tile-name">React</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">▲</span><span class="skill-tile-name">Next.js</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🔷</span><span class="skill-tile-name">TypeScript</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🟢</span><span class="skill-tile-name">Node.js</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🐍</span><span class="skill-tile-name">Python</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🗄️</span><span class="skill-tile-name">PostgreSQL</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🍃</span><span class="skill-tile-name">MongoDB</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🐳</span><span class="skill-tile-name">Docker</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">☁️</span><span class="skill-tile-name">AWS</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🔀</span><span class="skill-tile-name">Git</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🔁</span><span class="skill-tile-name">CI/CD</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon">🎨</span><span class="skill-tile-name">Figma</span></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact-section" class="section">
+      <div class="section-label">Get in Touch</div>
+      <div class="section-title">Contact</div>
+      <div class="section-underline"></div>
+      <p style="color:#555;margin-bottom:1.5rem;font-size:0.95rem;line-height:1.7;max-width:500px">I'm open to new opportunities, collaborations, and interesting conversations. Reach out through any of the channels below.</p>
+      <div class="contact-grid">
+        <a href="mailto:jane@example.com" class="contact-card">
+          <div class="contact-card-icon" style="background:#eef2ff">✉️</div>
+          <div><div class="contact-card-label">Email</div><div class="contact-card-value">jane@example.com</div></div>
+        </a>
+        <a href="https://linkedin.com/" class="contact-card">
+          <div class="contact-card-icon" style="background:#dbeafe">💼</div>
+          <div><div class="contact-card-label">LinkedIn</div><div class="contact-card-value">linkedin.com/in/janedoe</div></div>
+        </a>
+        <a href="https://github.com/" class="contact-card">
+          <div class="contact-card-icon" style="background:#f3f4f6">⬡</div>
+          <div><div class="contact-card-label">GitHub</div><div class="contact-card-value">github.com/janedoe</div></div>
+        </a>
+        <a href="#" class="contact-card">
+          <div class="contact-card-icon" style="background:#fdf4ff">📄</div>
+          <div><div class="contact-card-label">Resume</div><div class="contact-card-value">Download PDF</div></div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+</body>
+</html>
