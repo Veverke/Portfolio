@@ -50,14 +50,32 @@
 
 ## Phase 2: Style & Visual Identity
 
-> **Goal:** Define and apply a cohesive visual language that reflects the personality and profession of the individual — color palette, typography, iconography, and micro-details — building on top of the chosen sidebar-nav layout structure.
+> **Goal:** Define and apply a cohesive visual language that reflects the personality and profession of the individual — color palette, typography, iconography, and micro-details — building on top of the chosen sidebar-nav layout structure. Includes a live theme picker with preset themes and on-demand random palette generation via the Colormind.io API.
 
 ### Tasks
-- [ ] Define a color palette: pick 1–2 primary colors, 1 accent, and neutral background/text tones
-- [ ] Record the palette in `index.html` as CSS custom properties (`--color-primary`, `--color-accent`, etc.) in `:root`
+
+#### 2-pre — Visual Direction & Style Sampler
+
+> **Goal:** Establish visual direction through a short interview, then validate it visually before writing any production CSS. The sampler output feeds directly into the 5 preset themes in §2c.
+
+- [ ] Answer the four directional questions (record answers below):
+  1. **Tone:** `professional & clean` / `bold & editorial` / `creative & expressive` / `minimal & understated` → **`___________`**
+  2. **Background preference:** `light` / `dark` / `both` → **`___________`**
+  3. **Color family:** (e.g. blues, teals, greens, purples, warm earth, monochrome, no preference) → **`___________`**
+  4. **Field / role:** (e.g. software engineer, data scientist, product designer, PM…) → **`___________`**
+- [ ] Generate `style-sampler.html` — a self-contained file rendering the sidebar-nav layout structure (sidebar + hero + nav links + card + badge + button) **5 times**, each with a fully different hand-crafted theme derived from the direction answers above
+- [ ] Open `style-sampler.html` in browser and review all 5 themes side-by-side
+- [ ] Record the chosen theme(s) here: **Chosen: `___________`** (e.g. "colors of #2, feel of #4")
+- [ ] The chosen theme becomes the default preset; the remaining 4 sampler themes become the other presets in §2c
+
+#### 2a — CSS Foundation
+- [ ] Define CSS custom properties for the full design token set in `:root`: `--color-primary`, `--color-secondary`, `--color-accent`, `--color-bg`, `--color-surface`, `--color-text`, `--color-text-muted`, `--space-unit` (4 px base)
 - [ ] Choose a heading font and a body font (Google Fonts or system stack) — document the choice here: **Fonts: `___________`**
 - [ ] Apply heading font to all `<h1>`–`<h3>` elements via CSS
 - [ ] Apply body font to the base `body` selector
+- [ ] Set a consistent spacing scale as multiples of `--space-unit` throughout the stylesheet
+
+#### 2b — Component Styling
 - [ ] Style the sidebar: background color, width, padding, and link hover states
 - [ ] Style the navigation links: color, active indicator, and hover transition
 - [ ] Style the hero / header section: background treatment (solid, gradient, or subtle texture), text color, and spacing
@@ -67,31 +85,59 @@
 - [ ] Style the primary action buttons / CTA links
 - [ ] Choose and integrate an icon set (e.g. Font Awesome, Lucide, or inline SVGs) for nav and social links
 - [ ] Apply icons to all navigation items and social links
-- [ ] Set a consistent spacing scale (e.g. 4 px base unit) as CSS custom properties
 - [ ] Verify the chosen palette passes WCAG AA contrast for body text on all backgrounds
-- [ ] Export / document final color hex values and font names in a comment block at the top of the `<style>` section
+- [ ] Document final color hex values and font names in a comment block at the top of the `<style>` section
+
+#### 2c — Theme Picker
+- [ ] Curate **5 preset themes** (sourced / inspired by ColorHunt) — each defined as a named JS object with keys matching the CSS custom property token set (`primary`, `secondary`, `accent`, `bg`, `surface`, `text`, `textMuted`)
+- [ ] Implement a `applyTheme(themeObj)` JS function that writes each token to `document.documentElement.style.setProperty()`
+- [ ] Build the theme picker UI: a floating or sidebar-docked panel containing
+  - 5 preset palette swatches (click to apply instantly)
+  - A **"Random"** button that fetches a palette from Colormind.io and applies it live
+- [ ] Implement `fetchRandomTheme()`: POST to `https://colormind.io/api/` with `{"model":"default"}`, map the 5 returned RGB arrays to the design token set, then call `applyTheme()`
+- [ ] Show a brief loading state on the Random button while the fetch is in-flight
+- [ ] Persist the last-applied theme to `localStorage` and restore it on page load
+- [ ] Ensure theme picker panel is keyboard-accessible (focusable swatches, Enter/Space to apply)
 
 ### Deliverables
-- CSS custom properties for the full color palette defined in `:root`
+- `style-sampler.html` rendering 5 complete theme variations of the sidebar-nav layout for visual review
+- Directional answers and chosen theme recorded in this plan
+- CSS custom properties for the full color token set defined in `:root`
 - Heading and body fonts applied consistently across all sections
 - Sidebar, nav, hero, section headings, cards, and buttons all visually styled
 - Icons integrated for nav and social links
 - Color palette documented in a comment block in the stylesheet
+- 5 named preset themes defined in JS, each instantly applicable via the picker
+- "Random" button fetches a live palette from Colormind.io and re-themes the page without reload
+- Last-applied theme persisted in `localStorage`
 
 ### Tests
-- [ ] Open `index.html` in browser — overall look reflects the intended personal brand
-- [ ] Sidebar and nav links have clearly distinct hover / active states
+- [ ] Open `style-sampler.html` in browser — all 5 themes render without errors and are visually distinct
+- [ ] Chosen theme is recorded in the work-plan before any production CSS is written
+- [ ] Open `index.html` in browser — overall look reflects the intended personal brand using the default preset
+- [ ] Click each of the 5 preset swatches — page re-themes instantly with no flicker or reload
+- [ ] Click **"Random"** — button shows loading state, then page re-themes with the fetched palette
+- [ ] Reload page — previously applied theme is restored from `localStorage`
+- [ ] Sidebar and nav links have clearly distinct hover / active states across all themes
 - [ ] Project cards show hover lift or highlight effect
-- [ ] Page is readable on a bright display (no illegible low-contrast text)
-- [ ] Fonts load correctly (no fallback system font flashing on repeat visits)
+- [ ] Page is readable on a bright display under every preset (no illegible low-contrast text)
+- [ ] Fonts load correctly (no fallback system font visible on repeat visits)
 - [ ] Icons render at all tested viewport widths (375 px, 768 px, 1280 px)
+- [ ] Theme picker panel is fully operable by keyboard alone
 
 ### Unit Tests
 - [ ] Write Jest + jsdom tests asserting:
   - `:root` style block defines `--color-primary` and `--color-accent`
   - At least one `<link rel="stylesheet">` or `<style>` block is present in `<head>`
   - All navigation `<a>` elements contain either an `<svg>` child or an icon `<i>` element
-  - No inline `style` attributes set color or font values (all styling via CSS classes)
+  - No inline `style` attributes set color or font values (all styling via CSS classes or JS custom-property writes)
+- [ ] Write unit tests for `applyTheme()`:
+  - Calling it with a valid theme object sets `--color-primary` on `document.documentElement`
+  - Calling it saves the theme to `localStorage` under a known key
+- [ ] Write unit tests for `fetchRandomTheme()` (fetch mocked):
+  - On successful response, `applyTheme()` is called with an object containing all required token keys
+  - On network failure, an error state is shown and the previous theme is unchanged
+- [ ] Write a unit test asserting the 5 preset theme objects each contain all required token keys
 
 ### Phase Completion
 - [ ] All tasks checked off
