@@ -81,12 +81,14 @@ h1, h2, h3 { font-family: 'Nunito', sans-serif; }
   width: 80px; height: 80px;
   border-radius: 28% 72% 68% 32% / 36% 32% 68% 64%;
   margin: 0 auto var(--space-4);
-  background: linear-gradient(135deg, var(--color-accent), rgba(255,255,255,0.6));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
+  overflow: hidden;
   border: 3px solid rgba(255,255,255,0.3);
+  flex-shrink: 0;
+}
+.avatar-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .sidebar-name {
@@ -462,6 +464,13 @@ h1, h2, h3 { font-family: 'Nunito', sans-serif; }
   justify-content: center;
   font-size: 1.75rem;
   flex-shrink: 0;
+  overflow: hidden;
+}
+.proj-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* proj-emoji colour variants (replaces inline styles) */
@@ -531,8 +540,9 @@ h1, h2, h3 { font-family: 'Nunito', sans-serif; }
    ============================================================ */
 .skills-board {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(7, 1fr);
   gap: var(--space-3);
+  overflow-x: auto;
 }
 
 .skill-tile {
@@ -543,6 +553,7 @@ h1, h2, h3 { font-family: 'Nunito', sans-serif; }
   text-align: center;
   transition: all 0.18s;
   cursor: default;
+  min-width: 88px;
 }
 
 .skill-tile:hover {
@@ -551,7 +562,8 @@ h1, h2, h3 { font-family: 'Nunito', sans-serif; }
   transform: translateY(-2px);
 }
 
-.skill-tile-icon { font-size: 1.65rem; display: block; margin-bottom: var(--space-2); }
+.skill-tile-icon { font-size: 1.65rem; display: block; margin-bottom: var(--space-2); line-height: 1; }
+.skill-tile-icon img { width: 1.65rem; height: 1.65rem; object-fit: contain; display: inline-block; vertical-align: middle; }
 .skill-tile-name { font-size: 0.76rem; font-weight: 600; color: var(--color-text-muted); }
 
 /* ============================================================
@@ -619,6 +631,22 @@ h1, h2, h3 { font-family: 'Nunito', sans-serif; }
   font-size: 0.875rem;
   color: var(--color-text-muted);
   line-height: 1.65;
+}
+
+.exp-bullets {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.exp-bullets li {
+  margin-bottom: 0.35rem;
+}
+
+.exp-bullets li:last-child {
+  margin-bottom: 0;
 }
 
 /* ============================================================

@@ -259,8 +259,41 @@ const observer = new IntersectionObserver(
 sections.forEach((section) => observer.observe(section));
 
 /* ============================================================
+   fetchGitHubStats — populates stars & primary language for
+   project cards carrying a data-repo="owner/name" attribute.
+   Unauthenticated GitHub API: 60 req/hr, public repos only.
+   ============================================================ */
+async function fetchGitHubStats() {
+  const cards = document.querySelectorAll('.featured-proj[data-repo]');
+  await Promise.allSettled(
+    [...cards].map(async (card) => {
+      const repo = card.dataset.repo;
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repo}`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        const starsEl = card.querySelector('.proj-stars');
+        if (starsEl && data.stargazers_count > 0) {
+          starsEl.textContent = ` ★ ${data.stargazers_count.toLocaleString()}`;
+        }
+
+        const langEl = card.querySelector('.proj-lang-tag');
+        if (langEl && data.language) {
+          langEl.textContent = data.language;
+          langEl.removeAttribute('hidden');
+        }
+      } catch {
+        // Silently ignore — card still renders with hardcoded content
+      }
+    })
+  );
+}
+
+/* ============================================================
    Init
    ============================================================ */
 buildPicker();
 restoreTheme();
+fetchGitHubStats();
 

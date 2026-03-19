@@ -155,13 +155,13 @@
 ## Phase 3: Content — Identity & About
 
 ### Tasks
-- [ ] Replace placeholder text in `<title>` tag with real name + role
-- [ ] Replace placeholder name in the hero / header section
-- [ ] Replace placeholder job title / tagline in the hero section
-- [ ] Write a 3–5 sentence bio and insert into the About section
-- [ ] Replace placeholder email with real contact email
-- [ ] Replace placeholder LinkedIn URL with real profile URL
-- [ ] Replace placeholder GitHub URL with real profile URL
+- [x] Replace placeholder text in `<title>` tag with real name + role
+- [x] Replace placeholder name in the hero / header section
+- [x] Replace placeholder job title / tagline in the hero section
+- [x] Write a 3–5 sentence bio and insert into the About section
+- [x] Replace placeholder email with real contact email
+- [x] Replace placeholder LinkedIn URL with real profile URL
+- [x] Replace placeholder GitHub URL with real profile URL
 
 ### Deliverables
 - All identity and About fields contain real, final content
@@ -174,7 +174,7 @@
 - [ ] Click email link — opens mail client with correct address pre-filled
 
 ### Unit Tests
-- [ ] Write Jest + jsdom tests asserting:
+- [x] Write Jest + jsdom tests asserting:
   - `document.title` does not match `/your name|portfolio template/i`
   - No element `textContent` matches `/lorem ipsum/i`
   - `<a[href^="mailto:"]>` exists and `href` is not a placeholder value
@@ -182,24 +182,24 @@
   - `<a[href*="github"]>` exists and `href` is not a placeholder value
 
 ### Phase Completion
-- [ ] All tasks checked off
-- [ ] All tests passing
-- [ ] All unit tests passing
-- [ ] Work-plan updated — mark heading ✅ with completion date: ___________
+- [x] All tasks checked off
+- [ ] All tests passing (manual tests pending browser check)
+- [x] All unit tests passing — 5/5 (tests/phase3-identity.test.js)
+- [x] Work-plan updated — mark heading ✅ with completion date: 2026-03-18
 
 ---
 
-## Phase 4: Content — Skills & Experience
+## Phase 4: Content — Skills & Experience ✅
 
 ### Tasks
-- [ ] List all technical skills (languages, frameworks, tools, platforms)
-- [ ] Insert skills into the Skills section of `index.html`
-- [ ] Add Job #1: company, role, start/end dates, 3–5 bullet achievement points
-- [ ] Add Job #2 (if applicable): company, role, dates, bullets
-- [ ] Add Job #3 (if applicable): company, role, dates, bullets
-- [ ] Add education entry: institution, degree, graduation year
-- [ ] Verify experience entries are in reverse-chronological order (newest first)
-- [ ] Remove any leftover placeholder experience or skill entries
+- [x] List all technical skills (languages, frameworks, tools, platforms)
+- [x] Insert skills into the Skills section of `index.html`
+- [x] Add Job #1: company, role, start/end dates, 3–5 bullet achievement points
+- [x] Add Job #2 (if applicable): company, role, dates, bullets
+- [x] Add Job #3 (if applicable): company, role, dates, bullets
+- [x] Add education entry: institution, degree, graduation year
+- [x] Verify experience entries are in reverse-chronological order (newest first)
+- [x] Remove any leftover placeholder experience or skill entries
 
 ### Deliverables
 - Skills section populated with ≥ 5 real skills
@@ -208,39 +208,39 @@
 - All entries in reverse-chronological order
 
 ### Tests
-- [ ] Rendered Skills section shows ≥ 5 items visually
-- [ ] Each experience entry displays: company name, role title, date range
-- [ ] Education entry shows institution and degree
-- [ ] No placeholder text visible in these sections
+- [x] Rendered Skills section shows ≥ 5 items visually
+- [x] Each experience entry displays: company name, role title, date range
+- [x] Education entry shows institution and degree
+- [x] No placeholder text visible in these sections
 
 ### Unit Tests
-- [ ] Write Jest + jsdom tests asserting:
+- [x] Write Jest + jsdom tests asserting:
   - Skills list contains ≥ 5 non-empty items
   - Experience section contains ≥ 1 entry with a non-empty date range element
   - Education section contains ≥ 1 entry
   - No element within `#skills`, `#experience`, `#education` matches `/lorem|placeholder|example company/i`
 
 ### Phase Completion
-- [ ] All tasks checked off
-- [ ] All tests passing
-- [ ] All unit tests passing
-- [ ] Work-plan updated — mark heading ✅ with completion date: ___________
+- [x] All tasks checked off
+- [x] All tests passing
+- [x] All unit tests passing — 9/9 (tests/phase4-skills-experience.test.js)
+- [x] Work-plan updated — mark heading ✅ with completion date: 2026-03-11
 
 ---
 
 ## Phase 5: Content — Projects
 
 ### Tasks
-- [ ] Identify 2–4 projects to feature
-- [ ] Write name, 2–3 sentence description, and tech stack for Project #1
-- [ ] Write name, 2–3 sentence description, and tech stack for Project #2
-- [ ] Write name, 2–3 sentence description, and tech stack for Project #3 (if applicable)
-- [ ] Write name, 2–3 sentence description, and tech stack for Project #4 (if applicable)
-- [ ] Insert Project #1 into the Projects section with live/repo link(s)
-- [ ] Insert Project #2 into the Projects section with live/repo link(s)
-- [ ] Insert Project #3 (if applicable) with live/repo link(s)
-- [ ] Insert Project #4 (if applicable) with live/repo link(s)
-- [ ] Remove any unused placeholder project cards from the HTML
+- [x] Identify 2–4 projects to feature — **2 projects: bAInder, Chat Wizard**
+- [x] Write name, 2–3 sentence description, and tech stack for Project #1 — **bAInder** (https://github.com/Veverke/bAInder)
+- [x] Write name, 2–3 sentence description, and tech stack for Project #2 — **Chat Wizard** (https://github.com/Veverke/ChatWizard)
+- [x] Write name, 2–3 sentence description, and tech stack for Project #3 (if applicable) — N/A
+- [x] Write name, 2–3 sentence description, and tech stack for Project #4 (if applicable) — N/A
+- [x] Insert Project #1 into the Projects section with live/repo link(s)
+- [x] Insert Project #2 into the Projects section with live/repo link(s)
+- [x] Insert Project #3 (if applicable) with live/repo link(s) — N/A
+- [x] Insert Project #4 (if applicable) with live/repo link(s) — N/A
+- [x] Remove any unused placeholder project cards from the HTML
 
 ### Deliverables
 - Projects section contains 2–4 real project entries

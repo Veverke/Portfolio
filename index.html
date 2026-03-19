@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio – Sidebar Nav</title>
+  <title>Avraham Yehoshua Kahana – Software Engineer</title>
   <!-- Google Fonts: Nunito (headings) + Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome 6 Free — nav & social icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Devicon — technology skill icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
   <!-- App styles & JS (via Vite) -->
   <script type="module" src="/src/main.js"></script>
 </head>
@@ -18,9 +20,11 @@
 <!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-top">
-    <div class="avatar">👩‍💻</div>
-    <div class="sidebar-name">Jane Doe</div>
-    <div class="sidebar-role">Full-Stack Engineer</div>
+    <div class="avatar">
+      <img src="/images/avatar.jpg" alt="Avraham Yehoshua Kahana" class="avatar-img">
+    </div>
+    <div class="sidebar-name">Avraham Yehoshua Kahana</div>
+    <div class="sidebar-role">Software Engineer</div>
     <div class="sidebar-badge"><span class="badge-dot"></span> Open to work</div>
   </div>
 
@@ -41,6 +45,9 @@
     <a href="#skills-section" class="nav-item">
       <span class="nav-icon"><i class="fa-solid fa-bolt fa-fw"></i></span> Skills
     </a>
+    <a href="#education-section" class="nav-item">
+      <span class="nav-icon"><i class="fa-solid fa-graduation-cap fa-fw"></i></span> Education
+    </a>
     <a href="#contact-section" class="nav-item">
       <span class="nav-icon"><i class="fa-solid fa-envelope fa-fw"></i></span> Contact
     </a>
@@ -48,10 +55,10 @@
 
   <div class="sidebar-footer">
     <div class="social-row">
-      <a href="https://github.com/" class="social-btn" title="GitHub" aria-label="GitHub">
+      <a href="https://github.com/veverke" class="social-btn" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-github"></i>
       </a>
-      <a href="https://linkedin.com/" class="social-btn" title="LinkedIn" aria-label="LinkedIn">
+      <a href="https://www.linkedin.com/in/avrahamkahana" class="social-btn" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-linkedin-in"></i>
       </a>
       <a href="https://twitter.com/" class="social-btn" title="X / Twitter" aria-label="X / Twitter">
@@ -71,7 +78,7 @@
     <!-- HERO -->
     <div id="hero" class="hero-section">
       <span class="hero-tag">👋 Welcome to my portfolio</span>
-      <h1>Building great products<br>one commit at a time.</h1>
+      <h1>Enjoying the AI ride<br>to build better software.</h1>
       <p>I'm a full-stack developer with 5+ years of experience shipping web applications that people love. San Francisco-based, remote-friendly.</p>
       <div class="hero-btns">
         <a href="#projects-section" class="hbtn hbtn-white">See My Work</a>
@@ -110,7 +117,9 @@
       <div class="section-label">About Me</div>
       <div class="section-title">Who I am</div>
       <div class="section-underline"></div>
-      <p class="about-text">I'm a product-minded full-stack engineer who loves building things that make a real difference. I've spent 5+ years working across startups and scale-ups, taking products from zero to production. I care about code quality, great UX, and continuous learning.</p>
+      <p class="about-text">Bringing more than 7 years experience in backend development, from web to desktop apps, using Microsoft tech stack (.NET C# and related), in a variety of fields: Insurance, Telematics, Cybersecurity, Cloud, Retail. </p>
+      <br />
+      <p class="about-text">Joining the AI ride to make the most of software engineering and turn ideas into concretions with both speed and quality.</p>
     </section>
 
     <!-- PROJECTS -->
@@ -119,66 +128,35 @@
       <div class="section-title">Projects</div>
       <div class="section-underline"></div>
 
-      <div class="featured-proj">
-        <div class="proj-emoji proj-emoji--indigo">📋</div>
+      <div class="featured-proj" data-repo="Veverke/bAInder">
+        <div class="proj-emoji">
+          <img src="https://raw.githubusercontent.com/Veverke/bAInder/main/assets/icons/icon128.png" alt="bAInder icon" class="proj-icon-img">
+        </div>
         <div class="proj-main">
-          <h3>TaskMaster</h3>
-          <p>Collaborative task management with real-time sync, team workspaces, and smart notification routing. Scales to 10k+ concurrent users.</p>
+          <h3>bAInder<span class="proj-name-meta proj-stars"></span></h3>
+          <p>AI Chat Organizer — brings order to your AI conversations by intelligently organizing and surfacing chat history across sessions.</p>
           <div class="proj-tags">
-            <span class="proj-tag">React</span><span class="proj-tag">Node.js</span>
-            <span class="proj-tag">Socket.io</span><span class="proj-tag">MongoDB</span>
+            <span class="proj-tag proj-lang-tag" hidden></span>
           </div>
         </div>
         <div class="proj-actions">
-          <a href="#" class="proj-action-link">Live →</a>
-          <a href="#" class="proj-action-link">GitHub →</a>
+          <a href="https://github.com/Veverke/bAInder" class="proj-action-link" target="_blank" rel="noopener noreferrer">GitHub →</a>
         </div>
       </div>
 
-      <div class="featured-proj">
-        <div class="proj-emoji proj-emoji--teal">💪</div>
+      <div class="featured-proj" data-repo="Veverke/ChatWizard">
+        <div class="proj-emoji">
+          <img src="https://raw.githubusercontent.com/Veverke/ChatWizard/master/images/icon.png" alt="Chat Wizard icon" class="proj-icon-img">
+        </div>
         <div class="proj-main">
-          <h3>FitTrack</h3>
-          <p>Mobile fitness app with AI-powered workout recommendations, nutrition tracking, and progress visualization. 12k+ downloads.</p>
+          <h3>Chat Wizard<span class="proj-name-meta proj-stars"></span></h3>
+          <p>Unified search, analytics, and history browser for your GitHub Copilot Chat and Claude Code sessions.</p>
           <div class="proj-tags">
-            <span class="proj-tag">Flutter</span><span class="proj-tag">Firebase</span><span class="proj-tag">TFLite</span>
+            <span class="proj-tag proj-lang-tag" hidden></span>
           </div>
         </div>
         <div class="proj-actions">
-          <a href="#" class="proj-action-link">App Store →</a>
-          <a href="#" class="proj-action-link">GitHub →</a>
-        </div>
-      </div>
-
-      <div class="featured-proj">
-        <div class="proj-emoji proj-emoji--amber">🛒</div>
-        <div class="proj-main">
-          <h3>ShopSync</h3>
-          <p>E-commerce platform with inventory management, Stripe integration, and live analytics dashboards. Processed $500k in transactions.</p>
-          <div class="proj-tags">
-            <span class="proj-tag">Next.js</span><span class="proj-tag">PostgreSQL</span>
-            <span class="proj-tag">Stripe</span><span class="proj-tag">Redis</span>
-          </div>
-        </div>
-        <div class="proj-actions">
-          <a href="#" class="proj-action-link">Case Study →</a>
-          <a href="#" class="proj-action-link">GitHub →</a>
-        </div>
-      </div>
-
-      <div class="featured-proj">
-        <div class="proj-emoji proj-emoji--pink">🤖</div>
-        <div class="proj-main">
-          <h3>AiNote <span class="proj-name-meta">&nbsp;★ 2.1k</span></h3>
-          <p>AI-powered note-taking with auto-summarization, semantic search, and knowledge graph visualization. Open source.</p>
-          <div class="proj-tags">
-            <span class="proj-tag">Python</span><span class="proj-tag">FastAPI</span>
-            <span class="proj-tag">OpenAI</span><span class="proj-tag">Vue.js</span>
-          </div>
-        </div>
-        <div class="proj-actions">
-          <a href="#" class="proj-action-link">Demo →</a>
-          <a href="#" class="proj-action-link">GitHub →</a>
+          <a href="https://github.com/Veverke/ChatWizard" class="proj-action-link" target="_blank" rel="noopener noreferrer">GitHub →</a>
         </div>
       </div>
     </section>
@@ -195,7 +173,13 @@
           <span class="exp-date-badge">2023 – Present</span>
           <div class="exp-role-title">Senior Full-Stack Engineer</div>
           <div class="exp-company-name">Acme Corp · San Francisco</div>
-          <div class="exp-desc">Led redesign of the core product platform, reducing API latency by 60%. Managed a team of 4 and drove adoption of microservices architecture.</div>
+          <ul class="exp-bullets">
+            <li>Architected a redesigned product platform that cut average API response time by 60%, boosting user retention by 18%.</li>
+            <li>Led a cross-functional team of 4 engineers, establishing sprint cadences, code-review standards, and a zero-regression deployment policy.</li>
+            <li>Migrated a monolithic application to a microservices architecture using Node.js and Docker, enabling independent scaling of high-traffic services.</li>
+            <li>Built an internal monitoring dashboard with real-time alerting, reducing mean time to detect (MTTD) incidents by 40%.</li>
+            <li>Drove TypeScript adoption across the frontend codebase, reducing runtime errors by 30%.</li>
+          </ul>
         </div>
       </div>
 
@@ -205,7 +189,12 @@
           <span class="exp-date-badge">2021 – 2023</span>
           <div class="exp-role-title">Full-Stack Developer</div>
           <div class="exp-company-name">StartupCo · Remote</div>
-          <div class="exp-desc">Built the customer dashboard from scratch. Handled third-party API integrations, CI/CD pipelines, and scaled from 0 to 50k MAU.</div>
+          <ul class="exp-bullets">
+            <li>Built the customer-facing analytics dashboard from scratch in React, delivering the MVP in 8 weeks and onboarding the first 200 enterprise users.</li>
+            <li>Integrated 6 third-party APIs (payment, email, OAuth, analytics, notifications, CDN), each with full error handling and retry logic.</li>
+            <li>Set up CI/CD pipelines using GitHub Actions, cutting release cycles from biweekly to daily.</li>
+            <li>Scaled the platform from 0 to 50k monthly active users with zero unplanned downtime.</li>
+          </ul>
         </div>
       </div>
 
@@ -215,7 +204,32 @@
           <span class="exp-date-badge">2019 – 2021</span>
           <div class="exp-role-title">Junior Developer</div>
           <div class="exp-company-name">WebStudio · New York</div>
-          <div class="exp-desc">Developed client web app features, improved frontend performance by 35%, and contributed to an internal component library used across 12 projects.</div>
+          <ul class="exp-bullets">
+            <li>Developed and maintained 15+ client-facing web features using React and Ruby on Rails.</li>
+            <li>Improved Lighthouse performance score of the main product from 52 to 91 via lazy loading, image compression, and code splitting.</li>
+            <li>Contributed over 40 reusable components to the internal design-system library, adopted across 12 client projects.</li>
+            <li>Collaborated with designers in Figma to translate mockups into pixel-perfect, accessible UI components.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education-section" class="section">
+      <div class="section-label">Academic Background</div>
+      <div class="section-title">Education</div>
+      <div class="section-underline"></div>
+
+      <div class="exp-card exp-last">
+        <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+        <div>
+          <span class="exp-date-badge">2010 – 2014</span>
+          <div class="exp-role-title">B.Sc. Computer Science</div>
+          <div class="exp-company-name">Bar-Ilan University · Ramat Gan, Israel</div>
+          <ul class="exp-bullets">
+            <li>Graduated with honors. Core coursework included algorithms, data structures, operating systems, and software engineering.</li>
+            <li>Final project: distributed task-scheduling system built in Java with a web-based monitoring UI.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -226,18 +240,20 @@
       <div class="section-title">Skills</div>
       <div class="section-underline"></div>
       <div class="skills-board">
-        <div class="skill-tile"><span class="skill-tile-icon">⚛️</span><span class="skill-tile-name">React</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">▲</span><span class="skill-tile-name">Next.js</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🔷</span><span class="skill-tile-name">TypeScript</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🟢</span><span class="skill-tile-name">Node.js</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🐍</span><span class="skill-tile-name">Python</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🗄️</span><span class="skill-tile-name">PostgreSQL</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🍃</span><span class="skill-tile-name">MongoDB</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🐳</span><span class="skill-tile-name">Docker</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">☁️</span><span class="skill-tile-name">AWS</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🔀</span><span class="skill-tile-name">Git</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🔁</span><span class="skill-tile-name">CI/CD</span></div>
-        <div class="skill-tile"><span class="skill-tile-icon">🎨</span><span class="skill-tile-name">Figma</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-csharp-plain colored"></i></span><span class="skill-tile-name">C#</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="fa-solid fa-database"></i></span><span class="skill-tile-name">SQL</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-bash-plain colored"></i></span><span class="skill-tile-name">Bash</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-linux-plain colored"></i></span><span class="skill-tile-name">Linux</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-git-plain colored"></i></span><span class="skill-tile-name">Git</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-github-original colored"></i></span><span class="skill-tile-name">GitHub Workflows</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-docker-plain colored"></i></span><span class="skill-tile-name">Docker</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="fa-solid fa-cubes"></i></span><span class="skill-tile-name">Microservices</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-azure-plain colored"></i></span><span class="skill-tile-name">Cloud (Azure)</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-html5-plain colored"></i></span><span class="skill-tile-name">HTML</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-css3-plain colored"></i></span><span class="skill-tile-name">CSS</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><i class="devicon-javascript-plain colored"></i></span><span class="skill-tile-name">JavaScript</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><img src="https://github.gallerycdn.vsassets.io/extensions/github/copilotvs/1.206.0.0/1719349649662/Microsoft.VisualStudio.Services.Icons.Default" alt="GitHub Copilot"></span><span class="skill-tile-name">GitHub Copilot</span></div>
+        <div class="skill-tile"><span class="skill-tile-icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8XXtcU3SGlITKgB6jJuZOmKhDn7hv0I5zdA&s" alt="BDD"></span><span class="skill-tile-name">BDD</span></div>
       </div>
     </section>
 
@@ -248,17 +264,17 @@
       <div class="section-underline"></div>
       <p class="contact-intro">I'm open to new opportunities, collaborations, and interesting conversations. Reach out through any of the channels below.</p>
       <div class="contact-grid">
-        <a href="mailto:jane@example.com" class="contact-card">
+        <a href="mailto:avreimale@gmail.com" class="contact-card">
           <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
-          <div><div class="contact-card-label">Email</div><div class="contact-card-value">jane@example.com</div></div>
+          <div><div class="contact-card-label">Email</div><div class="contact-card-value">avreimale@gmail.com</div></div>
         </a>
-        <a href="https://linkedin.com/" class="contact-card">
+        <a href="https://www.linkedin.com/in/avrahamkahana" class="contact-card" target="_blank" rel="noopener noreferrer">
           <div class="contact-card-icon"><i class="fa-brands fa-linkedin-in"></i></div>
-          <div><div class="contact-card-label">LinkedIn</div><div class="contact-card-value">linkedin.com/in/janedoe</div></div>
+          <div><div class="contact-card-label">LinkedIn</div><div class="contact-card-value">linkedin.com/in/avrahamkahana</div></div>
         </a>
-        <a href="https://github.com/" class="contact-card">
+        <a href="https://github.com/veverke" class="contact-card" target="_blank" rel="noopener noreferrer">
           <div class="contact-card-icon"><i class="fa-brands fa-github"></i></div>
-          <div><div class="contact-card-label">GitHub</div><div class="contact-card-value">github.com/janedoe</div></div>
+          <div><div class="contact-card-label">GitHub</div><div class="contact-card-value">github.com/veverke</div></div>
         </a>
         <a href="#" class="contact-card">
           <div class="contact-card-icon"><i class="fa-solid fa-file-lines"></i></div>
