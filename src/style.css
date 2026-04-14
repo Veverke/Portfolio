@@ -510,6 +510,17 @@ h1, h2, h3 { font-family: 'Nunito', sans-serif; }
   font-weight: 700;
 }
 
+.proj-year-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+  margin-top: var(--space-5);
+  padding-left: 2px;
+}
+
 .proj-actions {
   display: flex;
   flex-direction: column;
