@@ -291,9 +291,53 @@ async function fetchGitHubStats() {
 }
 
 /* ============================================================
+   fetchGitHubProfileStats — populates the Stars and Badges
+   stat chips in the hero section.
+
+   Stars: sums stargazers_count across ALL public repos owned by
+   the user (paginates the /repos endpoint, 100 per page).
+
+   Badges: GitHub does not expose profile achievements via its
+   public REST or unauthenticated GraphQL API. Update
+   GITHUB_BADGES_COUNT manually whenever you earn a new badge.
+   ============================================================ */
+const GITHUB_USER         = 'veverke';
+const GITHUB_BADGES_COUNT = 8; // update manually — no public API for achievements
+
+async function fetchGitHubProfileStats() {
+  // --- Stars ---
+  const starsEl = document.getElementById('stat-stars');
+  if (starsEl) {
+    try {
+      let total = 0;
+      let page  = 1;
+      while (true) {
+        const res = await fetch(
+          `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&page=${page}&type=owner`
+        );
+        if (!res.ok) break;
+        const repos = await res.json();
+        if (!repos.length) break;
+        total += repos.reduce((sum, r) => sum + r.stargazers_count, 0);
+        if (repos.length < 100) break;
+        page++;
+      }
+      if (total > 0) starsEl.textContent = total.toLocaleString();
+    } catch {
+      // keep placeholder
+    }
+  }
+
+  // --- Badges ---
+  const badgesEl = document.getElementById('stat-badges');
+  if (badgesEl) badgesEl.textContent = GITHUB_BADGES_COUNT;
+}
+
+/* ============================================================
    Init
    ============================================================ */
 buildPicker();
 restoreTheme();
 fetchGitHubStats();
+fetchGitHubProfileStats();
 

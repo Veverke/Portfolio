@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avraham Yehoshua Kahana – CV</title>
+  <!-- Google Fonts: Nunito (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 Free -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <!-- Print stylesheet -->
+  <link rel="stylesheet" media="print" href="cv-print.css">
+  <style>
+    /* ---- Reset ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ---- Page wrapper ---- */
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #134e4a;
+      background: #f0fdfa;
+    }
+
+    .cv-page {
+      max-width: 760px;
+      margin: 2rem auto 4rem;
+      background: #ffffff;
+      padding: 3rem 3.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 32px rgba(13, 148, 136, 0.10);
+    }
+
+    /* ---- Export button (screen only) ---- */
+    .export-bar {
+      max-width: 760px;
+      margin: 2rem auto 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+
+    .export-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1.25rem;
+      background: #0d9488;
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .export-btn:hover { background: #0f766e; }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1.25rem;
+      background: transparent;
+      color: #0d9488;
+      border: 2px solid #0d9488;
+      border-radius: 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .back-btn:hover { background: #f0fdfa; }
+
+    /* ---- CV Header ---- */
+    .cv-header {
+      border-bottom: 2px solid #99f6e4;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .cv-header h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: #0d9488;
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+    }
+
+    .cv-header .cv-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0369a1;
+      margin-bottom: 0.85rem;
+    }
+
+    .cv-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      font-size: 0.83rem;
+      color: #516a74;
+    }
+
+    .cv-contacts a {
+      color: #0369a1;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .cv-contacts a:hover { text-decoration: underline; }
+
+    /* ---- Section ---- */
+    .cv-section {
+      margin-bottom: 1.75rem;
+    }
+
+    .cv-section-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #0d9488;
+      margin-bottom: 0.65rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid #99f6e4;
+    }
+
+    /* ---- Summary ---- */
+    .cv-summary p {
+      margin-bottom: 0.5rem;
+      color: #134e4a;
+    }
+
+    /* ---- Skills ---- */
+    .cv-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .cv-skill-tag {
+      background: #f0fdfa;
+      border: 1px solid #99f6e4;
+      border-radius: 20px;
+      padding: 0.2rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #0d9488;
+    }
+
+    /* ---- Experience & Education ---- */
+    .cv-entry {
+      margin-bottom: 1.25rem;
+      page-break-inside: avoid;
+    }
+
+    .cv-entry-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.15rem;
+    }
+
+    .cv-role {
+      font-weight: 600;
+      font-size: 0.96rem;
+      color: #134e4a;
+    }
+
+    .cv-date {
+      font-size: 0.8rem;
+      color: #516a74;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .cv-company {
+      font-size: 0.85rem;
+      color: #0369a1;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .cv-bullets {
+      padding-left: 1.15rem;
+      color: #134e4a;
+    }
+
+    .cv-bullets li {
+      margin-bottom: 0.25rem;
+      font-size: 0.87rem;
+    }
+
+    /* ---- Projects ---- */
+    .cv-project {
+      margin-bottom: 1rem;
+      page-break-inside: avoid;
+    }
+
+    .cv-project-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cv-project-name {
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: #134e4a;
+    }
+
+    .cv-project-link {
+      font-size: 0.8rem;
+      color: #0369a1;
+      text-decoration: none;
+    }
+    .cv-project-link:hover { text-decoration: underline; }
+
+    .cv-project-desc {
+      font-size: 0.86rem;
+      color: #516a74;
+      margin-top: 0.2rem;
+    }
+
+    /* ---- Footer ---- */
+    .cv-footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e0f2f1;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+    .cv-footer a {
+      color: #0369a1;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Export / back bar (hidden in print) -->
+  <div class="export-bar no-print">
+    <a href="index.html" class="back-btn" aria-label="Back to portfolio">
+      <i class="fa-solid fa-arrow-left fa-fw"></i> Portfolio
+    </a>
+    <button class="export-btn" onclick="window.print()" aria-label="Export CV as PDF">
+      <i class="fa-solid fa-file-arrow-down fa-fw"></i> Export PDF
+    </button>
+  </div>
+
+  <div class="cv-page">
+
+    <!-- HEADER -->
+    <header class="cv-header">
+      <h1>Avraham Yehoshua Kahana</h1>
+      <div class="cv-title">Senior Software Engineer</div>
+      <div class="cv-contacts">
+        <span>
+          <i class="fa-solid fa-phone fa-fw"></i> +972 58 70105
+        </span>
+        <span>
+          <i class="fa-solid fa-location-dot fa-fw"></i> Sderot, Israel
+        </span>
+        <a href="mailto:avreimale@gmail.com">
+          <i class="fa-solid fa-envelope fa-fw"></i> avreimale@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/avrahamkahana" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-linkedin-in fa-fw"></i> linkedin.com/in/avrahamkahana
+        </a>
+        <a href="https://github.com/veverke" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github fa-fw"></i> github.com/veverke
+        </a>
+        <a href="https://veverke.github.io/portfolio" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-globe fa-fw"></i> veverke.github.io/portfolio
+        </a>
+      </div>
+    </header>
+
+    <!-- SUMMARY -->
+    <section class="cv-section cv-summary">
+      <div class="cv-section-title">Summary</div>
+      <p>Bringing more than 7 years experience in backend development, from web to desktop apps, using Microsoft tech stack (.NET / C# and related), across Insurance, Telematics, Cybersecurity, Cloud, and Retail domains.</p>
+      <p>Embracing AI-assisted engineering to combine speed and quality — shipping features, improving developer workflows, and turning ideas into products.</p>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="cv-section">
+      <div class="cv-section-title">Skills</div>
+      <div class="cv-skills">
+        <span class="cv-skill-tag">C#</span>
+        <span class="cv-skill-tag">.NET / .NET Core</span>
+        <span class="cv-skill-tag">SQL</span>
+        <span class="cv-skill-tag">Bash</span>
+        <span class="cv-skill-tag">Linux</span>
+        <span class="cv-skill-tag">Git</span>
+        <span class="cv-skill-tag">GitHub Workflows</span>
+        <span class="cv-skill-tag">Docker</span>
+        <span class="cv-skill-tag">Microservices</span>
+        <span class="cv-skill-tag">Cloud (Azure / GCP)</span>
+        <span class="cv-skill-tag">HTML</span>
+        <span class="cv-skill-tag">CSS</span>
+        <span class="cv-skill-tag">JavaScript</span>
+        <span class="cv-skill-tag">GitHub Copilot</span>
+        <span class="cv-skill-tag">BDD</span>
+        <span class="cv-skill-tag">REST APIs</span>
+        <span class="cv-skill-tag">Kubernetes</span>
+        <span class="cv-skill-tag">PostgreSQL</span>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="cv-section">
+      <div class="cv-section-title">Experience</div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span class="cv-role">Senior Software Engineer</span>
+          <span class="cv-date"><time datetime="2025-02/2026-03">Feb 2025 – Mar 2026</time> · 1 yr 1 mo</span>
+        </div>
+        <div class="cv-company">Extreme · Hybrid · Full-time</div>
+        <ul class="cv-bullets">
+          <li>Built and supported NCR's retailers point-of-sale cloud-based (GCP) backends using C# RESTful microservices, Postgres, Redis, Docker, and Kubernetes.</li>
+          <li>Ownership of User Stories: writing BDD tests to define expected behavior, implementing features, and maintaining CI/CD test coverage of 90%+ minimum policy.</li>
+          <li>Proactively created improvement tasks and POCs in performance, code readability, refactoring, and removal of redundant/unused code.</li>
+          <li>Created GitHub Copilot Agents and Skills from repetitive tasks via Prompt Engineering; built a GitHub Workflow to reduce test deployment pipeline time.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span class="cv-role">Senior Software Engineer / Team Lead</span>
+          <span class="cv-date"><time datetime="2023-12/2024-07">Dec 2023 – Jul 2024</time> · 7 mos</span>
+        </div>
+        <div class="cv-company">Startup Booster Israel · Hybrid · Full-time</div>
+        <ul class="cv-bullets">
+          <li>Vendor supporting Azure Monitor at Microsoft; built a C# Azure Service Fabric application for monitoring and alerting on production deployments.</li>
+          <li>Designed a service to read Log Analytics data from production queues, scramble and push it into test queues — generating mass test data mirroring production.</li>
+          <li>Worked extensively with Azure Storage Queue, Blob, Table, and ARM Templates.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span class="cv-role">Senior Software Engineer / Team Lead</span>
+          <span class="cv-date"><time datetime="2020-08/2023-08">Aug 2020 – Aug 2023</time> · 3 yrs</span>
+        </div>
+        <div class="cv-company">Sepio Israel · Full-time</div>
+        <ul class="cv-bullets">
+          <li>Built and maintained Windows/Linux services (C#, .NET Core) for collecting and posting USB and Wi-Fi device data as part of the company's Device &amp; Network Monitoring solution.</li>
+          <li>Grew from 2nd developer to Team Lead — drove refactoring, reduced code redundancy, improved test coverage, and delivered new features including Linux deployment and Wi-Fi monitoring.</li>
+          <li>Acted as SCRUM Master; managed Azure DevOps Boards and Pipelines and translated sprint groomings into high-level requirements. ~40% management, 60% development.</li>
+          <li>Stack: C# · Postgres · WMI · Docker · Linux · xUnit · Advanced Installer · Azure DevOps · Git</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span class="cv-role">.NET Full Stack Developer</span>
+          <span class="cv-date"><time datetime="2016-08/2020-06">Aug 2016 – Jun 2020</time> · 3 yrs 10 mos</span>
+        </div>
+        <div class="cv-company">Galooli Ltd. · Tel Aviv District, Israel</div>
+        <ul class="cv-bullets">
+          <li>Built and maintained microservices for a Telematics platform enabling real-time monitoring of vehicle fleets — tracking movement, fuel consumption, and operational dashboards.</li>
+          <li>Developed WinForms interfaces using DevExpress, WCF Services, and Web API with MySQL.</li>
+          <li>Implemented ElasticSearch.NET / Kibana integration and managed Jenkins CI/CD jobs.</li>
+          <li>Stack: C# · RESTful microservices · MySQL · AWS Storage &amp; Lambda · WinForms · HTML/CSS/JS · Xamarin</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="cv-section">
+      <div class="cv-section-title">Education</div>
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span class="cv-role">B.Sc. Computer Science</span>
+          <span class="cv-date"><time datetime="2001/2006">2001 – 2006</time></span>
+        </div>
+        <div class="cv-company">Rio de Janeiro State University · Rio de Janeiro, Brazil</div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="cv-section">
+      <div class="cv-section-title">Selected Projects</div>
+
+      <div class="cv-project">
+        <div class="cv-project-header">
+          <span class="cv-project-name">bAInder</span>
+          <a href="https://github.com/Veverke/bAInder" class="cv-project-link" target="_blank" rel="noopener noreferrer">github.com/Veverke/bAInder</a>
+        </div>
+        <p class="cv-project-desc">AI Chat Organizer — brings order to your AI conversations by intelligently organizing and surfacing chat history across sessions. (2026)</p>
+      </div>
+
+      <div class="cv-project">
+        <div class="cv-project-header">
+          <span class="cv-project-name">Chat Wizard</span>
+          <a href="https://github.com/Veverke/ChatWizard" class="cv-project-link" target="_blank" rel="noopener noreferrer">github.com/Veverke/ChatWizard</a>
+        </div>
+        <p class="cv-project-desc">Unified search, analytics, and history browser for GitHub Copilot Chat and Claude Code sessions. (2026)</p>
+      </div>
+
+      <div class="cv-project">
+        <div class="cv-project-header">
+          <span class="cv-project-name">Searchable Yizkor Books</span>
+          <a href="https://github.com/Veverke/veverke.github.io" class="cv-project-link" target="_blank" rel="noopener noreferrer">github.com/Veverke/veverke.github.io</a>
+        </div>
+        <p class="cv-project-desc">Web tool making Holocaust memorial (Yizkor) book scans full-text searchable online using OCR and an in-browser SQLite engine. (2019)</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="cv-footer">
+      Generated from <a href="https://veverke.github.io/portfolio">veverke.github.io/portfolio</a> &middot; April 2026
+    </footer>
+
+  </div>
+
+</body>
+</html>

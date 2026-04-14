@@ -1,0 +1,134 @@
+/* ============================================================
+   cv-print.css — Print stylesheet for cv.html
+   Produces a clean A4 PDF when triggered via window.print()
+   ============================================================ */
+
+@page {
+  size: A4;
+  margin: 18mm 20mm;
+}
+
+/* ---- Reset backgrounds & shadows for print ---- */
+body {
+  background: #fff !important;
+  color: #000 !important;
+  font-size: 10.5pt;
+  font-family: 'Inter', Arial, sans-serif;
+  line-height: 1.55;
+}
+
+.cv-page {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+}
+
+/* ---- Hide screen-only elements ---- */
+.no-print,
+.export-bar,
+.export-btn,
+.back-btn {
+  display: none !important;
+}
+
+/* ---- Header ---- */
+.cv-header h1 {
+  font-size: 18pt;
+  color: #000 !important;
+}
+
+.cv-header .cv-title {
+  font-size: 12pt;
+  color: #333 !important;
+}
+
+.cv-header {
+  border-bottom: 1.5pt solid #999 !important;
+}
+
+.cv-contacts {
+  color: #333 !important;
+  font-size: 9pt;
+  gap: 0.4rem 1.2rem;
+}
+
+.cv-contacts a {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+/* ---- Section titles ---- */
+.cv-section-title {
+  font-size: 8pt;
+  color: #000 !important;
+  border-bottom: 0.75pt solid #999 !important;
+  letter-spacing: 1.5px;
+}
+
+/* ---- Body text ---- */
+.cv-summary p,
+.cv-bullets li,
+.cv-project-desc {
+  color: #000 !important;
+  font-size: 10pt;
+}
+
+.cv-role {
+  font-size: 10.5pt;
+  color: #000 !important;
+}
+
+.cv-company {
+  color: #333 !important;
+  font-size: 9.5pt;
+}
+
+.cv-date {
+  color: #444 !important;
+  font-size: 9pt;
+}
+
+.cv-project-name {
+  font-size: 10.5pt;
+  color: #000 !important;
+}
+
+.cv-project-link {
+  color: #000 !important;
+  text-decoration: none;
+  font-size: 9pt;
+}
+
+/* ---- Skills ---- */
+.cv-skill-tag {
+  background: #f5f5f5 !important;
+  border: 0.5pt solid #ccc !important;
+  color: #000 !important;
+  font-size: 9pt;
+}
+
+/* ---- Prevent entries splitting across pages ---- */
+.cv-entry,
+.cv-project {
+  page-break-inside: avoid;
+}
+
+/* ---- Footer ---- */
+.cv-footer {
+  font-size: 8pt;
+  color: #888 !important;
+  border-top: 0.5pt solid #ccc !important;
+}
+
+.cv-footer a {
+  color: #555 !important;
+  text-decoration: none;
+}
+
+/* ---- Links — show URL inline for print ---- */
+a[href^="http"]::after {
+  content: none;
+}

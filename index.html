@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Devicon — technology skill icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
   <!-- App styles & JS (via Vite) -->
   <script type="module" src="/src/main.js"></script>
 </head>
@@ -51,6 +53,9 @@
     <a href="#contact-section" class="nav-item">
       <span class="nav-icon"><i class="fa-solid fa-envelope fa-fw"></i></span> Contact
     </a>
+    <a href="cv.html" class="nav-item">
+      <span class="nav-icon"><i class="fa-solid fa-file-lines fa-fw"></i></span> View CV
+    </a>
   </nav>
 
   <div class="sidebar-footer">
@@ -65,7 +70,7 @@
         <i class="fa-brands fa-x-twitter"></i>
       </a>
     </div>
-    <a href="#" class="cv-btn">
+    <a href="cv.html" class="cv-btn">
       <i class="fa-solid fa-download"></i> Download Resume
     </a>
   </div>
@@ -82,7 +87,7 @@
       <p>I'm a full-stack developer with 7+ years of experience shipping web applications that people love. San Francisco-based, remote-friendly.</p>
       <div class="hero-btns">
         <a href="#projects-section" class="hbtn hbtn-white">See My Work</a>
-        <a href="#contact-section" class="hbtn hbtn-outline">Get in Touch</a>
+        <a href="cv.html" class="hbtn hbtn-outline">Download CV</a>
       </div>
     </div>
 
@@ -103,12 +108,12 @@
         <div><div class="chip-num">7+</div><div class="chip-label">Years exp.</div></div>
       </div>
       <div class="stat-chip">
-        <span class="chip-icon">🚀</span>
-        <div><div class="chip-num">20+</div><div class="chip-label">Projects shipped</div></div>
+        <span class="chip-icon">🏅</span>
+        <div><div class="chip-num" id="stat-badges">…</div><div class="chip-label">Badges</div></div>
       </div>
       <div class="stat-chip">
         <span class="chip-icon">⭐</span>
-        <div><div class="chip-num">8k+</div><div class="chip-label">GitHub stars</div></div>
+        <div><div class="chip-num" id="stat-stars">…</div><div class="chip-label">Stars</div></div>
       </div>
     </div>
 
@@ -200,7 +205,7 @@
       <div class="exp-card">
         <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
         <div>
-          <span class="exp-date-badge">Feb 2025 – Mar 2026 · 1 yr 1 mo</span>
+          <span class="exp-date-badge"><time datetime="2025-02/2026-03">Feb 2025 – Mar 2026</time> · 1 yr 1 mo</span>
           <div class="exp-role-title">Senior Software Engineer</div>
           <div class="exp-company-name">Extreme · Hybrid · Full-time</div>
           <ul class="exp-bullets">
@@ -216,7 +221,7 @@
       <div class="exp-card">
         <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
         <div>
-          <span class="exp-date-badge">Dec 2023 – Jul 2024 · 7 mos</span>
+          <span class="exp-date-badge"><time datetime="2023-12/2024-07">Dec 2023 – Jul 2024</time> · 7 mos</span>
           <div class="exp-role-title">Senior Software Engineer / Team Lead</div>
           <div class="exp-company-name">Startup Booster Israel · Hybrid · Full-time</div>
           <ul class="exp-bullets">
@@ -230,7 +235,7 @@
       <div class="exp-card">
         <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
         <div>
-          <span class="exp-date-badge">Aug 2020 – Aug 2023 · 3 yrs</span>
+          <span class="exp-date-badge"><time datetime="2020-08/2023-08">Aug 2020 – Aug 2023</time> · 3 yrs</span>
           <div class="exp-role-title">Senior Software Engineer / Team Lead</div>
           <div class="exp-company-name">Sepio Israel · Full-time</div>
           <ul class="exp-bullets">
@@ -245,7 +250,7 @@
       <div class="exp-card exp-last">
         <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
         <div>
-          <span class="exp-date-badge">Aug 2016 – Jun 2020 · 3 yrs 10 mos</span>
+          <span class="exp-date-badge"><time datetime="2016-08/2020-06">Aug 2016 – Jun 2020</time> · 3 yrs 10 mos</span>
           <div class="exp-role-title">.NET Full Stack Developer</div>
           <div class="exp-company-name">Galooli Ltd. · Tel Aviv District, Israel</div>
           <ul class="exp-bullets">
@@ -267,7 +272,7 @@
       <div class="exp-card exp-last">
         <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
         <div>
-          <span class="exp-date-badge">2001 – 2006</span>
+          <span class="exp-date-badge"><time datetime="2001/2006">2001 – 2006</time></span>
           <div class="exp-role-title">B.Sc. Computer Science</div>
           <div class="exp-company-name">Rio de Janeiro State University · Rio de Janeiro, Brazil</div>
         </div>
@@ -316,9 +321,9 @@
           <div class="contact-card-icon"><i class="fa-brands fa-github"></i></div>
           <div><div class="contact-card-label">GitHub</div><div class="contact-card-value">github.com/veverke</div></div>
         </a>
-        <a href="#" class="contact-card">
+        <a href="cv.html" class="contact-card">
           <div class="contact-card-icon"><i class="fa-solid fa-file-lines"></i></div>
-          <div><div class="contact-card-label">Resume</div><div class="contact-card-value">Download PDF</div></div>
+          <div><div class="contact-card-label">Resume</div><div class="contact-card-value">View &amp; Download CV</div></div>
         </a>
       </div>
     </section>
