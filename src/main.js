@@ -302,7 +302,7 @@ async function fetchGitHubStats() {
    GITHUB_BADGES_COUNT manually whenever you earn a new badge.
    ============================================================ */
 const GITHUB_USER         = 'veverke';
-const GITHUB_BADGES_COUNT = 8; // update manually — no public API for achievements
+const GITHUB_BADGES_COUNT = 4; // update manually — no public API for achievements
 
 async function fetchGitHubProfileStats() {
   // --- Stars ---

@@ -2,8 +2,8 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-  // Project page deployed at veverke.github.io/portfolio
-  base: '/portfolio/',
+  // Project page deployed at veverke.github.io/Portfolio (repo name is capital P)
+  base: '/Portfolio/',
   build: {
     rollupOptions: {
       input: {
