@@ -318,14 +318,14 @@
 ## Phase 7: Polish & Accessibility
 
 ### Tasks
-- [ ] Proofread hero / About text — fix grammar and spelling
-- [ ] Proofread experience entries — fix grammar and spelling
-- [ ] Proofread project descriptions — fix grammar and spelling
-- [ ] Verify heading hierarchy: one `<h1>`, logical `<h2>` → `<h3>` flow, no levels skipped
-- [ ] Verify all `<img>` tags have descriptive (not generic) `alt` text
+- [x] Proofread hero / About text — fix grammar and spelling
+- [x] Proofread experience entries — fix grammar and spelling
+- [x] Proofread project descriptions — fix grammar and spelling
+- [x] Verify heading hierarchy: one `<h1>`, logical `<h2>` → `<h3>` flow, no levels skipped — all `<div class="section-title">` changed to `<h2>` in both index.html and cv.html
+- [x] Verify all `<img>` tags have descriptive (not generic) `alt` text — all images have descriptive alt text
 - [ ] Check body text vs background color contrast (use WebAIM Contrast Checker — must pass AA)
 - [ ] Check link text vs background color contrast (must pass AA)
-- [ ] Add `aria-label` to any icon-only links (e.g. social icon buttons without visible text)
+- [x] Add `aria-label` to any icon-only links (e.g. social icon buttons without visible text) — all sidebar social buttons already had aria-label; added missing target/rel to Twitter link
 - [ ] Test keyboard navigation: Tab through every link and interactive element
 - [ ] Run Lighthouse audit (Chrome DevTools) — record baseline scores
 - [ ] Fix any issues flagged by Lighthouse until all four scores ≥ 90
@@ -343,18 +343,18 @@
 - [ ] Cross-browser: Chrome, Firefox, Edge — no layout breakage
 
 ### Unit Tests
-- [ ] Install `jest-axe` (`npm install --save-dev jest-axe`)
-- [ ] Write axe-core / jest-axe tests asserting:
+- [x] Install `jest-axe` (`npm install --save-dev jest-axe`)
+- [x] Write axe-core / jest-axe tests asserting:
   - No critical or serious axe violations on the full rendered page
   - All `<img>` have non-empty `alt` attributes
   - All `<a>` have discernible accessible text (text content or `aria-label`)
   - No heading levels are skipped (h1 → h2 → h3, not h1 → h3)
 
 ### Phase Completion
-- [ ] All tasks checked off
-- [ ] All tests passing
-- [ ] All unit tests passing
-- [ ] Work-plan updated — mark heading ✅ with completion date: ___________
+- [ ] All tasks checked off (manual browser tests pending: contrast, keyboard nav, Lighthouse)
+- [ ] All tests passing (manual tests pending)
+- [x] All unit tests passing — 11/11 (tests/phase7-accessibility.test.js)
+- [x] Work-plan updated — 2026-04-20
 
 ---
 
