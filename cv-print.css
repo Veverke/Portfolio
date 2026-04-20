@@ -3,11 +3,6 @@
    Produces a clean A4 PDF when triggered via window.print()
    ============================================================ */
 
-@page {
-  size: A4;
-  margin: 18mm 20mm;
-}
-
 /* ---- Reset backgrounds & shadows for print ---- */
 body {
   background: #fff !important;
@@ -18,20 +13,8 @@ body {
 }
 
 .cv-page {
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
+  padding: 18mm 20mm !important; /* content margins replacing the zero @page margin */
   background: #fff !important;
-}
-
-/* ---- Hide screen-only elements ---- */
-.no-print,
-.export-bar,
-.export-btn,
-.back-btn {
-  display: none !important;
 }
 
 /* ---- Header ---- */

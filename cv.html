@@ -14,6 +14,22 @@
   <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
   <!-- Print stylesheet -->
   <link rel="stylesheet" media="print" href="cv-print.css">
+  <!-- Always-on print rules — applied regardless of which export style is chosen -->
+  <style media="print">
+    @page { size: A4; margin: 0; }
+    .no-print,
+    .export-bar,
+    .export-btn,
+    .back-btn,
+    .pdf-modal-backdrop { display: none !important; }
+    .cv-page {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 18mm 20mm !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+  </style>
   <style>
     /* ---- Reset ---- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -252,6 +268,88 @@
       color: #0369a1;
       text-decoration: none;
     }
+
+    /* ---- Export-style modal ---- */
+    .pdf-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .pdf-modal-backdrop.hidden { display: none; }
+
+    .pdf-modal {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2rem 2.25rem 1.75rem;
+      max-width: 360px;
+      width: 90%;
+      box-shadow: 0 8px 40px rgba(13,148,136,0.18);
+      text-align: center;
+    }
+
+    .pdf-modal h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0d9488;
+      margin-bottom: 0.4rem;
+    }
+
+    .pdf-modal p {
+      font-size: 0.85rem;
+      color: #516a74;
+      margin-bottom: 1.35rem;
+      line-height: 1.5;
+    }
+
+    .pdf-modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .pdf-modal-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s;
+    }
+
+    .pdf-modal-btn.colored {
+      background: #0d9488;
+      color: #fff;
+    }
+    .pdf-modal-btn.colored:hover { background: #0f766e; }
+
+    .pdf-modal-btn.bw {
+      background: transparent;
+      color: #0d9488;
+      border: 2px solid #0d9488;
+    }
+    .pdf-modal-btn.bw:hover { background: #f0fdfa; }
+
+    .pdf-modal-cancel {
+      margin-top: 0.5rem;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      cursor: pointer;
+    }
+    .pdf-modal-cancel:hover { color: #516a74; }
   </style>
 </head>
 <body>
@@ -261,9 +359,26 @@
     <a href="index.html" class="back-btn" aria-label="Back to portfolio">
       <i class="fa-solid fa-arrow-left fa-fw"></i> Portfolio
     </a>
-    <button class="export-btn" onclick="window.print()" aria-label="Export CV as PDF">
+    <button class="export-btn" onclick="openPdfModal()" aria-label="Export CV as PDF">
       <i class="fa-solid fa-file-arrow-down fa-fw"></i> Export PDF
     </button>
+  </div>
+
+  <!-- PDF export style modal -->
+  <div id="pdfModal" class="pdf-modal-backdrop hidden no-print" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
+    <div class="pdf-modal">
+      <h2 id="pdfModalTitle">Export as PDF</h2>
+      <p>Choose how you'd like the PDF to look:</p>
+      <div class="pdf-modal-actions">
+        <button class="pdf-modal-btn colored" onclick="printWithStyle(true)">
+          <i class="fa-solid fa-palette fa-fw"></i> Keep original colors
+        </button>
+        <button class="pdf-modal-btn bw" onclick="printWithStyle(false)">
+          <i class="fa-solid fa-file fa-fw"></i> Strip to black &amp; white
+        </button>
+      </div>
+      <button class="pdf-modal-cancel" onclick="closePdfModal()">Cancel</button>
+    </div>
   </div>
 
   <div class="cv-page">
@@ -353,7 +468,7 @@
         <ul class="cv-bullets">
           <li>Vendor supporting Azure Monitor at Microsoft; built a C# Azure Service Fabric application for monitoring and alerting on production deployments.</li>
           <li>Designed a service to read Log Analytics data from production queues, scramble and push it into test queues — generating mass test data mirroring production.</li>
-          <li>Worked extensively with Azure Storage Queue, Blob, Table, and ARM Templates.</li>
+          <li>Worked with Azure Storage Queue, Blob, Table, and ARM Templates.</li>
         </ul>
       </div>
 
@@ -434,5 +549,39 @@
 
   </div>
 
+  <script>
+    var printCssLink = document.querySelector('link[href="cv-print.css"]');
+
+    function openPdfModal() {
+      document.getElementById('pdfModal').classList.remove('hidden');
+    }
+
+    function closePdfModal() {
+      document.getElementById('pdfModal').classList.add('hidden');
+    }
+
+    function printWithStyle(keepColors) {
+      closePdfModal();
+      // keepColors=true  → disable the B&W print stylesheet so original colors show
+      // keepColors=false → leave it active (default B&W print mode)
+      var originalMedia = printCssLink.media;
+      if (keepColors) {
+        printCssLink.media = 'not all';
+      }
+      window.print();
+      // Restore after the print dialog closes
+      printCssLink.media = originalMedia;
+    }
+
+    // Close modal on backdrop click
+    document.getElementById('pdfModal').addEventListener('click', function(e) {
+      if (e.target === this) closePdfModal();
+    });
+
+    // Close modal on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePdfModal();
+    });
+  </script>
 </body>
 </html>

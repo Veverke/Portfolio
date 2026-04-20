@@ -3,7 +3,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   // Project page deployed at veverke.github.io/Portfolio (repo name is capital P)
-  base: '/Portfolio/',
+  base: process.env.NODE_ENV === 'production' ? '/Portfolio/' : '/',
   build: {
     rollupOptions: {
       input: {
