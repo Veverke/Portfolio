@@ -13,7 +13,9 @@ body {
 }
 
 .cv-page {
-  padding: 18mm 20mm !important; /* content margins replacing the zero @page margin */
+  padding: 10mm 14mm !important;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone; /* repeat padding at the top of every page fragment */
   background: #fff !important;
 }
 
