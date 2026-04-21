@@ -337,13 +337,35 @@ async function fetchGitHubProfileStats() {
    Project card click — whole card navigates to the same URL
    as the proj-action-link badge inside it.
    ============================================================ */
+function activateProjectCard(card) {
+  const link = card.querySelector('.proj-action-link');
+  if (!link) return;
+
+  if (link.target === '_blank') {
+    link.click();
+    return;
+  }
+
+  window.open(link.href, '_blank', 'noopener,noreferrer');
+}
+
 function initProjectCardClicks() {
   document.querySelectorAll('.featured-proj').forEach((card) => {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'link');
+
     card.addEventListener('click', (e) => {
       // Don't double-navigate when the badge link itself was clicked
       if (e.target.closest('a')) return;
-      const link = card.querySelector('.proj-action-link');
-      if (link) window.open(link.href, '_blank', 'noopener,noreferrer');
+      activateProjectCard(card);
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.target.closest('a')) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activateProjectCard(card);
+      }
     });
   });
 }
