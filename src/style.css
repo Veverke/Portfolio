@@ -449,12 +449,19 @@ h1, h2, h3 { font-family: 'Nunito', sans-serif; }
   gap: var(--space-5);
   align-items: start;
   transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
 }
 
 .featured-proj:hover {
   box-shadow: 0 8px 32px rgba(0,0,0,0.09);
   transform: translateY(-2px);
-  cursor: pointer;
+}
+
+.featured-proj:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
 }
 
 .proj-emoji {
