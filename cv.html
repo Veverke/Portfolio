@@ -257,6 +257,32 @@
       margin-top: 0.2rem;
     }
 
+    .cv-project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.4rem;
+    }
+
+    .cv-proj-tag {
+      padding: 0.15rem 0.55rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .cv-proj-lang-tag {
+      background: rgba(13, 148, 136, 0.13);
+      color: #0d9488;
+    }
+
+    .cv-proj-tech-tag {
+      background: transparent;
+      color: #516a74;
+      border: 1px solid #99f6e4;
+      font-weight: 600;
+    }
+
     /* ---- Footer ---- */
     .cv-footer {
       margin-top: 2.5rem;
@@ -415,7 +441,7 @@
     <section class="cv-section cv-summary">
       <h2 class="cv-section-title">Summary</h2>
       <p>Bringing more than 7 years experience in backend development, from web to desktop apps, using Microsoft tech stack (.NET / C# and related), across Insurance, Telematics, Cybersecurity, Cloud, and Retail domains.</p>
-      <p>Embracing AI-assisted engineering to combine speed and quality — shipping features, improving developer workflows, and turning ideas into products.</p>
+      <p>Embracing AI-assisted engineering to speed up dev cycle and ship faster, and - to surface issues/problems and remediate them - before it reaches customer. On the personal domain — riding the AI wave to turn ideas into apps and products.</p>
     </section>
 
     <!-- SKILLS -->
@@ -522,25 +548,66 @@
       <div class="cv-project">
         <div class="cv-project-header">
           <span class="cv-project-name">bAInder</span>
+          <span class="cv-date"><time datetime="2026">2026</time></span>
           <a href="https://github.com/Veverke/bAInder" class="cv-project-link" target="_blank" rel="noopener noreferrer">github.com/Veverke/bAInder</a>
         </div>
-        <p class="cv-project-desc">AI Chat Organizer — brings order to your AI conversations by intelligently organizing and surfacing chat history across sessions. (2026)</p>
+        <p class="cv-project-desc">AI Chat Organizer — brings order to your AI conversations by intelligently organizing and surfacing chat history across sessions.</p>
+        <div class="cv-project-tags">
+          <span class="cv-proj-tag cv-proj-lang-tag">JavaScript</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">GitHub Copilot</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">Chrome Extension</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">Vitest</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">Codecov</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">ESLint</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">GitHub Actions</span>
+        </div>
       </div>
 
       <div class="cv-project">
         <div class="cv-project-header">
           <span class="cv-project-name">Chat Wizard</span>
+          <span class="cv-date"><time datetime="2026">2026</time></span>
           <a href="https://github.com/Veverke/ChatWizard" class="cv-project-link" target="_blank" rel="noopener noreferrer">github.com/Veverke/ChatWizard</a>
         </div>
-        <p class="cv-project-desc">Unified search, analytics, and history browser for GitHub Copilot Chat and Claude Code sessions. (2026)</p>
+        <p class="cv-project-desc">Unified search, analytics, and history browser for GitHub Copilot Chat and Claude Code sessions.</p>
+        <div class="cv-project-tags">
+          <span class="cv-proj-tag cv-proj-lang-tag">TypeScript</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">GitHub Copilot</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">VS Code Extension</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">ESLint</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">SQLite</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">GitHub Actions</span>
+        </div>
       </div>
 
       <div class="cv-project">
         <div class="cv-project-header">
           <span class="cv-project-name">Searchable Yizkor Books</span>
+          <span class="cv-date"><time datetime="2019">2019</time></span>
           <a href="https://veverke.github.io/yizkor-books-search.html" class="cv-project-link" target="_blank" rel="noopener noreferrer">github.com/Veverke/veverke.github.io</a>
         </div>
-        <p class="cv-project-desc">Web tool making Holocaust memorial (Yizkor) books scans full-text searchable online using OCR and an in-browser SQLite engine. (2019)</p>
+        <p class="cv-project-desc">Web tool making Holocaust memorial (Yizkor) books scans full-text searchable online using OCR and an in-browser SQLite engine.</p>
+        <div class="cv-project-tags">
+          <span class="cv-proj-tag cv-proj-lang-tag">JavaScript</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">GitHub Copilot</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">GitHub Pages</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">SQLite (WASM)</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">OCR</span>
+        </div>
+      </div>
+
+      <div class="cv-project">
+        <div class="cv-project-header">
+          <span class="cv-project-name">Freelance Projects</span>
+          <span class="cv-date"><time datetime="2015/2016">2015–2016</time></span>
+          <a href="https://www.upwork.com/freelancers/~01e4404ce25bf547fd" class="cv-project-link" target="_blank" rel="noopener noreferrer">upwork.com/freelancers/~01e4404ce25bf547fd</a>
+        </div>
+        <p class="cv-project-desc">Web scraping and crawling: e-commerce product catalog extraction, lead generation, and PDF text extraction.</p>
+        <div class="cv-project-tags">
+          <span class="cv-proj-tag cv-proj-lang-tag">C#</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">Selenium WebDriver</span>
+          <span class="cv-proj-tag cv-proj-tech-tag">HtmlAgilityPack</span>
+        </div>
       </div>
     </section>
 
