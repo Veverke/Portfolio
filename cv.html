@@ -13,7 +13,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
   <!-- Print stylesheet -->
-  <link rel="stylesheet" media="print" href="cv-print.css">
+  <link id="printCss" rel="stylesheet" media="print" href="cv-print.css">
   <!-- Always-on print rules — applied regardless of which export style is chosen -->
   <style media="print">
     @page { size: A4; margin: 0; }
@@ -634,7 +634,7 @@
   </div>
 
   <script>
-    var printCssLink = document.querySelector('link[href="cv-print.css"]');
+    var printCssLink = document.getElementById('printCss');
 
     function openPdfModal() {
       document.getElementById('pdfModal').classList.remove('hidden');
