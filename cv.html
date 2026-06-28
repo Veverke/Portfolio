@@ -387,6 +387,9 @@
     <a href="index.html" class="back-btn" aria-label="Back to portfolio">
       <i class="fa-solid fa-arrow-left fa-fw"></i> Portfolio
     </a>
+    <button class="export-btn" onclick="exportHtml()" aria-label="Export CV as HTML file">
+      <i class="fa-solid fa-file-code fa-fw"></i> Export HTML
+    </button>
     <button class="export-btn" onclick="openPdfModal()" aria-label="Export CV as PDF">
       <i class="fa-solid fa-file-arrow-down fa-fw"></i> Export PDF
     </button>
@@ -649,6 +652,48 @@
 
   <script>
     var printCssLink = document.getElementById('printCss');
+
+    async function exportHtml() {
+      // Clone the document to avoid mutating the live page
+      var clone = document.documentElement.cloneNode(true);
+
+      // Remove all <script> elements from the clone
+      var scripts = clone.querySelectorAll('script');
+      scripts.forEach(function(s) { s.remove(); });
+
+      // Remove elements with class 'no-print' (export bar, modal, etc.)
+      var noPrint = clone.querySelectorAll('.no-print');
+      noPrint.forEach(function(el) { el.remove(); });
+
+      // Inline the external print stylesheet
+      var printLink = clone.querySelector('#printCss');
+      if (printLink) {
+        try {
+          var resp = await fetch('cv-print.css');
+          var cssText = await resp.text();
+          var styleTag = document.createElement('style');
+          styleTag.textContent = cssText;
+          styleTag.id = 'printCss';
+          printLink.replaceWith(styleTag);
+        } catch (_) {
+          // If fetch fails, keep the original <link> as-is
+        }
+      }
+
+      // Build the full HTML string with a doctype
+      var html = '<!DOCTYPE html>\n' + clone.outerHTML;
+
+      // Trigger download
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'Avraham_Kahana_CV.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
 
     function openPdfModal() {
       document.getElementById('pdfModal').classList.remove('hidden');
