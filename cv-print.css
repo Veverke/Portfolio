@@ -117,3 +117,134 @@ body {
 a[href^="http"]::after {
   content: none;
 }
+
+/* ---- ATS-mode print overrides ---- */
+body.ats-mode,
+body.ats-mode .cv-page {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+body.ats-mode .ats-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 1.5rem !important;
+  align-items: start;
+}
+
+body.ats-mode .cv-footer {
+  grid-column: 1 / -1;
+}
+
+body.ats-mode .cv-header h1 {
+  font-family: Arial, sans-serif !important;
+  font-size: 14pt !important;
+  color: #000 !important;
+}
+
+body.ats-mode .cv-header .cv-title {
+  font-size: 10pt !important;
+  color: #222 !important;
+}
+
+body.ats-mode .cv-contacts {
+  font-size: 8pt !important;
+  color: #222 !important;
+}
+
+body.ats-mode .cv-contacts a,
+body.ats-mode .cv-contacts span {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+body.ats-mode .cv-contacts i,
+body.ats-mode .cv-contacts .fa-fw {
+  display: none !important;
+}
+
+body.ats-mode .cv-header {
+  border-bottom: 1.5pt solid #000 !important;
+}
+
+body.ats-mode .cv-section-title {
+  font-family: Arial, sans-serif !important;
+  font-size: 7pt !important;
+  color: #000 !important;
+  border-bottom: 0.75pt solid #555 !important;
+  letter-spacing: 1px;
+}
+
+body.ats-mode .cv-summary p,
+body.ats-mode .cv-bullets li,
+body.ats-mode .cv-project-desc {
+  font-size: 8.5pt !important;
+  color: #000 !important;
+}
+
+body.ats-mode .cv-skills {
+  display: inline;
+}
+
+body.ats-mode .cv-skill-tag {
+  display: inline !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 8.5pt !important;
+  color: #000 !important;
+}
+
+body.ats-mode .cv-skill-tag::after {
+  content: ", " !important;
+}
+
+body.ats-mode .cv-skill-tag:last-child::after {
+  content: "" !important;
+}
+
+body.ats-mode .cv-role {
+  font-size: 9pt !important;
+  color: #000 !important;
+}
+
+body.ats-mode .cv-company {
+  font-size: 8.5pt !important;
+  color: #222 !important;
+}
+
+body.ats-mode .cv-date {
+  font-size: 7.5pt !important;
+  color: #333 !important;
+}
+
+body.ats-mode .cv-project-name {
+  font-size: 8.5pt !important;
+  color: #000 !important;
+}
+
+body.ats-mode .cv-project-link {
+  font-size: 7.5pt !important;
+  color: #222 !important;
+  text-decoration: none;
+}
+
+body.ats-mode .cv-project-tags {
+  display: none !important;
+}
+
+body.ats-mode .ats-only {
+  display: block !important;
+}
+
+body.ats-mode .ats-online-links a {
+  font-size: 8pt !important;
+  color: #222 !important;
+  text-decoration: none;
+}
+
+body.ats-mode .cv-footer {
+  font-size: 7pt !important;
+  color: #555 !important;
+  border-top: 0.5pt solid #999 !important;
+}
