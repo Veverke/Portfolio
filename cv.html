@@ -152,6 +152,7 @@
       letter-spacing: 2px;
       color: #0d9488;
       margin-bottom: 0.65rem;
+      margin-top: 0.55rem;
       padding-bottom: 0.35rem;
       border-bottom: 1px solid #99f6e4;
     }
@@ -378,6 +379,323 @@
       cursor: pointer;
     }
     .pdf-modal-cancel:hover { color: #516a74; }
+
+    /* ---- ATS toggle ---- */
+    .ats-toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      user-select: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .ats-toggle-text {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #0d9488;
+      letter-spacing: 0.06em;
+    }
+
+    .ats-toggle-track {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      background: #ccfbf1;
+      border: 2px solid #0d9488;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .ats-toggle-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      background: #0d9488;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .ats-toggle-label.ats-active .ats-toggle-track {
+      background: #0d9488;
+    }
+
+    .ats-toggle-label.ats-active .ats-toggle-thumb {
+      transform: translateX(18px);
+      background: #fff;
+    }
+
+    .ats-toggle-label.ats-active .ats-toggle-text {
+      color: #0d9488;
+    }
+
+    /* =============================================================
+       ATS-COMPLIANT OVERRIDES
+       Activated by adding .ats-mode to <body>
+       2-column layout: left = summary, skills, experience
+                        right = projects, find me online
+       ============================================================= */
+    body.ats-mode {
+      background: #fff !important;
+    }
+
+    body.ats-mode .cv-page {
+      max-width: 1000px;
+      margin: 1.5rem auto;
+      padding: 2rem 2.5rem;
+      background: #fff;
+      border-radius: 0;
+      box-shadow: none;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* ---- 2-column grid ---- */
+    body.ats-mode .ats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    body.ats-mode .ats-col-left,
+    body.ats-mode .ats-col-right {
+      min-width: 0;
+    }
+
+    /* ---- Header ---- */
+    body.ats-mode .cv-header h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #000 !important;
+      margin-bottom: 0.1rem;
+    }
+
+    body.ats-mode .cv-header .cv-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #222 !important;
+      margin-bottom: 0.4rem;
+    }
+
+    body.ats-mode .cv-contacts {
+      font-size: 0.72rem;
+      color: #333 !important;
+      gap: 0.15rem 1rem;
+      line-height: 1.45;
+    }
+
+    body.ats-mode .cv-contacts a,
+    body.ats-mode .cv-contacts span {
+      color: #222 !important;
+      text-decoration: none;
+    }
+
+    body.ats-mode .cv-contacts i,
+    body.ats-mode .cv-contacts .fa-fw {
+      display: none;
+    }
+
+    body.ats-mode .cv-header {
+      border-bottom: 1.5px solid #000;
+      padding-bottom: 0.6rem;
+      margin-bottom: 0.85rem;
+    }
+
+    /* ---- Section titles ---- */
+    body.ats-mode .cv-section-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #000 !important;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 0.75px solid #555;
+      margin-bottom: 0.35rem;
+      padding-bottom: 0.15rem;
+    }
+
+    body.ats-mode .cv-section {
+      margin-bottom: 0.85rem;
+    }
+
+    /* ---- Summary ---- */
+    body.ats-mode .cv-summary p {
+      font-size: 0.76rem;
+      color: #000 !important;
+      line-height: 1.45;
+      margin-bottom: 0.25rem;
+    }
+
+    /* ---- Skills (comma-separated inline) ---- */
+    body.ats-mode .cv-skills {
+      display: inline;
+      gap: 0;
+    }
+
+    body.ats-mode .cv-skill-tag {
+      display: inline;
+      background: none !important;
+      border: none !important;
+      border-radius: 0;
+      padding: 0;
+      font-size: 0.76rem;
+      font-weight: 400;
+      color: #000 !important;
+    }
+
+    body.ats-mode .cv-skill-tag::after {
+      content: ", ";
+    }
+
+    body.ats-mode .cv-skill-tag:last-child::after {
+      content: "";
+    }
+
+    /* ---- Experience ---- */
+    body.ats-mode .cv-entry {
+      margin-bottom: 0.6rem;
+    }
+
+    body.ats-mode .cv-entry-header {
+      display: block;
+      gap: 0;
+    }
+
+    body.ats-mode .cv-role {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000 !important;
+      display: block;
+    }
+
+    body.ats-mode .cv-company {
+      font-size: 0.76rem;
+      font-weight: 400;
+      color: #222 !important;
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
+    body.ats-mode .cv-date {
+      font-size: 0.7rem;
+      color: #333 !important;
+      white-space: nowrap;
+      font-weight: 400;
+    }
+
+    body.ats-mode .cv-bullets {
+      padding-left: 1rem;
+      margin-top: 0.1rem;
+    }
+
+    body.ats-mode .cv-bullets li {
+      font-size: 0.75rem;
+      color: #000 !important;
+      margin-bottom: 0.1rem;
+      line-height: 1.4;
+    }
+
+    /* ---- Projects ---- */
+    body.ats-mode .cv-project {
+      margin-bottom: 0.6rem;
+    }
+
+    body.ats-mode .cv-project-header {
+      display: block;
+      gap: 0;
+    }
+
+    body.ats-mode .cv-project-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #000 !important;
+      display: inline;
+    }
+
+    body.ats-mode .cv-project-link {
+      font-size: 0.7rem;
+      color: #222 !important;
+      text-decoration: none;
+      display: inline;
+      margin-left: 0.25rem;
+    }
+
+    body.ats-mode .cv-project-desc {
+      font-size: 0.75rem;
+      color: #000 !important;
+      line-height: 1.4;
+      margin-top: 0.05rem;
+    }
+
+    body.ats-mode .cv-project-tags {
+      display: none;
+    }
+
+    /* ---- Find Me Online (ATS only) ---- */
+    body.ats-mode .ats-only {
+      display: block;
+    }
+    .ats-only {
+      display: none;
+    }
+
+    body.ats-mode .ats-online-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    body.ats-mode .ats-online-links a {
+      font-size: 0.75rem;
+      color: #222 !important;
+      text-decoration: none;
+      display: block;
+    }
+
+    body.ats-mode .ats-online-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---- Footer ---- */
+    body.ats-mode .cv-footer {
+      font-size: 0.65rem;
+      color: #555 !important;
+      border-top: 0.5px solid #aaa;
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    body.ats-mode .cv-footer a {
+      color: #222 !important;
+      text-decoration: none;
+    }
+
+    /* ---- Hide icons in ATS mode ---- */
+    body.ats-mode .cv-contacts i,
+    body.ats-mode .cv-contacts .fa-fw {
+      display: none !important;
+    }
+
+    /* ---- Condense spacing ---- */
+    body.ats-mode .cv-summary p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ---- Print ---- */
+    @media print {
+      body.ats-mode .cv-page {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+      body.ats-mode .ats-grid {
+        gap: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -393,6 +711,13 @@
     <button class="export-btn" onclick="openPdfModal()" aria-label="Export CV as PDF">
       <i class="fa-solid fa-file-arrow-down fa-fw"></i> Export PDF
     </button>
+    <!-- ATS toggle -->
+    <label class="ats-toggle-label no-print" title="Switch to ATS-compliant view">
+      <span class="ats-toggle-text">ATS</span>
+      <span class="ats-toggle-track">
+        <span class="ats-toggle-thumb"></span>
+      </span>
+    </label>
   </div>
 
   <!-- PDF export style modal -->
@@ -440,11 +765,17 @@
       </div>
     </header>
 
+    <!-- ===== ATS 2-column grid wrapper ===== -->
+    <div class="ats-grid">
+
+    <!-- LEFT COLUMN -->
+    <div class="ats-col-left">
+
     <!-- SUMMARY -->
     <section class="cv-section cv-summary">
       <h2 class="cv-section-title">Summary</h2>
-      <p>Bringing more than 7 years experience in backend development, from web to desktop apps, using Microsoft tech stack (.NET / C# and related), across Insurance, Telematics, Cybersecurity, Cloud, and Retail domains.</p>
-      <p>Embracing AI-assisted engineering to speed up dev cycle and ship faster, and - to surface issues/problems and remediate them - before it reaches customer. On the personal domain — riding the AI wave to turn ideas into apps and products.</p>
+      <p>+7 years experience in backend development, from web to desktop apps, using Microsoft tech stack (.NET / C# and related), across Insurance, Telematics, Cybersecurity, Cloud, and Retail domains.</p>
+      <p>Embracing AI-assisted engineering to speed up dev cycle, ship faster, surface problems and remediate them - before it reaches customer. On the personal domain — turning ideas into apps and products (See Projects section).</p>
     </section>
 
     <!-- SKILLS -->
@@ -532,6 +863,11 @@
       </div>
     </section>
 
+    </div><!-- /.ats-col-left -->
+
+    <!-- RIGHT COLUMN -->
+    <div class="ats-col-right">
+
     <!-- EDUCATION -->
     <section class="cv-section">
       <h2 class="cv-section-title">Education</h2>
@@ -546,7 +882,7 @@
 
     <!-- PROJECTS -->
     <section class="cv-section">
-      <h2 class="cv-section-title">Selected Projects</h2>
+      <h2 class="cv-section-title" style="margin-top: 3.4rem;">Selected Projects</h2>
 
       <div class="cv-project">
         <div class="cv-project-header">
@@ -643,6 +979,21 @@
       </div>
     </section>
 
+    <!-- Find me online (ATS only) -->
+    <section class="cv-section ats-only" style="margin-top: 2.8rem">
+      <h2 class="cv-section-title">Find Me Online</h2>
+      <div class="ats-online-links">
+        <a href="https://www.linkedin.com/in/avrahamkahana" target="_blank" rel="noopener noreferrer">linkedin.com/in/avrahamkahana</a>
+        <a href="https://github.com/veverke" target="_blank" rel="noopener noreferrer">github.com/veverke</a>
+        <a href="https://veverke.github.io/portfolio" target="_blank" rel="noopener noreferrer">veverke.github.io/portfolio</a>
+        <a href="https://stackoverflow.com/users/1219280/veverke" target="_blank" rel="noopener noreferrer">stackoverflow.com/users/1219280/veverke</a>
+      </div>
+    </section>
+
+    </div><!-- /.ats-col-right -->
+
+    </div><!-- /.ats-grid -->
+
     <!-- FOOTER -->
     <footer class="cv-footer">
       Generated from <a href="https://veverke.github.io/portfolio">veverke.github.io/portfolio</a> &middot; April 2026
@@ -724,6 +1075,22 @@
     // Close modal on Escape
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closePdfModal();
+    });
+
+    /* ---- ATS toggle logic ---- */
+    var atsToggle = document.querySelector('.ats-toggle-label');
+    var bodyEl = document.body;
+
+    // Restore ATS state from sessionStorage
+    if (sessionStorage.getItem('cv-ats-mode') === 'true') {
+      bodyEl.classList.add('ats-mode');
+      atsToggle.classList.add('ats-active');
+    }
+
+    atsToggle.addEventListener('click', function() {
+      var isActive = bodyEl.classList.toggle('ats-mode');
+      atsToggle.classList.toggle('ats-active', isActive);
+      sessionStorage.setItem('cv-ats-mode', isActive);
     });
   </script>
 </body>
