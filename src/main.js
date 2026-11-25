@@ -89,8 +89,9 @@ const THEMES = [
   },
 ];
 
-const LS_KEY = 'portfolio-theme-id';
-const root   = document.documentElement;
+const LS_KEY     = 'portfolio-theme-id';
+const TOKENS_KEY = 'portfolio-theme-tokens';
+const root       = document.documentElement;
 
 /* ============================================================
    applyTheme — writes token values to :root custom properties
@@ -104,6 +105,14 @@ function applyTheme(theme) {
   });
 
   localStorage.setItem(LS_KEY, theme.id);
+
+  // Persist the full token values so other pages (e.g. cv.html) can reuse the
+  // active theme — including a randomly generated one (which has no preset id).
+  const tokens = {};
+  Object.keys(TOKEN_MAP).forEach((key) => {
+    if (theme[key] !== undefined) tokens[key] = theme[key];
+  });
+  localStorage.setItem(TOKENS_KEY, JSON.stringify(tokens));
 
   // Update active swatch indicator
   document.querySelectorAll('.picker-swatch').forEach((el) => {
@@ -231,10 +240,26 @@ function buildPicker() {
    ============================================================ */
 function restoreTheme() {
   const savedId = localStorage.getItem(LS_KEY);
-  if (!savedId) return;
-  const theme = THEMES.find((t) => t.id === savedId);
-  if (theme) applyTheme(theme);
-  // 'random' themes are not re-applied (id won't match THEMES array) — falls back to CSS default
+  if (savedId) {
+    const theme = THEMES.find((t) => t.id === savedId);
+    if (theme) { applyTheme(theme); return; }
+  }
+
+  // Saved id isn't a preset (e.g. the 'random' palette) — restore the persisted
+  // token values so a random theme survives a page reload too.
+  const tokensRaw = localStorage.getItem(TOKENS_KEY);
+  if (!tokensRaw) return;
+  try {
+    const tokens = JSON.parse(tokensRaw);
+    Object.keys(TOKEN_MAP).forEach((key) => {
+      const value = tokens[key];
+      if (typeof value === 'string' && value.length) {
+        root.style.setProperty(TOKEN_MAP[key], value);
+      }
+    });
+  } catch (_) {
+    // Ignore malformed stored tokens — keep CSS defaults.
+  }
 }
 
 /* ============================================================
