@@ -810,13 +810,13 @@
       <div class="cv-entry">
         <div class="cv-entry-header">
           <span class="cv-role">Senior Software Engineer</span>
-          <span class="cv-date"><time datetime="2025-02/2026-03">Feb 2025 – Present</time> · 1 yr 4 mo</span>
+          <span class="cv-date" data-present="2025-02"><time datetime="2025-02">Feb 2025 – Present</time> · <span class="cv-duration">1 yr 4 mo</span></span>
         </div>
         <div class="cv-company">Extreme · Hybrid · Full-time</div>
         <ul class="cv-bullets">
           <li>Built and supported NCR's retailers point-of-sale cloud-based (GCP) backends using C# RESTful microservices, Postgres, Redis, Docker, and Kubernetes.</li>
           <li>Ownership of User Stories: writing BDD tests to define expected behavior, implementing features, and maintaining CI/CD test coverage of 90%+ minimum policy.</li>
-          <li>Proactively created improvement tasks and POCs in performance, code readability, refactoring, and removal of redundant/unused code.</li>
+          <li>Proactively created improvement tasks/ and POCs in performance, code readability, refactoring, and removal of redundant/unused code.</li>
           <li>Created GitHub Copilot Agents and Skills from repetitive tasks via Prompt Engineering; built a GitHub Workflow to reduce test deployment pipeline time.</li>
         </ul>
       </div>
@@ -985,7 +985,7 @@
       <div class="ats-online-links">
         <a href="https://www.linkedin.com/in/avrahamkahana" target="_blank" rel="noopener noreferrer">linkedin.com/in/avrahamkahana</a>
         <a href="https://github.com/veverke" target="_blank" rel="noopener noreferrer">github.com/veverke</a>
-        <a href="https://veverke.github.io/portfolio" target="_blank" rel="noopener noreferrer">veverke.github.io/portfolio</a>
+        <a href="https://veverke.github.io/Portfolio" target="_blank" rel="noopener noreferrer">veverke.github.io/portfolio</a>
         <a href="https://stackoverflow.com/users/1219280/veverke" target="_blank" rel="noopener noreferrer">stackoverflow.com/users/1219280/veverke</a>
       </div>
     </section>
@@ -1092,6 +1092,41 @@
       atsToggle.classList.toggle('ats-active', isActive);
       sessionStorage.setItem('cv-ats-mode', isActive);
     });
+
+    /* ---- Live duration for the current (Present) role ---- */
+    function cvFormatDuration(months) {
+      if (months < 0) months = 0;
+      var years = Math.floor(months / 12);
+      var rest = months % 12;
+      var parts = [];
+      if (years > 0) parts.push(years + (years === 1 ? ' yr' : ' yrs'));
+      if (rest > 0) parts.push(rest + (rest === 1 ? ' mo' : ' mos'));
+      return parts.length ? parts.join(' ') : '0 mos';
+    }
+
+    function cvUpdatePresentDurations() {
+      var badges = document.querySelectorAll('[data-present]');
+      badges.forEach(function (badge) {
+        var durationEl = badge.querySelector('.cv-duration');
+        var raw = badge.getAttribute('data-present');
+        if (!durationEl || !raw) return;
+
+        var bits = raw.split('-');
+        var year = parseInt(bits[0], 10);
+        var month = parseInt(bits[1], 10);
+        if (!year || !month) return;
+
+        var start = new Date(year, month - 1, 1);
+        var now = new Date();
+        var months =
+          (now.getFullYear() - start.getFullYear()) * 12 +
+          (now.getMonth() - start.getMonth());
+
+        durationEl.textContent = cvFormatDuration(months);
+      });
+    }
+
+    cvUpdatePresentDurations();
   </script>
 </body>
 </html>

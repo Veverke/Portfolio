@@ -371,6 +371,47 @@ function initProjectCardClicks() {
 }
 
 /* ============================================================
+   updatePresentDurations — recomputes the length of any job
+   position still marked "Present" relative to today's date,
+   replacing the hardcoded fallback with a live calculation.
+
+   Markup contract: the badge carries data-present="YYYY-MM"
+   (the role start month) and wraps the human-readable duration
+   inside an element with class .exp-duration.
+   ============================================================ */
+function formatDuration(months) {
+  if (months < 0) months = 0;
+  const years = Math.floor(months / 12);
+  const rest  = months % 12;
+  const parts = [];
+  if (years > 0) parts.push(`${years} yr${years === 1 ? '' : 's'}`);
+  if (rest  > 0) parts.push(`${rest} mo${rest === 1 ? '' : 's'}`);
+  return parts.length ? parts.join(' ') : '0 mos';
+}
+
+function updatePresentDurations() {
+  document.querySelectorAll('[data-present]').forEach((badge) => {
+    const durationEl = badge.querySelector('.exp-duration');
+    const raw = badge.getAttribute('data-present');
+    if (!durationEl || !raw) return;
+
+    const [year, month] = raw.split('-').map((n) => parseInt(n, 10));
+    if (!year || !month) return;
+
+    // Treat the start month as its first day; duration is measured in
+    // whole months elapsed up to today (month-granular because the
+    // content only specifies "Feb 2025").
+    const start  = new Date(year, month - 1, 1);
+    const now    = new Date();
+    const months =
+      (now.getFullYear() - start.getFullYear()) * 12 +
+      (now.getMonth() - start.getMonth());
+
+    durationEl.textContent = formatDuration(months);
+  });
+}
+
+/* ============================================================
    Init
    ============================================================ */
 buildPicker();
@@ -378,4 +419,5 @@ restoreTheme();
 fetchGitHubStats();
 fetchGitHubProfileStats();
 initProjectCardClicks();
+updatePresentDurations();
 

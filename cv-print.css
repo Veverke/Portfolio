@@ -3,6 +3,12 @@
    Produces a clean A4 PDF when triggered via window.print()
    ============================================================ */
 
+/* ---- Page geometry ---- */
+@page {
+  size: A4;
+  margin: 0;
+}
+
 /* ---- Reset backgrounds & shadows for print ---- */
 body {
   background: #fff !important;
