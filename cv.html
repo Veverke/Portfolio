@@ -36,22 +36,34 @@
     /* ---- Reset ---- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ---- Theme tokens (default = Creative & Expressive; overridden at runtime) ---- */
+    :root {
+      --color-primary:    #0d9488;
+      --color-secondary:  #0369a1;
+      --color-accent:     #38bdf8;
+      --color-bg:         #f0fdfa;
+      --color-surface:    #ffffff;
+      --color-text:       #134e4a;
+      --color-text-muted: #516a74;
+      --color-border:     #99f6e4;
+    }
+
     /* ---- Page wrapper ---- */
     body {
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
       font-size: 0.92rem;
       line-height: 1.65;
-      color: #134e4a;
-      background: #f0fdfa;
+      color: var(--color-text);
+      background: var(--color-bg);
     }
 
     .cv-page {
       max-width: 760px;
       margin: 2rem auto 4rem;
-      background: #ffffff;
+      background: var(--color-surface);
       padding: 3rem 3.5rem;
       border-radius: 12px;
-      box-shadow: 0 4px 32px rgba(13, 148, 136, 0.10);
+      box-shadow: 0 4px 32px color-mix(in srgb, var(--color-primary) 10%, transparent);
     }
 
     /* ---- Export button (screen only) ---- */
@@ -68,7 +80,7 @@
       align-items: center;
       gap: 0.45rem;
       padding: 0.55rem 1.25rem;
-      background: #0d9488;
+      background: var(--color-primary);
       color: #fff;
       border: none;
       border-radius: 24px;
@@ -79,7 +91,7 @@
       text-decoration: none;
       transition: background 0.15s;
     }
-    .export-btn:hover { background: #0f766e; }
+    .export-btn:hover { background: color-mix(in srgb, var(--color-primary) 85%, black); }
 
     .back-btn {
       display: inline-flex;
@@ -87,8 +99,8 @@
       gap: 0.45rem;
       padding: 0.55rem 1.25rem;
       background: transparent;
-      color: #0d9488;
-      border: 2px solid #0d9488;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
       border-radius: 24px;
       font-family: 'Inter', sans-serif;
       font-size: 0.875rem;
@@ -97,11 +109,11 @@
       text-decoration: none;
       transition: all 0.15s;
     }
-    .back-btn:hover { background: #f0fdfa; }
+    .back-btn:hover { background: var(--color-bg); }
 
     /* ---- CV Header ---- */
     .cv-header {
-      border-bottom: 2px solid #99f6e4;
+      border-bottom: 2px solid var(--color-border);
       padding-bottom: 1.5rem;
       margin-bottom: 1.75rem;
     }
@@ -110,7 +122,7 @@
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
       font-size: 2rem;
-      color: #0d9488;
+      color: var(--color-primary);
       line-height: 1.2;
       margin-bottom: 0.25rem;
     }
@@ -118,7 +130,7 @@
     .cv-header .cv-title {
       font-size: 1.05rem;
       font-weight: 600;
-      color: #0369a1;
+      color: var(--color-secondary);
       margin-bottom: 0.85rem;
     }
 
@@ -127,11 +139,11 @@
       flex-wrap: wrap;
       gap: 0.5rem 1.5rem;
       font-size: 0.83rem;
-      color: #516a74;
+      color: var(--color-text-muted);
     }
 
     .cv-contacts a {
-      color: #0369a1;
+      color: var(--color-secondary);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -150,17 +162,17 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: #0d9488;
+      color: var(--color-primary);
       margin-bottom: 0.65rem;
       margin-top: 0.55rem;
       padding-bottom: 0.35rem;
-      border-bottom: 1px solid #99f6e4;
+      border-bottom: 1px solid var(--color-border);
     }
 
     /* ---- Summary ---- */
     .cv-summary p {
       margin-bottom: 0.5rem;
-      color: #134e4a;
+      color: var(--color-text);
     }
 
     /* ---- Skills ---- */
@@ -171,13 +183,13 @@
     }
 
     .cv-skill-tag {
-      background: #f0fdfa;
-      border: 1px solid #99f6e4;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
       border-radius: 20px;
       padding: 0.2rem 0.75rem;
       font-size: 0.8rem;
       font-weight: 500;
-      color: #0d9488;
+      color: var(--color-primary);
     }
 
     /* ---- Experience & Education ---- */
@@ -198,26 +210,26 @@
     .cv-role {
       font-weight: 600;
       font-size: 0.96rem;
-      color: #134e4a;
+      color: var(--color-text);
     }
 
     .cv-date {
       font-size: 0.8rem;
-      color: #516a74;
+      color: var(--color-text-muted);
       white-space: nowrap;
       flex-shrink: 0;
     }
 
     .cv-company {
       font-size: 0.85rem;
-      color: #0369a1;
+      color: var(--color-secondary);
       font-weight: 500;
       margin-bottom: 0.4rem;
     }
 
     .cv-bullets {
       padding-left: 1.15rem;
-      color: #134e4a;
+      color: var(--color-text);
     }
 
     .cv-bullets li {
@@ -242,19 +254,19 @@
     .cv-project-name {
       font-weight: 600;
       font-size: 0.94rem;
-      color: #134e4a;
+      color: var(--color-text);
     }
 
     .cv-project-link {
       font-size: 0.8rem;
-      color: #0369a1;
+      color: var(--color-secondary);
       text-decoration: none;
     }
     .cv-project-link:hover { text-decoration: underline; }
 
     .cv-project-desc {
       font-size: 0.86rem;
-      color: #516a74;
+      color: var(--color-text-muted);
       margin-top: 0.2rem;
     }
 
@@ -273,14 +285,14 @@
     }
 
     .cv-proj-lang-tag {
-      background: rgba(13, 148, 136, 0.13);
-      color: #0d9488;
+      background: color-mix(in srgb, var(--color-primary) 13%, transparent);
+      color: var(--color-primary);
     }
 
     .cv-proj-tech-tag {
       background: transparent;
-      color: #516a74;
-      border: 1px solid #99f6e4;
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
       font-weight: 600;
     }
 
@@ -288,13 +300,13 @@
     .cv-footer {
       margin-top: 2.5rem;
       padding-top: 1rem;
-      border-top: 1px solid #e0f2f1;
+      border-top: 1px solid var(--color-border);
       font-size: 0.75rem;
       color: #9ca3af;
       text-align: center;
     }
     .cv-footer a {
-      color: #0369a1;
+      color: var(--color-secondary);
       text-decoration: none;
     }
 
@@ -311,12 +323,12 @@
     .pdf-modal-backdrop.hidden { display: none; }
 
     .pdf-modal {
-      background: #fff;
+      background: var(--color-surface);
       border-radius: 14px;
       padding: 2rem 2.25rem 1.75rem;
       max-width: 360px;
       width: 90%;
-      box-shadow: 0 8px 40px rgba(13,148,136,0.18);
+      box-shadow: 0 8px 40px color-mix(in srgb, var(--color-primary) 18%, transparent);
       text-align: center;
     }
 
@@ -324,13 +336,13 @@
       font-family: 'Nunito', sans-serif;
       font-size: 1.15rem;
       font-weight: 800;
-      color: #0d9488;
+      color: var(--color-primary);
       margin-bottom: 0.4rem;
     }
 
     .pdf-modal p {
       font-size: 0.85rem;
-      color: #516a74;
+      color: var(--color-text-muted);
       margin-bottom: 1.35rem;
       line-height: 1.5;
     }
@@ -357,17 +369,17 @@
     }
 
     .pdf-modal-btn.colored {
-      background: #0d9488;
+      background: var(--color-primary);
       color: #fff;
     }
-    .pdf-modal-btn.colored:hover { background: #0f766e; }
+    .pdf-modal-btn.colored:hover { background: color-mix(in srgb, var(--color-primary) 85%, black); }
 
     .pdf-modal-btn.bw {
       background: transparent;
-      color: #0d9488;
-      border: 2px solid #0d9488;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
     }
-    .pdf-modal-btn.bw:hover { background: #f0fdfa; }
+    .pdf-modal-btn.bw:hover { background: var(--color-bg); }
 
     .pdf-modal-cancel {
       margin-top: 0.5rem;
@@ -378,7 +390,7 @@
       color: #9ca3af;
       cursor: pointer;
     }
-    .pdf-modal-cancel:hover { color: #516a74; }
+    .pdf-modal-cancel:hover { color: var(--color-text-muted); }
 
     /* ---- ATS toggle ---- */
     .ats-toggle-label {
@@ -393,7 +405,7 @@
     .ats-toggle-text {
       font-size: 0.75rem;
       font-weight: 700;
-      color: #0d9488;
+      color: var(--color-primary);
       letter-spacing: 0.06em;
     }
 
@@ -401,8 +413,8 @@
       position: relative;
       width: 40px;
       height: 22px;
-      background: #ccfbf1;
-      border: 2px solid #0d9488;
+      background: color-mix(in srgb, var(--color-primary) 15%, white);
+      border: 2px solid var(--color-primary);
       border-radius: 12px;
       transition: background 0.2s;
     }
@@ -413,13 +425,13 @@
       left: 2px;
       width: 14px;
       height: 14px;
-      background: #0d9488;
+      background: var(--color-primary);
       border-radius: 50%;
       transition: transform 0.2s;
     }
 
     .ats-toggle-label.ats-active .ats-toggle-track {
-      background: #0d9488;
+      background: var(--color-primary);
     }
 
     .ats-toggle-label.ats-active .ats-toggle-thumb {
@@ -428,7 +440,7 @@
     }
 
     .ats-toggle-label.ats-active .ats-toggle-text {
-      color: #0d9488;
+      color: var(--color-primary);
     }
 
     /* =============================================================
@@ -697,6 +709,38 @@
       }
     }
   </style>
+<script>
+    // Carry the theme chosen on the portfolio page over to the CV.
+    // src/main.js saves the active theme's token values under this key, so the
+    // CV (and its "Keep original colors" PDF export) can reuse the in-place
+    // theme — including a randomly generated one.
+    (function () {
+      var TOKENS_KEY = 'portfolio-theme-tokens';
+      var TOKEN_MAP = {
+        primary:   '--color-primary',
+        secondary: '--color-secondary',
+        accent:    '--color-accent',
+        bg:        '--color-bg',
+        surface:   '--color-surface',
+        text:      '--color-text',
+        textMuted: '--color-text-muted',
+        border:    '--color-border'
+      };
+      try {
+        var raw = localStorage.getItem(TOKENS_KEY);
+        if (!raw) return;
+        var tokens = JSON.parse(raw);
+        Object.keys(TOKEN_MAP).forEach(function (key) {
+          var value = tokens[key];
+          if (typeof value === 'string' && value.charAt(0) === '#') {
+            document.documentElement.style.setProperty(TOKEN_MAP[key], value);
+          }
+        });
+      } catch (e) {
+        // Invalid stored theme — keep the default colours.
+      }
+    })();
+  </script>
 </head>
 <body>
 
